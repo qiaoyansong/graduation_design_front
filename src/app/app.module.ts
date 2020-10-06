@@ -13,11 +13,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { DevUIModule } from 'ng-devui';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { BackTopComponent } from './back-top/back-top.component';
+import { CarouselComponent } from './carousel/carousel.component';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 @NgModule({
   declarations: [
     AppComponent,
     TinyEditorComponent,
-    BackTopComponent
+    BackTopComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { BackTopComponent } from './back-top/back-top.component';
     FormsModule,
     HttpClientModule,
     DevUIModule,
-    NzIconModule
+    NzIconModule,
+    NzCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]
