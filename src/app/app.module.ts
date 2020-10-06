@@ -10,10 +10,14 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { TinyEditorComponent } from './tiny-editor/tiny-editor.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DevUIModule } from 'ng-devui';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { BackTopComponent } from './back-top/back-top.component';
 @NgModule({
   declarations: [
     AppComponent,
-    TinyEditorComponent
+    TinyEditorComponent,
+    BackTopComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +28,9 @@ import { HttpClientModule } from '@angular/common/http';
     NzBackTopModule,
     EditorModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DevUIModule,
+    NzIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

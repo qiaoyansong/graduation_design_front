@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import { PicUploadService } from '../service/pic-upload.service';
 @Component({
   selector: 'app-tiny-editor',
   templateUrl: './tiny-editor.component.html',
@@ -11,7 +10,6 @@ export class TinyEditorComponent implements OnInit {
   @Output()
   public editorKeyup = new EventEmitter();
   public data;
-  editor;
   constructor() { }
   tinyInit = {
     height: 500,
