@@ -19,6 +19,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { BreadCrumbComponent } from './bread-crumb/bread-crumb.component';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { MultiTranslateLoader } from './MultiTranslateLoader';
+import { XAnchorModule } from '@ng-nest/ui/anchor';
+import { AnchorComponent } from './anchor/anchor.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +28,7 @@ import { MultiTranslateLoader } from './MultiTranslateLoader';
     BackTopComponent,
     CarouselComponent,
     BreadCrumbComponent,
+    AnchorComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,7 @@ import { MultiTranslateLoader } from './MultiTranslateLoader';
       },
     }),
     NzBreadCrumbModule,
+    XAnchorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
