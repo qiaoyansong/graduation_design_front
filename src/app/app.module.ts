@@ -9,18 +9,20 @@ import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { TinyEditorComponent } from './tiny-editor/tiny-editor.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DevUIModule } from 'ng-devui';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { BackTopComponent } from './back-top/back-top.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { MultiTranslateLoader } from './MultiTranslateLoader';
 @NgModule({
   declarations: [
     AppComponent,
     TinyEditorComponent,
     BackTopComponent,
-    CarouselComponent
+    CarouselComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,9 +36,24 @@ import { NzCarouselModule } from 'ng-zorro-antd/carousel';
     HttpClientModule,
     DevUIModule,
     NzIconModule,
-    NzCarouselModule
+    NzCarouselModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpYamlLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
+export function HttpYamlLoaderFactory(http: HttpClient): MultiTranslateLoader {
+  const localPath = 'assets/i18n/';
+  const resources = [
+    { prefix: `${localPath}label.`, suffix: '.yaml' },
+    { prefix: `${localPath}message.`, suffix: '.yaml' },
+  ];
+  return new MultiTranslateLoader(http, resources);
+}
