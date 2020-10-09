@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
  * 这是随便切换语言模块
  * 'zh' 代表 汉语 对应 xxx.zh.yaml
  * 'en' 代表 英语
+ * 在app.component.ts中调用
  */
 export class LanguageService {
   private language;

@@ -16,6 +16,8 @@ import { BackTopComponent } from './back-top/back-top.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { BreadCrumbComponent } from './bread-crumb/bread-crumb.component';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { MultiTranslateLoader } from './MultiTranslateLoader';
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { MultiTranslateLoader } from './MultiTranslateLoader';
     TinyEditorComponent,
     BackTopComponent,
     CarouselComponent,
+    BreadCrumbComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +47,7 @@ import { MultiTranslateLoader } from './MultiTranslateLoader';
         deps: [HttpClient],
       },
     }),
+    NzBreadCrumbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
