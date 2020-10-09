@@ -21,6 +21,8 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { MultiTranslateLoader } from './MultiTranslateLoader';
 import { XAnchorModule } from '@ng-nest/ui/anchor';
 import { AnchorComponent } from './anchor/anchor.component';
+import { ResultFofComponent } from './result-page/result-fof/result-fof.component';
+import { NzResultModule } from 'ng-zorro-antd/result';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +31,7 @@ import { AnchorComponent } from './anchor/anchor.component';
     CarouselComponent,
     BreadCrumbComponent,
     AnchorComponent,
+    ResultFofComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,7 @@ import { AnchorComponent } from './anchor/anchor.component';
     }),
     NzBreadCrumbModule,
     XAnchorModule,
+    NzResultModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
