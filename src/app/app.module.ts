@@ -23,11 +23,11 @@ import { XAnchorModule } from '@ng-nest/ui/anchor';
 import { AnchorComponent } from './anchor/anchor.component';
 import { ResultFofComponent } from './result-page/result-fof/result-fof.component';
 import { NzResultModule } from 'ng-zorro-antd/result';
-import { LayoutHeaderComponent } from './layout-header/layout-header.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { HomeComponent } from './home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +37,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
     BreadCrumbComponent,
     AnchorComponent,
     ResultFofComponent,
-    LayoutHeaderComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

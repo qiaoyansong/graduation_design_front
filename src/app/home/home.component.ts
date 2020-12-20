@@ -3,11 +3,12 @@ import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../service/language.service';
 
 @Component({
-  selector: 'app-layout-header',
-  templateUrl: './layout-header.component.html',
-  styleUrls: ['./layout-header.component.scss']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class LayoutHeaderComponent implements OnInit {
+export class HomeComponent implements OnInit {
+
   constructor(private languageService: LanguageService, private translate: TranslateService) { }
   visible = false;
   language: string;
@@ -20,4 +21,5 @@ export class LayoutHeaderComponent implements OnInit {
     this.language = value;
     this.translate.use(this.language);
   }
+
 }
