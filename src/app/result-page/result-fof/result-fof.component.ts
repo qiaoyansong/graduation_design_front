@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+
 /**
  * 404界面
  *
@@ -10,9 +11,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./result-fof.component.scss'],
 })
 export class ResultFofComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+
   public goHome() {
     this.router.navigate(['/tinyEditor']);
   }

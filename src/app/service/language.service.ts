@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -11,10 +11,14 @@ import { Injectable } from '@angular/core';
  */
 export class LanguageService {
   private language;
-  constructor() {}
+
+  constructor() {
+  }
+
   public getLanguage(): string {
     return this.language == null ? 'zh' : this.language;
   }
+
   public setLanguage(language: string): void {
     this.language = language;
   }

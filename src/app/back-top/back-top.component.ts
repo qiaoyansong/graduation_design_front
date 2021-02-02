@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-back-top',
@@ -11,7 +11,9 @@ export class BackTopComponent implements OnInit {
    */
   @Input()
   public height: number;
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

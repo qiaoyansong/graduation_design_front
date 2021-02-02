@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AnchorComponent } from './anchor.component';
+import {AnchorComponent} from './anchor.component';
 
 describe('AnchorComponent', () => {
   let component: AnchorComponent;
@@ -8,9 +8,9 @@ describe('AnchorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AnchorComponent ]
+      declarations: [AnchorComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

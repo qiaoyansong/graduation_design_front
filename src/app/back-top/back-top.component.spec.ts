@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BackTopComponent } from './back-top.component';
+import {BackTopComponent} from './back-top.component';
 
 describe('BackTopComponent', () => {
   let component: BackTopComponent;
@@ -8,9 +8,9 @@ describe('BackTopComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BackTopComponent ]
+      declarations: [BackTopComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

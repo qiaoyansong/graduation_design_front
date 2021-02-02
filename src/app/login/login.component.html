@@ -1,0 +1,50 @@
+<nz-layout>
+  <nz-layout>
+    <nz-header nz-row>
+        <div nz-col nzSpan="8">
+            <img alt="微尘logo" src="../../assets/images/logo.png"/>
+        </div>
+        <div nz-col nzSpan="8">
+            {{ "Home.BeforeSearchInput" | translate }}：
+            <nz-select ngModel="zh" (ngModelChange)="changeLanguage($event)">
+              <nz-option nzValue="zh" nzLabel="简体中文"></nz-option>
+              <nz-option nzValue="en" nzLabel="英语"></nz-option>
+            </nz-select>
+        </div>
+ </nz-header>
+ <app-carousel [array]='array' height=400></app-carousel>
+    <app-bread-crumb class="bread" type='login'></app-bread-crumb>  
+    <nz-layout class="contentWidth">
+      <nz-content>
+        <nz-layout>
+            <nz-header>Header</nz-header>
+            <nz-content>Content</nz-content>
+          </nz-layout>
+      </nz-content>
+      <nz-sider>Sider</nz-sider>
+    </nz-layout>
+    <nz-footer>
+        <div nz-row>
+            <div nz-col nzSpan="12" nzOffset="6">
+              <a href="http://www.zggyw.org/"> {{ "Home.Footer.HomePage" | translate }}</a> |
+              <a href="http://www.zggyw.org/html/help/wzjs/gywm/"> {{ "Home.Footer.AboutUs" | translate }}</a> |
+              <a
+                href="http://www.zggyw.org/html/help/cjwt/zggywtgxz/"> {{ "Home.Footer.SubmissionGuidelines" | translate }}</a>
+              |
+              <a href="http://www.zggyw.org/html/help/wzjs/wzsm/"> {{ "Home.Footer.WebsiteStated" | translate }}</a> |
+              <a href="http://www.zggyw.org/html/help/ywjs/ywhz/"> {{ "Home.Footer.BusinessCooperation" | translate }}</a>
+            </div>
+            <div nz-col nzSpan="12" nzOffset="6">
+              微尘版权所有
+            </div>
+            <div nz-col nzSpan="12" nzOffset="6">
+              联系我：1012077930@qq.com
+            </div>
+            <div nz-col nzSpan="12" nzOffset="6">
+              <a href="http://www.12377.cn/" target="_blank">违法和不良信息举报中心</a>
+              |
+              <a href="http://www.piyao.org.cn/" target="_blank">中国互联网联合辟谣平台</a>
+            </div>
+          </div>
+    </nz-footer>
+  </nz-layout>

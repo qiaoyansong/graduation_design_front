@@ -1,7 +1,9 @@
-<nz-carousel nzAutoPlay>
-  <div nz-carousel-content *ngFor="let index of array">
-    <h3>{{ index }}</h3>
-  </div>
-</nz-carousel>
-<!-- <button>{{'Button.Yes' | translate}}</button>
-<button>{{'Button.No' | translate}}</button> -->
+<section *ngIf="height == 400">
+  <d-carousel autoplay=true autoplaySpeed="3000">
+    <d-carousel-item *ngFor="let i of array">
+      <img src="{{ i }}" style="height: 400px;" alt=""/>
+    </d-carousel-item>
+  </d-carousel>
+</section>
+
+

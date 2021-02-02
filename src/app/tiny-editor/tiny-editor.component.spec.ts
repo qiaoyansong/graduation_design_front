@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TinyEditorComponent } from './tiny-editor.component';
+import {TinyEditorComponent} from './tiny-editor.component';
 
 describe('TinyEditorComponent', () => {
   let component: TinyEditorComponent;
@@ -8,9 +8,9 @@ describe('TinyEditorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TinyEditorComponent ]
+      declarations: [TinyEditorComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

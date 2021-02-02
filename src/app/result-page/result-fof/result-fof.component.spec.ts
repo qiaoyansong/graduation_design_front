@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ResultFofComponent } from './result-fof.component';
+import {ResultFofComponent} from './result-fof.component';
 
 describe('ResultFofComponent', () => {
   let component: ResultFofComponent;
@@ -8,9 +8,9 @@ describe('ResultFofComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResultFofComponent ]
+      declarations: [ResultFofComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

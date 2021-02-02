@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import { timeInterval } from 'rxjs/operators';
 
 @Component({
   selector: 'app-carousel',
@@ -9,7 +10,14 @@ export class CarouselComponent implements OnInit {
   /**
    * 这是走马灯模块
    */
-  constructor() {}
-  public array = [1, 2, 3, 4];
-  ngOnInit(): void {}
+  @Input()
+  public height: number;
+  constructor() {
+  }
+
+  @Input()
+  public array: any;
+
+  ngOnInit(): void {
+  }
 }
