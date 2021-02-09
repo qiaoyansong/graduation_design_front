@@ -23,22 +23,32 @@ export class HomeComponent implements OnInit {
     this.language = this.languageService.getLanguage();
     this.translate.use(this.language);
   }
-
+  /**
+   * 切换语言
+   * @param value 语言种类
+   */
   public changeLanguage(value: string): void {
     this.languageService.setLanguage(value);
     this.language = value;
     this.translate.use(this.language);
   }
+  /**
+   *  导航去login界面
+   */
   public login(): void {
-    // 设置login界面走马灯高度
-    // 导航去login界面
     this.router.navigate(['/login']);
   }
 
+  /**
+   * 导航去register界面
+   */
   public register(): void {
-    // 导航去register界面
     this.router.navigate(['/register']);
   }
+
+  /**
+   * 搜索框
+   */
   public search(): void {
     console.log('value' + this.searchValue);
   }

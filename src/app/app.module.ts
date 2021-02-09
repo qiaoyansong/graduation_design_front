@@ -8,7 +8,7 @@ import {NzLayoutModule} from 'ng-zorro-antd/layout';
 import {NzBackTopModule} from 'ng-zorro-antd/back-top';
 import {EditorModule} from '@tinymce/tinymce-angular';
 import {TinyEditorComponent} from './tiny-editor/tiny-editor.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {DevUIModule} from 'ng-devui';
 import {NzIconModule} from 'ng-zorro-antd/icon';
@@ -30,7 +30,9 @@ import {NzMenuModule} from 'ng-zorro-antd/menu';
 import {HomeComponent} from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-
+import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,14 +55,18 @@ import { RegisterComponent } from './register/register.component';
     NzBackTopModule,
     EditorModule,
     FormsModule,
+    NzFormModule,
     HttpClientModule,
     DevUIModule,
     NzIconModule,
+    NzAlertModule,
     NzCarouselModule,
+    ReactiveFormsModule,
     NzGridModule,
     NzInputModule,
     NzSelectModule,
     NzMenuModule,
+    NzStepsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
