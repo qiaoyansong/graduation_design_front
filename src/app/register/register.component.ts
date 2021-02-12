@@ -76,9 +76,9 @@ export class RegisterComponent implements OnInit {
   public errorMsg: string;
 
   //注册界面展示图片
-  public array = ['http://localhost:8080/login/1.jpg',
-  'http://localhost:8080/login/2.jpg',
-  'http://localhost:8080/login/3.jpg'];
+  public array = ['http://localhost:8080/register/1.jpg',
+  'http://localhost:8080/register/2.jpg',
+  'http://localhost:8080/register/3.jpg'];
 
   public changeLanguage(value: string): void {
     this.languageService.setLanguage(value);
@@ -173,13 +173,6 @@ export class RegisterComponent implements OnInit {
         this.current += 1;
       }
     }
-  }
-
-  /**
-   * 提交表单 并且验证验证码
-   */
-  done(): void {
-    console.log('done');
   }
 
   /**

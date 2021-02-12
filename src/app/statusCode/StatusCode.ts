@@ -31,6 +31,10 @@ export enum StatusCode{
      * 用户名已经存在
      */
     USERNAME_IS_EXISTS = "107",
+     /**
+     * 用户名不存在
+     */
+    USERNAME_IS_NOT_EXISTS = "110",
     /**
      * 邮箱已经存在
      */
@@ -42,5 +46,21 @@ export enum StatusCode{
     /**
      * 成功
      */
-    SUCCESS = "200"
+    SUCCESS = "200",
+    /**
+     * 密码错误
+     */
+    WRONG_PASSWORD= "111",
+    /**
+     * 别处登录，如果不是自己操作需要修改密码
+     */
+    LOGIN_ELSEWHERE = "112",
+     /**
+     * 权限不足
+     */
+    INSUFFICIENT_PERMISSIONS =  "113",
+    /**
+     * 与绑定邮箱不一致
+     */
+    MAILBOX_ERROR = "114"
 }

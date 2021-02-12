@@ -1,3 +1,5 @@
+<nz-alert nzType="error" *ngIf="flag === '110'" nzMessage="用户不存在" nzShowIcon  nzCloseable></nz-alert>
+<nz-alert nzType="error" *ngIf="flag === '111'" nzMessage="密码错误" nzShowIcon  nzCloseable></nz-alert>
 <nz-layout>
   <nz-layout>
     <nz-header nz-row>
@@ -15,13 +17,60 @@
  <app-carousel [array]='array' height=400></app-carousel>
     <app-bread-crumb class="bread" type='login'></app-bread-crumb>  
     <nz-layout class="contentWidth">
-      <nz-content>
+      <nz-content *ngIf="!isShow">
         <nz-layout>
-            <nz-header>Header</nz-header>
-            <nz-content>Content</nz-content>
+          <!-- 头部 -->
+          <nz-header class="heigth40">
+            <h2>用户登录</h2>
+          </nz-header>
+          <!-- 内容 -->
+          <nz-content class="white-background">
+            <!-- 登录表单 -->
+            <form nz-form [formGroup]="loginForm">
+              <!-- 用户名 -->
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="userName">用户名</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="用户名不符合要求">
+                  <input nz-input formControlName="userName" id="userName"
+                  [(ngModel)]="user.userName" placeholder="字母开头，允许4-20字符，只允许包含字母、数字以及下划线" />
+                </nz-form-control>
+              </nz-form-item>
+              <!-- 密码 -->
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>密码</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="密码不符合要求">
+                  <input nz-input type="password" id="password" formControlName="password"
+                  [(ngModel)]="user.password" placeholder="最少需要10个字符，最多不超过20个字符，需要同时包含数字以及字母" />
+                </nz-form-control>
+              </nz-form-item>
+              <div nz-row class="login-form-margin marginLeft">
+                <div nz-col [nzSpan]="12" >
+                  <a class="login-form-forgot">忘记密码</a>
+                </div>
+              </div>
+              <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" (click)="login()">登录</button>
+            </form>
+          </nz-content>
           </nz-layout>
       </nz-content>
-      <nz-sider>Sider</nz-sider>
+      <nz-content *ngIf="isShow">
+        <nz-result
+        nzStatus="success"
+        nzTitle="登陆成功"
+        >
+        <div nz-result-extra>
+          <button nz-button nzType="primary" (click) = "goToHomepage()">前往主页</button>
+          <button nz-button (click) = "goToPersonCenter()">前往个人中心</button>
+        </div>
+      </nz-result>
+      </nz-content>
+      <!-- 侧边栏 -->
+      <nz-sider class="white-background">
+        <div class="blackWorld">
+          您还没有账号?请先注册
+          <button nz-button class="green" nzType="primary" (click)="register()">注册</button>
+        </div>
+      </nz-sider>
     </nz-layout>
     <nz-footer>
         <div nz-row>
@@ -47,4 +96,4 @@
             </div>
           </div>
     </nz-footer>
-  </nz-layout>
+</nz-layout>

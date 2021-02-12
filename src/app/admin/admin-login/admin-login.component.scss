@@ -23,6 +23,7 @@
   }
   
   nz-content {
+    background: blue;
     color: #fff;
     min-height: 120px;
     line-height: 120px;
@@ -70,14 +71,28 @@
   .ant-layout {
     background: white;
 }
+.steps-content {
+  margin-top: 16px;
+  border: 1px dashed #e9e9e9;
+  border-radius: 6px;
+  background-color: #fafafa;
+  min-height: 200px;
+  text-align: center;
+  padding-top: 80px;
+}
+
+.steps-action {
+  margin-top: 24px;
+}
+
+button {
+  margin-right: 8px;
+}
+.ant-steps-item{
+  width: 33.3%;
+}
 .white-background{
   background-color: white;
-}
-.blackWorld{
-  color: black;
-}
-.heigth40{
-  height: 40px;
 }
 h2{
   text-align: left;
@@ -86,21 +101,19 @@ h2{
 h2{
   border-bottom: 1px dashed #CCC;
 }
-.login-form {
-  max-width: 300px;
+.heigth40{
+  height: 40px;
 }
-
-.login-form-margin {
+.redSpan{
+  font-weight: bolder;
+  color: red
+}
+nz-alert {
   margin-bottom: 16px;
 }
-.marginLeft{
-  margin-left: 50%;
+.green{
+  background-color: rgba(9, 243, 9, 0.356);
 }
-.login-form-forgot {
-  float: right;
-  color: blue;
-}
-
-.login-form-button {
-  width: 50%;
+.blackWorld{
+  color: black;
 }

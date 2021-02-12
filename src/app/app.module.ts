@@ -33,6 +33,10 @@ import { RegisterComponent } from './register/register.component';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { PersonalComponent } from './personal/personal.component';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +49,8 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
+    PersonalComponent,
+    AdminLoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +73,8 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
     NzSelectModule,
     NzMenuModule,
     NzStepsModule,
+    NzAvatarModule,
+    NzDropDownModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

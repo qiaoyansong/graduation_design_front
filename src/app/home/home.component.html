@@ -24,7 +24,20 @@
         <nz-option nzValue="zh" nzLabel="简体中文"></nz-option>
         <nz-option nzValue="en" nzLabel="英语"></nz-option>
       </nz-select>
-      <div><button nz-button class="green" nzType="default" (click)="login()">登录</button><button class="red" (click)="register()" nz-button nzType="default">注册</button></div>
+      <div *ngIf="!isLogin"><button nz-button class="green" nzType="default" (click)="login()">登录</button><button class="red" (click)="register()" nz-button nzType="default">注册</button></div>
+      <div *ngIf="isLogin">
+         <nz-avatar [ngStyle]="{ 'background-color': color }" [nzText]="userName" nzSize="large" style="vertical-align: middle;"></nz-avatar>
+         <a nz-dropdown [nzDropdownMenu]="menu" class="blackColorText">
+          选项
+          <i nz-icon nzType="down"></i>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item (click)="goToPersonalPage()">个人主页</li>
+            <li nz-menu-item (click)="logout()">退出</li>
+          </ul>
+        </nz-dropdown-menu>
+      </div>
     </div>
   </nz-header>
   <nz-content>
