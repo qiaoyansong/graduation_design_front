@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {LanguageService} from '../service/language.service';
 import { LoginService } from '../service/login.service';
-import { StatusCode } from '../statusCode/StatusCode';
+import { StatusCode } from '../enumType/StatusCode';
 import { passwordValidator, userNameValidator } from '../validator/bussinessValidator';
+import { userType } from '../enumType/UserType';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -92,7 +93,16 @@ export class LoginComponent implements OnInit {
         }else if(data.code === StatusCode.SUCCESS){
           // 登陆成功
           this.isShow = true;
-          this.loginService.setUserName(this.user.userName);
+          if(data.body.type != userType.GENERAL_USER){
+            // 如果是管理员登录，登录无效，跳转至管理员登录界面并且清楚Session中的信息
+            this.loginService.removeSaveInfo().subscribe(data => {
+              
+            });
+            this.router.navigate(['/admin/login']);
+          }else{
+            // 登陆成功
+            this.loginService.setUser(data.body);
+          }
         }
       });
     }
@@ -130,5 +140,12 @@ export class LoginComponent implements OnInit {
    */
   public goToHomepage(): void{
     this.router.navigate(['']);
+  }
+
+  /**
+   * 导航去忘记密码界面
+   */
+  public afterClose(): void{
+    this.router.navigate(['/forgetpwd']);
   }
 }

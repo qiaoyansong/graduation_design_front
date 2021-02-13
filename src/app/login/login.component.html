@@ -45,7 +45,7 @@
               </nz-form-item>
               <div nz-row class="login-form-margin marginLeft">
                 <div nz-col [nzSpan]="12" >
-                  <a class="login-form-forgot">忘记密码</a>
+                  <a class="login-form-forgot" (click) = "afterClose()">忘记密码</a>
                 </div>
               </div>
               <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" (click)="login()">登录</button>

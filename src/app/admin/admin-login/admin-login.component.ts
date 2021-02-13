@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from 'src/app/service/language.service';
 import { LoginService } from 'src/app/service/login.service';
-import { StatusCode } from 'src/app/statusCode/StatusCode';
+import { StatusCode } from 'src/app/enumType/StatusCode';
 import { mailboxValidator, passwordValidator, userNameValidator, verificationCodeValidator } from 'src/app/validator/bussinessValidator';
+import { userType } from 'src/app/enumType/UserType';
 
 @Component({
   selector: 'app-admin-login',
@@ -35,6 +36,8 @@ export class AdminLoginComponent implements OnInit {
   // 请求验证码服务返回的code信息
   public flag: string;
 
+  // 失败原因
+  public errorMsg: string;
   public user = {
     'userName': '',
     'password': '',
@@ -157,6 +160,24 @@ export class AdminLoginComponent implements OnInit {
     } else {
       //检验验证码表单
       if (this.checkVerificationCode()) {
+        this.loginService.adminLogin(this.user).subscribe(data => {
+          if(data.code === StatusCode.VERIFICATION_CODE_VERIFICATION_FAILED){
+            // 验证码验证失败
+            this.flag = StatusCode.VERIFICATION_CODE_VERIFICATION_FAILED;
+            this.errorMsg = '验证码验证失败，请到邮箱查看验证码';
+          }else if(data.code === StatusCode.VERIFICATION_CODE_FAILURE){
+            // 验证码失效
+            this.flag = StatusCode.VERIFICATION_CODE_FAILURE;
+            this.errorMsg = '验证码失效，需要用户重新申请验证码';
+          }else if(data.code === StatusCode.SUCCESS){
+            // 成功
+            this.flag = StatusCode.SUCCESS;
+            this.loginService.setUser(data.body);
+            this.router.navigate(['/admin/homepage'], { queryParams: { userName: this.user.userName } });
+          }
+          // 显示结果
+          this.current+=1;
+        });
 
       }
     }
@@ -200,5 +221,12 @@ export class AdminLoginComponent implements OnInit {
     const reg = /^\d{6}$/;
     const result = reg.test(value);
     return result;
+  }
+
+  /**
+   * 重新登录
+   */
+  public reLogin(): void{
+    this.current = 0;
   }
 }

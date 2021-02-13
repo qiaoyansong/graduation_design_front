@@ -4,7 +4,7 @@ import { LanguageService } from '../service/language.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { mailboxValidator, passwordValidator, userNameValidator, verificationCodeValidator } from '../validator/bussinessValidator';
 import { RegisterService } from '../service/register.service';
-import { StatusCode } from '../statusCode/StatusCode';
+import { StatusCode } from '../enumType/StatusCode';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',

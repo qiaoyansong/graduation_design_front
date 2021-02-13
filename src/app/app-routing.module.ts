@@ -1,8 +1,11 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
+import { AdminHomepageComponent } from './admin/admin-homepage/admin-homepage.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import {AnchorComponent} from './anchor/anchor.component';
 import {CarouselComponent} from './carousel/carousel.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { AdminIsLoginGuard } from './guard/adminIsLogin.guard';
 import { IsLoginGuard } from './guard/isLogin.guard';
 import {HomeComponent} from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -20,7 +23,9 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'personal', component: PersonalComponent, canActivate: [IsLoginGuard]},
+  {path: 'admin/homepage', component: AdminHomepageComponent, canActivate: [AdminIsLoginGuard]},
   {path: 'admin/login', component: AdminLoginComponent},
+  {path: 'forgetpwd', component: ForgetPasswordComponent},
   {path: '**', component: ResultFofComponent},
 ];
 

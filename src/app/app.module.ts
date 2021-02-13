@@ -37,6 +37,8 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { PersonalComponent } from './personal/personal.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
+import { AdminHomepageComponent } from './admin/admin-homepage/admin-homepage.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +53,8 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
     RegisterComponent,
     PersonalComponent,
     AdminLoginComponent,
+    AdminHomepageComponent,
+    ForgetPasswordComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,12 @@
+<nz-alert
+*ngIf="otherFlag"
+nzType="error"
+nzCloseable
+nzMessage="在别处登录"
+nzDescription="您的账号在别处登录，您被迫下线，右上角关闭此消息框，可以立刻修改密码"
+(nzOnClose)="afterClose()"
+>
+</nz-alert>
 <nz-layout>
   <nz-header nz-row>
     <div nz-col nzSpan="8">
@@ -25,7 +34,8 @@
         <nz-option nzValue="en" nzLabel="英语"></nz-option>
       </nz-select>
       <div *ngIf="!isLogin"><button nz-button class="green" nzType="default" (click)="login()">登录</button><button class="red" (click)="register()" nz-button nzType="default">注册</button></div>
-      <div *ngIf="isLogin">
+      <!-- 登陆成功显示用户 -->
+      <div *ngIf="isLogin && userType === 'GENERAL_USER'">
          <nz-avatar [ngStyle]="{ 'background-color': color }" [nzText]="userName" nzSize="large" style="vertical-align: middle;"></nz-avatar>
          <a nz-dropdown [nzDropdownMenu]="menu" class="blackColorText">
           选项
@@ -38,6 +48,20 @@
           </ul>
         </nz-dropdown-menu>
       </div>
+      <!-- 登陆成功显示管理员 -->
+      <div *ngIf="isLogin && userType != 'GENERAL_USER'">
+        <nz-avatar [ngStyle]="{ 'background-color': color }" [nzText]="userName" nzSize="large" style="vertical-align: middle;"></nz-avatar>
+        <a nz-dropdown [nzDropdownMenu]="menu" class="blackColorText">
+         选项
+         <i nz-icon nzType="down"></i>
+       </a>
+       <nz-dropdown-menu #menu="nzDropdownMenu">
+         <ul nz-menu nzSelectable>
+           <li nz-menu-item (click)="goToAdminPersonalPage()">管理员后台界面</li>
+           <li nz-menu-item (click)="logout()">退出</li>
+         </ul>
+       </nz-dropdown-menu>
+     </div>
     </div>
   </nz-header>
   <nz-content>

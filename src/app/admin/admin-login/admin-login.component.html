@@ -8,6 +8,7 @@
 <nz-alert nzType="error" *ngIf="flag === '111'" nzMessage="密码错误" nzShowIcon  nzCloseable></nz-alert>
 <nz-alert nzType="error" *ngIf="flag === '113'" nzMessage="权限不足" nzShowIcon  nzCloseable></nz-alert>
 <nz-alert nzType="error" *ngIf="flag === '114'" nzMessage="与绑定邮箱不一致" nzShowIcon  nzCloseable></nz-alert>
+<nz-alert nzType="error" *ngIf="flag === '106'" nzMessage="验证码验证失败，请到邮箱查看验证码" nzShowIcon  nzCloseable></nz-alert>
 <nz-layout>
   <nz-layout>
     <nz-header nz-row>
@@ -84,6 +85,20 @@
                   </form>
                   <!-- 表单结束 -->
                 </nz-content>
+              <!-- 登录失败 -->
+              <nz-content *ngIf="current === 2 && flag != '200'" class="white-background">
+                <nz-result nzTitle="登录失败" nzStatus="error">
+                  <div nz-result-content>
+                    <div class="desc">
+                      <h4 nz-title>登录失败的原因是：{{errorMsg}}</h4>
+                    </div>
+                  </div>
+                  <div nz-result-extra>
+                    <button nz-button nzType="primary" (click)="reLogin()">重新登录</button>
+                    <button nz-button (click)="goToHomepage()">返回主页</button>
+                  </div>
+                </nz-result>
+              </nz-content>
                 <nz-footer class="white-background">
                   <nz-steps [nzCurrent]="current">
                     <nz-step nzTitle="登录"></nz-step>
