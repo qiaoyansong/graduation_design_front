@@ -17,7 +17,10 @@ export class ResultFofComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * 返回首页
+   */
   public goHome() {
-    this.router.navigate(['/tinyEditor']);
+    this.router.navigate(['']);
   }
 }

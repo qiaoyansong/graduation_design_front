@@ -63,3 +63,37 @@ export function verificationCodeValidator(): ValidatorFn{
     return result ? null : {'verificationCode' : {name: value}} ;
   };
 }
+
+/**
+ * 验证文章标题是否符合格式
+ */
+export function newsTitleValidator(): ValidatorFn{
+  return (control: AbstractControl): {[key: string]: any}| null => {
+    const value = control.value;
+    const reg = /^[\u4e00-\u9fa5]{1,20}$/;
+    const result = reg.test(value);
+    return result ? null : {'newsTitle' : {name: value}} ;
+  };
+}
+/**
+ * 验证文章来源是否符合格式
+ */
+export function newsSourceValidator(): ValidatorFn{
+  return (control: AbstractControl): {[key: string]: any}| null => {
+    const value = control.value;
+    const reg = /^[\u4e00-\u9fa5]{1,10}$/;
+    const result = reg.test(value);
+    return result ? null : {'newsSource' : {name: value}} ;
+  };
+}
+/**
+ * 验证文章摘要是否符合格式
+ */
+export function newsSummaryValidator(): ValidatorFn{
+  return (control: AbstractControl): {[key: string]: any}| null => {
+    const value = control.value;
+    const reg = /^.{1,100}$/;
+    const result = reg.test(value);
+    return result ? null : {'newsSummary' : {name: value}} ;
+  };
+}

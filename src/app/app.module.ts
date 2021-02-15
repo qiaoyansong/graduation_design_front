@@ -39,6 +39,11 @@ import { PersonalComponent } from './personal/personal.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { AdminHomepageComponent } from './admin/admin-homepage/admin-homepage.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,10 +69,13 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
     NzLayoutModule,
     NzBackTopModule,
     EditorModule,
+    NzToolTipModule,
     FormsModule,
     NzFormModule,
+    NzUploadModule,
     HttpClientModule,
     DevUIModule,
+    NzPaginationModule,
     NzIconModule,
     NzAlertModule,
     NzCarouselModule,
@@ -89,8 +97,9 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
     NzBreadCrumbModule,
     XAnchorModule,
     NzResultModule,
+    NzSwitchModule
   ],
-  providers: [],
+  providers: [NzMessageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {

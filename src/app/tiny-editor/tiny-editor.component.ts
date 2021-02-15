@@ -10,7 +10,8 @@ export class TinyEditorComponent implements OnInit {
   public elementId: string;
   @Output()
   public editorKeyup = new EventEmitter();
-  public data;
+
+  public data: any;
 
   constructor() {
   }
@@ -34,7 +35,7 @@ export class TinyEditorComponent implements OnInit {
       let xhr: XMLHttpRequest;
       let formData: FormData;
       xhr = new XMLHttpRequest();
-      xhr.open('POST', 'http://localhost:8080/test', true);
+      xhr.open('POST', 'http://localhost:8080/upload/pic', true);
       formData = new FormData();
       formData.append('file', blobInfo.blob());
       xhr.onload = () => {
@@ -44,16 +45,20 @@ export class TinyEditorComponent implements OnInit {
           return;
         }
         json = JSON.parse(xhr.responseText);
+        // location就是json返回的图片地址返回的数据必须含有location字段
         if (!json || typeof json.location !== 'string') {
-          failFun('Invalid JSON: ' + xhr.responseText);
+          failFun('上传成功');
           return;
         }
-        succFun(json.location);
+        succFun("http://localhost:8080/upload/pic/" + json.location);
       };
       xhr.send(formData);
     }
   }
 
+  public change(): void{
+    console.log(this.data);
+  }
   ngOnInit(): void {
   }
 }

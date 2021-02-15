@@ -1,1 +1,384 @@
-<p>admin-homepage works!</p>
+<nz-layout>
+  <nz-header nz-row>
+    <div nz-col nzSpan="8">
+      <img alt="微尘logo" src="http://localhost:8080/logo.png" />
+    </div>
+  </nz-header>
+  <nz-layout>
+    <!-- 导航栏 -->
+    <nz-sider nzTheme="light">
+      <div class="wrapper">
+        <button nz-button nzType="primary" (click)="toggleCollapsed()" style="background-color: #1890ff;
+            border-color: #1890ff; margin-left: -137px;">
+          <i nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+        </button>
+        <nz-switch [(ngModel)]="theme">
+          <span checked>Dark</span>
+          <span unchecked>Light</span>
+        </nz-switch>
+        <ul nz-menu nzMode="inline" [nzTheme]="theme ? 'dark' : 'light'" [nzInlineCollapsed]="isCollapsed">
+          <li nz-submenu nz-tooltip nzTooltipPlacement="right" nzTitle="用户相关" nzOpen nzIcon="appstore">
+            <ul>
+              <li nz-menu-item nzSelected>
+                用户信息
+                <a (click)="getInfo(1)"></a>
+              </li>
+              <li nz-menu-item>
+                用户投稿
+                <a (click)="getInfo(2)"></a>
+              </li>
+              <li nz-menu-item>
+                用户求助
+                <a (click)="getInfo(3)"></a>
+              </li>
+            </ul>
+          </li>
+          <li nz-submenu nzTitle="公益资讯" nzIcon="appstore" nzOpen>
+            <ul>
+              <li nz-menu-item>
+                上传公益资讯
+                <a (click)="getInfo(4)"></a>
+              </li>
+              <li nz-menu-item>
+                查看公益资讯
+                <a (click)="getInfo(5)"></a>
+              </li>
+            </ul>
+          </li>
+          <li nz-submenu nzTitle="公益活动" nzIcon="setting" nzOpen>
+            <ul>
+              <li nz-menu-item>
+                上传公益活动
+                <a (click)="getInfo(6)"></a>
+              </li>
+              <li nz-menu-item>
+                查看公益活动
+                <a (click)="getInfo(7)"></a>
+              </li>
+            </ul>
+          </li>
+          <li nz-submenu nzTitle="公益商品" nzIcon="setting" nzOpen>
+            <ul>
+              <li nz-menu-item>
+                上传公益商品
+                <a (click)="getInfo(8)"></a>
+              </li>
+              <li nz-menu-item>
+                查看公益商品
+                <a (click)="getInfo(9)"></a>
+              </li>
+            </ul>
+          </li>
+          <li nz-submenu nzTitle="公益拍卖" nzIcon="setting" nzOpen>
+            <ul>
+              <li nz-menu-item>
+                上传公益拍卖
+                <a (click)="getInfo(10)"></a>
+              </li>
+              <li nz-menu-item>
+                查看公益拍卖
+                <a (click)="getInfo(11)"></a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nz-sider>
+    <!-- 用户信息 -->
+    <nz-layout *ngIf="select === 1">
+      <app-bread-crumb class="bread-crumb" isAdmin=true type='userInfo'></app-bread-crumb>
+      <nz-content>
+        <nz-header class="content-header" style="display: flex;">
+          <!-- 列表升序、降序按钮 -->
+          <div class="order-div">
+            <nz-select [ngModel]="listSortOrderBy" (ngModelChange)="changeOrder($event)">
+              <nz-option nzValue="asc" nzLabel="升序"></nz-option>
+              <nz-option nzValue="desc" nzLabel="降序"></nz-option>
+            </nz-select>
+          </div>
+          <!-- 搜索框 -->
+          <div class="search-div">
+            <input nz-input placeholder="请输入搜索内容" [(ngModel)]="searchValue" style="width: 50%; margin-left: -240px;" />
+            <button nz-button nzType="primary" nzShape="circle"><i nz-icon nzType="search"></i></button>
+          </div>
+        </nz-header>
+        <nz-content class="content-data">用户信息</nz-content>
+        <!-- 分页 -->
+        <nz-footer class="page">
+          <!-- nzPageIndex开始页码 nzTotal 记录总数 nzPageSize 每一页的数据条数 都可以进行双向绑定-->
+          <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="sizeTotal" [nzPageSize]="10" nzShowQuickJumper
+            (nzPageIndexChange)="selectData()"></nz-pagination>
+        </nz-footer>
+      </nz-content>
+    </nz-layout>
+    <!-- 用户投稿 -->
+    <nz-layout *ngIf="select === 2">
+      <app-bread-crumb class="bread-crumb" isAdmin=true type='usertg'></app-bread-crumb>
+      <nz-content>
+        <nz-header class="content-header" style="display: flex;">
+          <!-- 列表升序、降序按钮 -->
+          <div class="order-div">
+            <nz-select [ngModel]="listSortOrderBy" (ngModelChange)="changeOrder($event)">
+              <nz-option nzValue="asc" nzLabel="升序"></nz-option>
+              <nz-option nzValue="desc" nzLabel="降序"></nz-option>
+            </nz-select>
+          </div>
+          <!-- 搜索框 -->
+          <div class="search-div">
+            <input nz-input placeholder="请输入搜索内容" [(ngModel)]="searchValue" style="width: 50%; margin-left: -240px;" />
+            <button nz-button nzType="primary" nzShape="circle"><i nz-icon nzType="search"></i></button>
+          </div>
+        </nz-header>
+        <nz-content class="content-data">用户投稿</nz-content>
+        <!-- 分页 -->
+        <nz-footer class="page">
+          <!-- nzPageIndex开始页码 nzTotal 记录总数 nzPageSize 每一页的数据条数 都可以进行双向绑定-->
+          <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="sizeTotal" [nzPageSize]="10" nzShowQuickJumper
+            (nzPageIndexChange)="selectData()"></nz-pagination>
+        </nz-footer>
+      </nz-content>
+    </nz-layout>
+    <!-- 用户求助 -->
+    <nz-layout *ngIf="select === 3">
+      <app-bread-crumb class="bread-crumb" isAdmin=true type='userhelp'></app-bread-crumb>
+      <nz-content>
+        <nz-header class="content-header" style="display: flex;">
+          <!-- 列表升序、降序按钮 -->
+          <div class="order-div">
+            <nz-select [ngModel]="listSortOrderBy" (ngModelChange)="changeOrder($event)">
+              <nz-option nzValue="asc" nzLabel="升序"></nz-option>
+              <nz-option nzValue="desc" nzLabel="降序"></nz-option>
+            </nz-select>
+          </div>
+          <!-- 搜索框 -->
+          <div class="search-div">
+            <input nz-input placeholder="请输入搜索内容" [(ngModel)]="searchValue" style="width: 50%; margin-left: -240px;" />
+            <button nz-button nzType="primary" nzShape="circle"><i nz-icon nzType="search"></i></button>
+          </div>
+        </nz-header>
+        <nz-content class="content-data">用户求助</nz-content>
+        <!-- 分页 -->
+        <nz-footer class="page">
+          <!-- nzPageIndex开始页码 nzTotal 记录总数 nzPageSize 每一页的数据条数 都可以进行双向绑定-->
+          <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="sizeTotal" [nzPageSize]="10" nzShowQuickJumper
+            (nzPageIndexChange)="selectData()"></nz-pagination>
+        </nz-footer>
+      </nz-content>
+    </nz-layout>
+    <!-- 查看公益资讯 -->
+    <nz-layout *ngIf="select === 5">
+      <app-bread-crumb class="bread-crumb" isAdmin=true type='ckgyzz'></app-bread-crumb>
+      <nz-content>
+        <nz-header class="content-header" style="display: flex;">
+          <!-- 列表升序、降序按钮 -->
+          <div class="order-div">
+            <nz-select [ngModel]="listSortOrderBy" (ngModelChange)="changeOrder($event)">
+              <nz-option nzValue="asc" nzLabel="升序"></nz-option>
+              <nz-option nzValue="desc" nzLabel="降序"></nz-option>
+            </nz-select>
+          </div>
+          <!-- 搜索框 -->
+          <div class="search-div">
+            <input nz-input placeholder="请输入搜索内容" [(ngModel)]="searchValue" style="width: 50%; margin-left: -240px;" />
+            <button nz-button nzType="primary" nzShape="circle"><i nz-icon nzType="search"></i></button>
+          </div>
+        </nz-header>
+        <nz-content class="content-data">查看公益资讯</nz-content>
+        <!-- 分页 -->
+        <nz-footer class="page">
+          <!-- nzPageIndex开始页码 nzTotal 记录总数 nzPageSize 每一页的数据条数 都可以进行双向绑定-->
+          <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="sizeTotal" [nzPageSize]="10" nzShowQuickJumper
+            (nzPageIndexChange)="selectData()"></nz-pagination>
+        </nz-footer>
+      </nz-content>
+    </nz-layout>
+    <!-- 上传公益资讯 -->
+    <nz-layout *ngIf="select === 4">
+      <app-bread-crumb class="bread-crumb" isAdmin=true type='scgyzz'></app-bread-crumb>
+      <nz-content>
+        <nz-content class="content-data-upload">
+          <!-- 上传公益资讯表单 -->
+          <form nz-form [formGroup]="uploadNewsForm">
+            <!-- 文章标题 -->
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="title">文章标题</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="文章标题不符合要求">
+                <input nz-input formControlName="title" id="title" [(ngModel)]="news.title"
+                  placeholder="只支持汉字，最多支持20个汉字" />
+              </nz-form-control>
+            </nz-form-item>
+            <!-- 文章来源 -->
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="source" nzRequired>文章来源</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="文章来源不符合要求">
+                <input nz-input id="source" formControlName="source" [(ngModel)]="news.source"
+                  placeholder="只支持汉字，最多支持10个汉字" />
+              </nz-form-control>
+            </nz-form-item>
+             <!-- 摘要 -->
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="summary" nzRequired>摘要</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="摘要不符合要求">
+                <textarea id="summary" formControlName="summary" rows="4" nz-input [(ngModel)]="news.summary"
+                placeholder="只支持汉字，最多支持50个汉字"></textarea>
+              </nz-form-control>
+            </nz-form-item>
+            <!-- 列表展示图片 -->
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24">
+                <span style="font-size: 24px; line-height: 100%; color: red;">*</span>列表展示图片
+                <i nz-icon nzType="question" nzTheme="outline" nzTooltipTitle="仅支持.png、.jpg格式的图片" nzTooltipPlacement="topCenter" nz-tooltip></i>
+              </nz-form-label>
+              <nz-upload
+              nzAction="http://localhost:8080/upload/pic"
+              [nzHeaders]="{ authorization: 'authorization-text' }"
+              (nzChange)="handleChange($event)"
+              [nzDisabled]="isDisabled"
+              >
+            <button nz-button><i nz-icon nzType="upload"></i>上传</button>
+            </nz-upload>
+            </nz-form-item>
+            <!-- 文章类型 -->
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24">文章类型</nz-form-label>
+              <nz-select ngModel="0" (ngModelChange)="changeNewsType($event)" [ngModelOptions]="{standalone: true}" style="width: 20%;">
+                <nz-option nzValue="0" nzLabel="国内"></nz-option>
+                <nz-option nzValue="1" nzLabel="政府"></nz-option>
+              </nz-select>
+            </nz-form-item>
+          </form>
+          <editor [(ngModel)]="data" apiKey="gwyubai1cdtwea9azntbx3b4dni7oq5e5hmptytgybotdmh3" [init]="tinyInit"></editor>
+          <button nz-button nzType="primary" (click)="uploadNews()">上传</button>
+        </nz-content>
+      </nz-content>
+    </nz-layout>
+    <!-- 查看公益活动 -->
+    <nz-layout *ngIf="select === 7">
+      <app-bread-crumb class="bread-crumb" isAdmin=true type='ckgyhd'></app-bread-crumb>
+      <nz-content>
+        <nz-header class="content-header" style="display: flex;">
+          <!-- 列表升序、降序按钮 -->
+          <div class="order-div">
+            <nz-select [ngModel]="listSortOrderBy" (ngModelChange)="changeOrder($event)">
+              <nz-option nzValue="asc" nzLabel="升序"></nz-option>
+              <nz-option nzValue="desc" nzLabel="降序"></nz-option>
+            </nz-select>
+          </div>
+          <!-- 搜索框 -->
+          <div class="search-div">
+            <input nz-input placeholder="请输入搜索内容" [(ngModel)]="searchValue" style="width: 50%; margin-left: -240px;" />
+            <button nz-button nzType="primary" nzShape="circle"><i nz-icon nzType="search"></i></button>
+          </div>
+        </nz-header>
+        <nz-content class="content-data">查看公益活动</nz-content>
+        <!-- 分页 -->
+        <nz-footer class="page">
+          <!-- nzPageIndex开始页码 nzTotal 记录总数 nzPageSize 每一页的数据条数 都可以进行双向绑定-->
+          <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="sizeTotal" [nzPageSize]="10" nzShowQuickJumper
+            (nzPageIndexChange)="selectData()"></nz-pagination>
+        </nz-footer>
+      </nz-content>
+    </nz-layout>
+    <!-- 上传公益活动 -->
+    <nz-layout *ngIf="select === 6">
+      <app-bread-crumb class="bread-crumb" isAdmin=true type='scgyhd'></app-bread-crumb>
+      <nz-content>
+        <nz-content class="content-data-upload">上传公益活动</nz-content>
+      </nz-content>
+    </nz-layout>
+    <!-- 查看公益商品 -->
+    <nz-layout *ngIf="select === 9">
+      <app-bread-crumb class="bread-crumb" isAdmin=true type='ckgysp'></app-bread-crumb>
+      <nz-content>
+        <nz-header class="content-header" style="display: flex;">
+          <!-- 列表升序、降序按钮 -->
+          <div class="order-div">
+            <nz-select [ngModel]="listSortOrderBy" (ngModelChange)="changeOrder($event)">
+              <nz-option nzValue="asc" nzLabel="升序"></nz-option>
+              <nz-option nzValue="desc" nzLabel="降序"></nz-option>
+            </nz-select>
+          </div>
+          <!-- 搜索框 -->
+          <div class="search-div">
+            <input nz-input placeholder="请输入搜索内容" [(ngModel)]="searchValue" style="width: 50%; margin-left: -240px;" />
+            <button nz-button nzType="primary" nzShape="circle"><i nz-icon nzType="search"></i></button>
+          </div>
+        </nz-header>
+        <nz-content class="content-data">查看公益商品</nz-content>
+        <!-- 分页 -->
+        <nz-footer class="page">
+          <!-- nzPageIndex开始页码 nzTotal 记录总数 nzPageSize 每一页的数据条数 都可以进行双向绑定-->
+          <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="sizeTotal" [nzPageSize]="10" nzShowQuickJumper
+            (nzPageIndexChange)="selectData()"></nz-pagination>
+        </nz-footer>
+      </nz-content>
+    </nz-layout>
+    <!-- 上传公益商品 -->
+    <nz-layout *ngIf="select === 8">
+      <app-bread-crumb class="bread-crumb" isAdmin=true type='scgysp'></app-bread-crumb>
+      <nz-content>
+        <nz-content class="content-data-upload">上传公益商品</nz-content>
+      </nz-content>
+    </nz-layout>
+    <!-- 查看公益拍卖 -->
+    <nz-layout *ngIf="select === 11">
+      <app-bread-crumb class="bread-crumb" isAdmin=true type='ckgypm'></app-bread-crumb>
+      <nz-content>
+        <nz-header class="content-header" style="display: flex;">
+          <!-- 列表升序、降序按钮 -->
+          <div class="order-div">
+            <nz-select [ngModel]="listSortOrderBy" (ngModelChange)="changeOrder($event)">
+              <nz-option nzValue="asc" nzLabel="升序"></nz-option>
+              <nz-option nzValue="desc" nzLabel="降序"></nz-option>
+            </nz-select>
+          </div>
+          <!-- 搜索框 -->
+          <div class="search-div">
+            <input nz-input placeholder="请输入搜索内容" [(ngModel)]="searchValue" style="width: 50%; margin-left: -240px;" />
+            <button nz-button nzType="primary" nzShape="circle"><i nz-icon nzType="search"></i></button>
+          </div>
+        </nz-header>
+        <nz-content class="content-data">查看公益拍卖</nz-content>
+        <!-- 分页 -->
+        <nz-footer class="page">
+          <!-- nzPageIndex开始页码 nzTotal 记录总数 nzPageSize 每一页的数据条数 都可以进行双向绑定-->
+          <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="sizeTotal" [nzPageSize]="10" nzShowQuickJumper
+            (nzPageIndexChange)="selectData()"></nz-pagination>
+        </nz-footer>
+      </nz-content>
+    </nz-layout>
+    <!-- 上传公益拍卖 -->
+    <nz-layout *ngIf="select === 10">
+      <app-bread-crumb class="bread-crumb" isAdmin=true type='scgypm'></app-bread-crumb>
+      <nz-content>
+        <nz-content class="content-data-upload">上传公益拍卖</nz-content>
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
+  <!-- 声明信息 -->
+  <nz-footer>
+    <div nz-row>
+      <div nz-col nzSpan="12" nzOffset="6">
+        <a href="http://www.zggyw.org/"> {{ "Home.Footer.HomePage" | translate }}</a> |
+        <a href="http://www.zggyw.org/html/help/wzjs/gywm/"> {{ "Home.Footer.AboutUs" | translate }}</a> |
+        <a href="http://www.zggyw.org/html/help/cjwt/zggywtgxz/"> {{ "Home.Footer.SubmissionGuidelines" | translate
+          }}</a>
+        |
+        <a href="http://www.zggyw.org/html/help/wzjs/wzsm/"> {{ "Home.Footer.WebsiteStated" | translate }}</a> |
+        <a href="http://www.zggyw.org/html/help/ywjs/ywhz/"> {{ "Home.Footer.BusinessCooperation" | translate }}</a>
+      </div>
+      <div nz-col nzSpan="12" nzOffset="6">
+        微尘版权所有
+      </div>
+      <div nz-col nzSpan="12" nzOffset="6">
+        联系我：1012077930@qq.com
+      </div>
+      <div nz-col nzSpan="12" nzOffset="6">
+        <a href="http://www.12377.cn/" target="_blank">违法和不良信息举报中心</a>
+        |
+        <a href="http://www.piyao.org.cn/" target="_blank">中国互联网联合辟谣平台</a>
+      </div>
+    </div>
+  </nz-footer>
+</nz-layout>
+<app-back-top [height]="2"></app-back-top>

@@ -12,6 +12,6 @@ export class AdminIsLoginGuard implements CanActivate{
     }
     checkLogin(): true | UrlTree {
         if (this.loginService.isLogin()) { return true; }
-        return this.router.createUrlTree(['/login/admin']);
+        return this.router.createUrlTree(['']);
     }
 }

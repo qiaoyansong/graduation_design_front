@@ -1,7 +1,2 @@
-<app-bread-crumb></app-bread-crumb>
-<h1>TinyMCE 5 Angular Demo</h1>
-<editor [(ngModel)]="data" apiKey="gwyubai1cdtwea9azntbx3b4dni7oq5e5hmptytgybotdmh3" [init]="tinyInit"></editor>
-<!-- <p><img src="assets/images/a.jpg" alt="" width="1499" height="468" /></p> -->
+<editor [(ngModel)]="data" apiKey="gwyubai1cdtwea9azntbx3b4dni7oq5e5hmptytgybotdmh3" [init]="tinyInit" (change)="change()"></editor>
 {{data}}
-<!-- <app-back-top [height] = "-2"></app-back-top> -->
-<!-- <button>{{'Button.Yes' | translate}}</button> -->
