@@ -1,0 +1,52 @@
+<nz-layout>
+  <app-bread-crumb class="bread-crumb" isAdmin=true type='scgyhd'></app-bread-crumb>
+  <nz-content>
+    <nz-content class="content-data-upload">
+      <!-- 上传公益活动表单 -->
+      <form nz-form [formGroup]="uploadActivityForm">
+        <!-- 活动标题 -->
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="title">活动标题</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="活动标题不符合要求">
+            <input nz-input formControlName="title" id="title" placeholder="只支持汉字，最多支持20个汉字" [(ngModel)]="activity.title"/>
+          </nz-form-control>
+        </nz-form-item>
+        <!-- 开始、结束时间 -->
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24">
+            <span style="font-size: 24px; line-height: 100%; color: red;">*</span>开始结束时间
+          </nz-form-label>
+          <nz-range-picker [(ngModel)]="dateRange" [ngModelOptions]="{standalone: true}"></nz-range-picker>
+        </nz-form-item>
+        <!-- 活动摘要 -->
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="summary" nzRequired>活动摘要</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="活动摘要不符合要求">
+            <textarea id="summary" formControlName="summary" rows="4" nz-input [(ngModel)]="activity.summary"
+              placeholder="只支持汉字，最多支持100个汉字"></textarea>
+          </nz-form-control>
+        </nz-form-item>
+        <!-- 难度 -->
+        <nz-form-item>
+          {{activity.difficulty}}
+          <nz-form-label [nzSm]="6" [nzXs]="24"><span style="font-size: 24px; line-height: 100%; color: red;">*</span>
+            难度</nz-form-label>
+            <nz-rate [(ngModel)]="value" [nzTooltips]="tooltips" [ngModelOptions]="{standalone: true}"></nz-rate>
+            <span *ngIf="value" class="ant-rate-text">{{ value ? tooltips[value - 1] : '' }}</span>
+        </nz-form-item>
+        <!-- 所需人数 -->
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24"><span
+              style="font-size: 24px; line-height: 100%; color: red;">*</span>
+              所需人数
+              <i nz-icon nzType="question" nzTheme="outline" nzTooltipTitle="最多40人" nzTooltipPlacement="topCenter" nz-tooltip></i>
+            </nz-form-label>
+              <nz-input-number [(ngModel)]="peoples" [nzMin]="1" [nzMax]="40" [nzStep]="1" [ngModelOptions]="{standalone: true}"></nz-input-number>
+        </nz-form-item>
+      </form>
+      <!-- 活动内容 -->
+      <editor [(ngModel)]="data" apiKey="gwyubai1cdtwea9azntbx3b4dni7oq5e5hmptytgybotdmh3" [init]="tinyInit"></editor>
+      <button nz-button nzType="primary" (click)="uploadActivity()">上传</button>
+    </nz-content>
+  </nz-content>
+</nz-layout>

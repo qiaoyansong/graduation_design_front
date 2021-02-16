@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -5,15 +6,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AdminService {
-  httpClient: any;
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
   
   /**
    * 用于上传文章
    * @param params 文章信息
    */
-  public login(params: any): Observable<any>{
+  public uploadNews(params: any): Observable<any>{
     let news =  {
       'title': params.title,
       'source': params.source,

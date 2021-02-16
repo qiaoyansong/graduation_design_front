@@ -62,5 +62,13 @@ export enum StatusCode{
     /**
      * 与绑定邮箱不一致
      */
-    MAILBOX_ERROR = "114"
+    MAILBOX_ERROR = "114",
+     /**
+     * 用户未登录
+     */
+    USER_IS_NOT_LOGGED_IN =  "115",
+    /**
+     * 文章标题已经存在
+     */
+    NEWS_TITLE_IS_EXISTS = "116"
 }

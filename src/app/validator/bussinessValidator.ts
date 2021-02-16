@@ -97,3 +97,14 @@ export function newsSummaryValidator(): ValidatorFn{
     return result ? null : {'newsSummary' : {name: value}} ;
   };
 }
+  /**
+  * 验证商品摘要是否符合格式
+ */
+export function commoditySummaryValidator(): ValidatorFn{
+  return (control: AbstractControl): {[key: string]: any}| null => {
+    const value = control.value;
+    const reg = /^.{0,100}$/;
+    const result = reg.test(value);
+    return result ? null : {'commoditySummary' : {name: value}} ;
+  };
+}

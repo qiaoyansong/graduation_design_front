@@ -44,6 +44,21 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { UploadNewsComponent } from './admin/news/upload-news/upload-news.component';
+import { SeeNewsComponent } from './admin/news/see-news/see-news.component';
+import { UploadActivityComponent } from './admin/activity/upload-activity/upload-activity.component';
+import { SeeActivityComponent } from './admin/activity/see-activity/see-activity.component';
+import { UploadAuctionComponent } from './admin/auction/upload-auction/upload-auction.component';
+import { SeeAuctionComponent } from './admin/auction/see-auction/see-auction.component';
+import { UploadCommodityComponent } from './admin/commodity/upload-commodity/upload-commodity.component';
+import { SeeCommodityComponent } from './admin/commodity/see-commodity/see-commodity.component';
+import { UserInfoComponent } from './admin/user/user-info/user-info.component';
+import { UserTgComponent } from './admin/user/user-tg/user-tg.component';
+import { UserSeekHelpComponent } from './admin/user/user-seek-help/user-seek-help.component';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzRateModule } from 'ng-zorro-antd/rate';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzSliderModule } from 'ng-zorro-antd/slider';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +75,17 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
     AdminLoginComponent,
     AdminHomepageComponent,
     ForgetPasswordComponent,
+    UploadNewsComponent,
+    SeeNewsComponent,
+    UploadActivityComponent,
+    SeeActivityComponent,
+    UploadAuctionComponent,
+    SeeAuctionComponent,
+    UploadCommodityComponent,
+    SeeCommodityComponent,
+    UserInfoComponent,
+    UserTgComponent,
+    UserSeekHelpComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,8 +96,11 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
     NzBackTopModule,
     EditorModule,
     NzToolTipModule,
+    NzDatePickerModule,
     FormsModule,
     NzFormModule,
+    NzRateModule,
+    NzSliderModule,
     NzUploadModule,
     HttpClientModule,
     DevUIModule,
@@ -86,6 +115,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
     NzMenuModule,
     NzStepsModule,
     NzAvatarModule,
+    NzInputNumberModule,
     NzDropDownModule,
     TranslateModule.forRoot({
       loader: {

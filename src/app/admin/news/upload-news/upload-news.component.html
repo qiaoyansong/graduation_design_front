@@ -1,0 +1,65 @@
+<nz-layout>
+    <app-bread-crumb class="bread-crumb" isAdmin=true type='scgyzz'></app-bread-crumb>
+    <nz-content>
+      <nz-content class="content-data-upload">
+        <!-- 上传公益资讯表单 -->
+        <form nz-form [formGroup]="uploadNewsForm">
+          <!-- 文章标题 -->
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="title">文章标题</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="文章标题不符合要求">
+              <input nz-input formControlName="title" id="title" [(ngModel)]="news.title"
+                placeholder="只支持汉字，最多支持20个汉字" />
+            </nz-form-control>
+          </nz-form-item>
+          <!-- 文章来源 -->
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="source" nzRequired>文章来源</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="文章来源不符合要求">
+              <input nz-input id="source" formControlName="source" [(ngModel)]="news.source"
+                placeholder="只支持汉字，最多支持10个汉字" />
+            </nz-form-control>
+          </nz-form-item>
+           <!-- 摘要 -->
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="summary" nzRequired>摘要</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="摘要不符合要求">
+              <textarea id="summary" formControlName="summary" rows="4" nz-input [(ngModel)]="news.summary"
+              placeholder="只支持汉字，最多支持100个汉字"></textarea>
+            </nz-form-control>
+          </nz-form-item>
+          <!-- 列表展示图片 -->
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24">
+              <span style="font-size: 24px; line-height: 100%; color: red;">*</span>列表展示图片
+              <i nz-icon nzType="question" nzTheme="outline" nzTooltipTitle="仅支持.png、.jpg格式的图片" nzTooltipPlacement="topCenter" nz-tooltip></i>
+            </nz-form-label>
+            <nz-upload
+            nzAction="http://localhost:8080/upload/pic"
+            [nzHeaders]="{ authorization: 'authorization-text' }"
+            (nzChange)="handleNewsImagChange($event)"
+            [nzDisabled]="isDisabled"
+            >
+          <button nz-button><i nz-icon nzType="upload"></i>上传</button>
+          </nz-upload>
+          </nz-form-item>
+          <!-- 文章类型 -->
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24">文章类型</nz-form-label>
+            <nz-select ngModel="0" (ngModelChange)="changeNewsType($event)" [ngModelOptions]="{standalone: true}" style="width: 20%;">
+              <nz-option nzValue="0" nzLabel="国内"></nz-option>
+              <nz-option nzValue="1" nzLabel="政府"></nz-option>
+              <nz-option nzValue="2" nzLabel="学校"></nz-option>
+              <nz-option nzValue="3" nzLabel="企业"></nz-option>
+              <nz-option nzValue="4" nzLabel="益人"></nz-option>
+              <nz-option nzValue="5" nzLabel="好人"></nz-option>
+              <nz-option nzValue="6" nzLabel="好事"></nz-option>
+              <nz-option nzValue="7" nzLabel="评选"></nz-option>
+            </nz-select>
+          </nz-form-item>
+        </form>
+        <editor [(ngModel)]="data" apiKey="gwyubai1cdtwea9azntbx3b4dni7oq5e5hmptytgybotdmh3" [init]="tinyInit"></editor>
+        <button nz-button nzType="primary" (click)="uploadNews()">上传</button>
+      </nz-content>
+    </nz-content>
+  </nz-layout>

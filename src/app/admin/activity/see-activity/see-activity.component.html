@@ -1,0 +1,26 @@
+<nz-layout style="height: 100%;">
+    <app-bread-crumb class="bread-crumb" isAdmin=true type='ckgyhd'></app-bread-crumb>
+    <nz-content>
+      <nz-header class="content-header" style="display: flex;">
+        <!-- 列表升序、降序按钮 -->
+        <div class="order-div">
+          <nz-select [ngModel]="listSortOrderBy" (ngModelChange)="changeOrder($event)">
+            <nz-option nzValue="asc" nzLabel="升序"></nz-option>
+            <nz-option nzValue="desc" nzLabel="降序"></nz-option>
+          </nz-select>
+        </div>
+        <!-- 搜索框 -->
+        <div class="search-div">
+          <input nz-input placeholder="请输入搜索内容" [(ngModel)]="searchValue" style="width: 50%; margin-left: -240px;" />
+          <button nz-button nzType="primary" nzShape="circle"><i nz-icon nzType="search"></i></button>
+        </div>
+      </nz-header>
+      <nz-content class="content-data">查看公益活动</nz-content>
+      <!-- 分页 -->
+      <nz-footer class="page">
+        <!-- nzPageIndex开始页码 nzTotal 记录总数 nzPageSize 每一页的数据条数 都可以进行双向绑定-->
+        <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="sizeTotal" [nzPageSize]="10" nzShowQuickJumper
+          (nzPageIndexChange)="selectData()"></nz-pagination>
+      </nz-footer>
+    </nz-content>
+  </nz-layout>
