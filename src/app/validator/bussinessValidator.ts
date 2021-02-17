@@ -70,7 +70,7 @@ export function verificationCodeValidator(): ValidatorFn{
 export function newsTitleValidator(): ValidatorFn{
   return (control: AbstractControl): {[key: string]: any}| null => {
     const value = control.value;
-    const reg = /^[\u4e00-\u9fa5]{1,20}$/;
+    const reg = /^[\u4e00-\u9fa5]{1,50}$/;
     const result = reg.test(value);
     return result ? null : {'newsTitle' : {name: value}} ;
   };

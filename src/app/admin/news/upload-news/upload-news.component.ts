@@ -110,7 +110,7 @@ export class UploadNewsComponent implements OnInit {
     */
   public checkNewsTitle(): boolean {
     const value = this.news.title;
-    const reg = /^[\u4e00-\u9fa5]{1,20}$/;
+    const reg = /^[\u4e00-\u9fa5]{1,50}$/;
     const result = reg.test(value);
     return result;
   };
@@ -159,15 +159,6 @@ export class UploadNewsComponent implements OnInit {
       this.adminService.uploadNews(this.news).subscribe(data => {
         if (data.code === StatusCode.SUCCESS) {
           // 成功
-          this.news.type = '0';
-          this.news.article = '';
-          this.data = null;
-          this.news.img = '';
-          this.news.source = '';
-          this.news.title = '';
-          this.news.summary = '';
-          this.imgLocation = null;
-          this.buildUploadNewsForm();
           this.flag = StatusCode.SUCCESS;
           // 移动到顶部
           window.scrollTo(0, 0);
@@ -182,7 +173,6 @@ export class UploadNewsComponent implements OnInit {
           // 移动到顶部
           window.scrollTo(0, 0);
         }
-        console.log(data);
         this.uploadFlags.emit(this.flag);
       });
     }

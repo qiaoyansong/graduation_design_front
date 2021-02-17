@@ -2,9 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { StatusCode } from 'src/app/enumType/StatusCode';
 import { AdminService } from 'src/app/service/admin.service';
-import { newsSummaryValidator, newsTitleValidator } from 'src/app/validator/bussinessValidator';
-import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
-import { NzMessageService } from 'ng-zorro-antd/message';
+import { commoditySummaryValidator, newsSummaryValidator,} from 'src/app/validator/bussinessValidator';
 import { NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 @Component({
   selector: 'app-upload-activity',
@@ -33,7 +31,7 @@ export class UploadActivityComponent implements OnInit {
   dateRange = [];
   // 人数
   peoples = 1;
-  // 上传文章标志位
+  // 上传活动标志位
   @Output()
   public uploadFlags = new EventEmitter<string>();
   // 难度等级
@@ -51,8 +49,8 @@ export class UploadActivityComponent implements OnInit {
   public buildUploadActivityForm(): void {
     this.uploadActivityForm = this.fb.group(
       {
-        title: [this.activity.title, [newsTitleValidator()]],
-        summary: [this.activity.summary, [newsSummaryValidator()]],
+        title: [this.activity.title, [newsSummaryValidator()]],
+        summary: [this.activity.summary, [commoditySummaryValidator()]],
       });
   }
 
@@ -104,9 +102,9 @@ export class UploadActivityComponent implements OnInit {
   /**
    * 验证活动标题是否符合格式
    */
-  public checkNewsTitle(): boolean {
+  public checkActivityTitle(): boolean {
     const value = this.activity.title;
-    const reg = /^[\u4e00-\u9fa5]{1,20}$/;
+    const reg = /^[\u4e00-\u9fa5]{1,50}$/;
     const result = reg.test(value);
     return result;
   };
@@ -114,9 +112,9 @@ export class UploadActivityComponent implements OnInit {
   /**
    * 验证活动摘要是否符合格式
    */
-  public checkNewsSummary(): boolean {
+  public checkActivitySummary(): boolean {
     const value = this.activity.summary;
-    const reg = /^.{1,100}$/;
+    const reg = /^.{0,100}$/;
     const result = reg.test(value);
     return result;
   };
@@ -129,9 +127,35 @@ export class UploadActivityComponent implements OnInit {
   };
 
   /**
+   * 验证开始结束时间是否符合格式
+   */
+  public checkBeginAndEndTime(): boolean {
+    return this.dateRange == null ? false : true;;
+  };
+
+  /**
    * 上传活动
    */
   public uploadActivity(): void {
-    
+    if(this.checkData() && this.checkActivitySummary() && this.checkActivityTitle() && this.checkBeginAndEndTime()){
+      this.activity.content = this.data;
+      this.activity.difficulty = this.value + '';
+      this.activity.peoples = this.peoples + '';
+      this.activity.beginTime = this.dateRange[0];
+      this.activity.endTime = this.dateRange[1];
+      this.adminService.uploadActivity(this.activity).subscribe(data => {
+        if(data.code === StatusCode.SUCCESS){
+          this.flag = StatusCode.SUCCESS;
+          // 移动到顶部
+          window.scrollTo(0, 0);
+        } else if (data.code === StatusCode.USER_IS_NOT_LOGGED_IN) {
+          // 未登录
+          this.flag = StatusCode.USER_IS_NOT_LOGGED_IN;
+          // 移动到顶部
+          window.scrollTo(0, 0);
+        }
+        this.uploadFlags.emit(this.flag);
+      });
+    }
   }
 }

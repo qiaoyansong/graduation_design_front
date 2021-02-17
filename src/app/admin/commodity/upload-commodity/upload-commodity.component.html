@@ -9,7 +9,7 @@
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="title">商品标题</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="商品标题不符合要求">
-            <input nz-input formControlName="title" id="title" placeholder="只支持汉字，最多支持20个汉字" [(ngModel)]="commodity.title"/>
+            <input nz-input formControlName="title" id="title" placeholder="只支持汉字，最多支持50个汉字" [(ngModel)]="commodity.title"/>
           </nz-form-control>
         </nz-form-item>
         <!-- 商品摘要 -->
@@ -36,6 +36,8 @@
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24"><span style="font-size: 24px; line-height: 100%; color: red;">*</span>
             所需点数
+            <i nz-icon nzType="question" nzTheme="outline" nzTooltipTitle="最多100"
+            nzTooltipPlacement="topCenter" nz-tooltip></i>
           </nz-form-label>
           <nz-slider style="width: 60%;" [(ngModel)]="point" [nzDisabled]="false" [nzMax] =100 [nzMin]=1 [ngModelOptions]="{standalone: true}"></nz-slider>
         </nz-form-item>
@@ -43,8 +45,10 @@
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24"><span style="font-size: 24px; line-height: 100%; color: red;">*</span>
             商品剩余数量
+            <i nz-icon nzType="question" nzTheme="outline" nzTooltipTitle="最多100"
+            nzTooltipPlacement="topCenter" nz-tooltip></i>
           </nz-form-label>
-          <nz-slider style="width: 60%;" [(ngModel)]="quantity" [nzDisabled]="false" [nzMax] =100 [ngModelOptions]="{standalone: true}"></nz-slider>
+          <nz-slider style="width: 60%;" [(ngModel)]="quantity" [nzDisabled]="false" [nzMax] =100 [nzMin]=1 [ngModelOptions]="{standalone: true}"></nz-slider>
         </nz-form-item>
       </form>
       <!-- 商品信息 -->

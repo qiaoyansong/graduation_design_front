@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { newsTitleValidator, newsSourceValidator,newsSummaryValidator } from 'src/app/validator/bussinessValidator';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
-import { AdminService } from 'src/app/service/admin.service';
+import { FormGroup } from '@angular/forms';
+import { StatusComponent } from 'ng-devui';
 import { StatusCode } from 'src/app/enumType/StatusCode';
 @Component({
   selector: 'app-admin-homepage',
@@ -21,6 +18,12 @@ export class AdminHomepageComponent implements OnInit {
   public uploadAuctionForm: FormGroup;
   // 上传文章标志位
   public UploadnewsFlag;
+  // 上传文章标志位
+  public UploadActivityFlag;
+  // 上传拍卖标志位
+  public UploadAuctionFlag;
+  // 上传商品标志位
+  public UploadCommodityFlag;
   /**
    * 内嵌菜单切换按钮
    */
@@ -48,5 +51,38 @@ export class AdminHomepageComponent implements OnInit {
    */
   public getUploadNewsFlag(msg): void{
     this.UploadnewsFlag = msg;
+    if(this.UploadnewsFlag === StatusCode.SUCCESS){
+      this.select = 5;
+    }
+  }
+
+  /**
+   * 从上传活动子组件获取上传标志位
+   */
+  public getUploadActivityFlag(msg): void{
+    this.UploadActivityFlag = msg;
+    if(this.UploadActivityFlag === StatusCode.SUCCESS){
+      this.select = 7;
+    }
+  }
+
+  /**
+   * 从上传拍卖子组件获取上传标志位
+   */
+  public getUploadAuctionFlag(msg): void{
+    this.UploadAuctionFlag = msg;
+    if(this.UploadAuctionFlag === StatusCode.SUCCESS){
+      this.select = 11;
+    }
+  }
+
+  /**
+   * 从上传商品子组件获取上传标志位
+   */
+  public getUploadCommodityFlag(msg): void{
+    this.UploadCommodityFlag = msg;
+    if(this.UploadCommodityFlag === StatusCode.SUCCESS){
+      this.select = 9;
+    }
   }
 } 

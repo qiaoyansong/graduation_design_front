@@ -8,7 +8,7 @@
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="title">活动标题</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="活动标题不符合要求">
-            <input nz-input formControlName="title" id="title" placeholder="只支持汉字，最多支持20个汉字" [(ngModel)]="activity.title"/>
+            <input nz-input formControlName="title" id="title" placeholder="只支持汉字，最多支持50个汉字" [(ngModel)]="activity.title"/>
           </nz-form-control>
         </nz-form-item>
         <!-- 开始、结束时间 -->
@@ -20,7 +20,7 @@
         </nz-form-item>
         <!-- 活动摘要 -->
         <nz-form-item>
-          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="summary" nzRequired>活动摘要</nz-form-label>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="summary">活动摘要</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="活动摘要不符合要求">
             <textarea id="summary" formControlName="summary" rows="4" nz-input [(ngModel)]="activity.summary"
               placeholder="只支持汉字，最多支持100个汉字"></textarea>

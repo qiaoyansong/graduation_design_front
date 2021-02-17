@@ -9,7 +9,7 @@
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="title">拍卖商品名称</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="拍卖商品名称不符合要求">
-            <input nz-input formControlName="title" id="title" placeholder="只支持汉字，最多支持20个汉字"
+            <input nz-input formControlName="title" id="title" placeholder="只支持汉字，最多支持50个汉字"
               [(ngModel)]="auction.title" />
           </nz-form-control>
         </nz-form-item>
@@ -44,6 +44,8 @@
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24"><span style="font-size: 24px; line-height: 100%; color: red;">*</span>
             最低价格
+            <i nz-icon nzType="question" nzTheme="outline" nzTooltipTitle="最低1元"
+              nzTooltipPlacement="topCenter" nz-tooltip></i>
           </nz-form-label>
           <nz-slider style="width: 60%;" [(ngModel)]="minPrice" [nzDisabled]="false" [nzMax]=100 [nzMin]=1
             [ngModelOptions]="{standalone: true}"></nz-slider>
@@ -52,6 +54,8 @@
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24"><span style="font-size: 24px; line-height: 100%; color: red;">*</span>
             最高价格
+            <i nz-icon nzType="question" nzTheme="outline" nzTooltipTitle="最高1000元"
+              nzTooltipPlacement="topCenter" nz-tooltip></i>
           </nz-form-label>
           <nz-slider style="width: 60%;" [(ngModel)]="maxPrice" [nzDisabled]="false" [nzMax]=1000 [nzMin]=1
             [ngModelOptions]="{standalone: true}"></nz-slider>

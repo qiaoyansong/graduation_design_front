@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { commoditySummaryValidator, newsTitleValidator } from 'src/app/validator/bussinessValidator';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { AdminService } from 'src/app/service/admin.service';
+import { StatusCode } from 'src/app/enumType/StatusCode';
 @Component({
   selector: 'app-upload-commodity',
   templateUrl: './upload-commodity.component.html',
@@ -31,8 +33,14 @@ export class UploadCommodityComponent implements OnInit {
   public isDisabled = false;
   // 图片地址
   public imgLocation;
+  // 上传拍卖标志位
+  @Output()
+  public uploadFlags = new EventEmitter<string>();
+  // 上传标志位
+  public flag;
   constructor(private fb: FormBuilder,
-    private msg: NzMessageService) { 
+    private msg: NzMessageService,
+    private adminService: AdminService) { 
       this.buildUploadCommodityForm();
     }
 
@@ -105,7 +113,6 @@ export class UploadCommodityComponent implements OnInit {
       this.isDisabled = true;
       // 图片存放地址
       this.imgLocation = "http://localhost:8080/upload/pic/" + info.file.response.location;
-      console.log(this.imgLocation);
     } else if (info.file.status === 'error') {
       this.msg.error(`${info.file.name} 文件上传失败`);
     }
@@ -116,7 +123,7 @@ export class UploadCommodityComponent implements OnInit {
     */
    public checkNewsTitle(): boolean {
     const value = this.commodity.title;
-    const reg = /^[\u4e00-\u9fa5]{1,20}$/;
+    const reg = /^[\u4e00-\u9fa5]{1,50}$/;
     const result = reg.test(value);
     return result;
   };
@@ -148,6 +155,24 @@ export class UploadCommodityComponent implements OnInit {
    * 上传公益商品
    */
   public uploadCommodity(): void {
-
+    if(this.checkData() && this.checkListImage() && this.checkNewsSummary() && this.checkNewsTitle()){
+      this.commodity.content = this.data;
+      this.commodity.img = this.imgLocation;
+      this.commodity.quantity = this.quantity + '';
+      this.commodity.point = this.point + '';
+      this.adminService.uploadCommodity(this.commodity).subscribe(data => {
+        if(data.code === StatusCode.SUCCESS){
+          this.flag = StatusCode.SUCCESS;
+          // 移动到顶部
+          window.scrollTo(0, 0);
+        } else if (data.code === StatusCode.USER_IS_NOT_LOGGED_IN) {
+          // 未登录
+          this.flag = StatusCode.USER_IS_NOT_LOGGED_IN;
+          // 移动到顶部
+          window.scrollTo(0, 0);
+        }
+        this.uploadFlags.emit(this.flag);
+      });
+  }
   }
 }
