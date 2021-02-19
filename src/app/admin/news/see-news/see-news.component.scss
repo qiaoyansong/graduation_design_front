@@ -1,110 +1,130 @@
 .header-menu {
-    line-height: 64px;
-  }
-  
-  .sider-menu {
-    height: 100%;
-    border-right: 0;
-  }
-  
-  nz-content {
-    background: white;
-    min-height: 280px;
-  }
-  div img {
-    width: 100%;
-    height: 100%;
-  }
-  nz-header {
-    background-color: white;
-    height: 120px;
-  }
-  nz-layout:last-child {
-    margin: 0;
-  }
-  .ant-col {
-    height: 100%;
-  }
-  
-  .ant-input-group-wrapper {
-    margin-top: 50px;
-  }
-  
-  nz-select {
-    margin: 0 8px 10px 0;
-    width: 120px;
-  }
-  
-  a {
-    color: white; 
-  }
-  
-  .ant-layout-header .ant-menu {
-    margin: 22px auto;
-  }
-  .green{
-    background-color: rgba(9, 243, 9, 0.356);
-  }
-  .red{
-    background-color: rgba(247, 4, 4, 0.397);
-  }
-  .blackColorText{
-    color: black;
-  }
-  .wrapper {
-    width: 100%;
-    height: 100%;
-  }
-  nz-footer {
-    background: #333;
-    color: #fff;
-  }
-  
-  nz-footer {
-    line-height: 1.5;
-  }
-  .page{
-    height: 10%; 
-    padding: 0;
-    background-color: white;
-  }
-  .ant-pagination{
-   margin-top: 7px;
-  }
-  nz-select {
-    width: 80%;
-    margin: 0;
-  }
-  .bread-crumb{
-    background-color: white; 
-    text-align: left;
-  }
-  .content-header{
-    height: 10%; 
-    padding: 0;
-  }
-  .order-div{
-    height: 100%; 
-    background-color: white; 
-    flex: 2;
-  }
-  .search-div{
-    height: 100%; 
-    background-color: white; 
-    display: inline-block; flex: 8;
-  }
-  .content-data{
-    background-color: yellow; 
-    height: 77%; 
-    padding: 0;
-    margin-top: 5px;
-  }
-  .content-data-upload{
-    background-color: white; 
-    height: 98%; 
-    padding: 0;
-    margin-top: 10px;
-  }
-  .anticon-question{
-    color: blue;
-  }
+  line-height: 64px;
+}
+
+.sider-menu {
+  height: 100%;
+  border-right: 0;
+}
+
+nz-content {
+  background: white;
+  min-height: 280px;
+}
+div img {
+  width: 100%;
+  height: 100%;
+}
+nz-header {
+  background-color: white;
+  height: 120px;
+}
+nz-layout:last-child {
+  margin: 0;
+}
+.ant-col {
+  height: 100%;
+}
+
+.ant-input-group-wrapper {
+  margin-top: 50px;
+}
+
+nz-select {
+  margin: 0 8px 10px 0;
+  width: 120px;
+}
+
+a {
+  color: white;
+}
+
+.ant-layout-header .ant-menu {
+  margin: 22px auto;
+}
+.green {
+  background-color: rgba(9, 243, 9, 0.356);
+}
+.red {
+  background-color: rgba(247, 4, 4, 0.397);
+}
+.blackColorText {
+  color: black;
+}
+.wrapper {
+  width: 100%;
+  height: 100%;
+}
+nz-footer {
+  background: #333;
+  color: #fff;
+}
+
+nz-footer {
+  line-height: 1.5;
+}
+.page {
+  height: 10%;
+  padding: 0;
+  background-color: white;
+}
+.ant-pagination {
+  margin-top: 7px;
+}
+nz-select {
+  width: 80%;
+  margin: 0;
+}
+.bread-crumb {
+  background-color: white;
+  text-align: left;
+}
+.content-header {
+  height: 10%;
+  padding: 0;
+}
+.order-div {
+  height: 100%;
+  background-color: white;
+  flex: 2;
+}
+.search-div {
+  height: 100%;
+  background-color: white;
+  display: inline-block;
+  flex: 8;
+}
+.content-data {
+  height: 100%;
+  padding: 0;
+  margin-top: 5px;
+}
+.content-data-upload {
+  background-color: white;
+  height: 98%;
+  padding: 0;
+  margin-top: 10px;
+}
+.anticon-question {
+  color: blue;
+}
+td a{
+  color: #1890ff;
+}
+.search-box {
+  padding: 8px;
+}
+
+.search-box input {
+  width: 188px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.search-box button {
+  width: 90px;
+}
+
+.search-button {
+  margin-right: 8px;
+}

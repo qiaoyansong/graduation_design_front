@@ -1,26 +1,15 @@
-<nz-alert
-*ngIf="otherFlag"
-nzType="error"
-nzCloseable
-nzMessage="在别处登录"
-nzDescription="您的账号在别处登录，您被迫下线，右上角关闭此消息框，可以立刻修改密码"
-(nzOnClose)="afterClose()"
->
+<nz-alert *ngIf="otherFlag" nzType="error" nzCloseable nzMessage="在别处登录"
+  nzDescription="您的账号在别处登录，您被迫下线，右上角关闭此消息框，可以立刻修改密码" (nzOnClose)="afterClose()">
 </nz-alert>
 <nz-layout>
   <!-- 首部信息 -->
   <nz-header nz-row>
     <div nz-col nzSpan="8">
-      <img alt="微尘logo" src="http://localhost:8080/logo.png"/>
+      <img alt="微尘logo" src="http://localhost:8080/logo.png" />
     </div>
     <div nz-col nzSpan="8">
       <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-        <input
-          type="text"
-          nz-input
-          placeholder="{{ 'Home.SearchInputValue' | translate }}"
-          [(ngModel)]="searchValue"
-        />
+        <input type="text" nz-input placeholder="{{ 'Home.SearchInputValue' | translate }}" [(ngModel)]="searchValue" />
       </nz-input-group>
       <ng-template #suffixIconButton>
         <button nz-button nzType="primary" nzSearch (click)="search()">
@@ -34,11 +23,13 @@ nzDescription="您的账号在别处登录，您被迫下线，右上角关闭�
         <nz-option nzValue="zh" nzLabel="简体中文"></nz-option>
         <nz-option nzValue="en" nzLabel="英语"></nz-option>
       </nz-select>
-      <div *ngIf="!isLogin"><button nz-button class="green" nzType="default" (click)="login()">登录</button><button class="red" (click)="register()" nz-button nzType="default">注册</button></div>
+      <div *ngIf="!isLogin"><button nz-button class="green" nzType="default" (click)="login()">登录</button><button
+          class="red" (click)="register()" nz-button nzType="default">注册</button></div>
       <!-- 登陆成功显示用户 -->
       <div *ngIf="isLogin && userType === 'GENERAL_USER'">
-         <nz-avatar [ngStyle]="{ 'background-color': color }" [nzText]="userName" nzSize="large" style="vertical-align: middle;"></nz-avatar>
-         <a nz-dropdown [nzDropdownMenu]="menu" class="blackColorText">
+        <nz-avatar [ngStyle]="{ 'background-color': color }" [nzText]="userName" nzSize="large"
+          style="vertical-align: middle;"></nz-avatar>
+        <a nz-dropdown [nzDropdownMenu]="menu" class="blackColorText">
           选项
           <i nz-icon nzType="down"></i>
         </a>
@@ -51,22 +42,24 @@ nzDescription="您的账号在别处登录，您被迫下线，右上角关闭�
       </div>
       <!-- 登陆成功显示管理员 -->
       <div *ngIf="isLogin && userType != 'GENERAL_USER'">
-        <nz-avatar [ngStyle]="{ 'background-color': color }" [nzText]="userName" nzSize="large" style="vertical-align: middle;"></nz-avatar>
+        <nz-avatar [ngStyle]="{ 'background-color': color }" [nzText]="userName" nzSize="large"
+          style="vertical-align: middle;"></nz-avatar>
         <a nz-dropdown [nzDropdownMenu]="menu" class="blackColorText">
-         选项
-         <i nz-icon nzType="down"></i>
-       </a>
-       <nz-dropdown-menu #menu="nzDropdownMenu">
-         <ul nz-menu nzSelectable>
-           <li nz-menu-item (click)="goToAdminPersonalPage()">管理员后台界面</li>
-           <li nz-menu-item (click)="logout()">退出</li>
-         </ul>
-       </nz-dropdown-menu>
-     </div>
+          选项
+          <i nz-icon nzType="down"></i>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item (click)="goToAdminPersonalPage()">管理员后台界面</li>
+            <li nz-menu-item (click)="logout()">退出</li>
+          </ul>
+        </nz-dropdown-menu>
+      </div>
     </div>
   </nz-header>
   <nz-content>
     <nz-layout>
+      <!-- 导航栏 -->
       <nz-header>
         <ul nz-menu nzMode="horizontal">
           <li nz-menu-item>
@@ -110,16 +103,328 @@ nzDescription="您的账号在别处登录，您被迫下线，右上角关闭�
           </li>
         </ul>
       </nz-header>
-      <nz-layout>
-        <nz-content>
-          <div nz-row>
-            <div nz-col nzSpan="12" nzOffset="6">
-              <div style="height: 50px;"></div>
-              <div style="height: 50px;"></div>
-              <div style="height: 50px;"></div>
-              <div style="height: 50px;"></div>
-              <div style="height: 50px;"></div>
+      <nz-layout style="background-color: white;">
+        <!-- 实际内容 -->
+        <nz-content style="width: 80%; margin: 0 auto;">
+          <!-- 国内资讯 走马灯  政府资讯-->
+          <div class="box1">
+            <div class="box1_1">
+              <div class="box2_listt">
+                <h3>国内</h3>
+              </div>
+              <div class="box2_head"></div>
+              <div class="box2_body">
+                <ul>
+                  <li><i nz-icon nzType="caret-right" nzTheme="outline" style="float: left; width: 5%; color: black;"></i><a
+                      href="/fuwu/zhaomu/content-50-17485-1.html" title="北京冬奥今起招募赛会志愿者">北京冬奥今起招募赛会志愿者</a></li>
+                  <li><i nz-icon nzType="caret-right" nzTheme="outline" style="float: left; width: 5%; color: black;"></i><a
+                      href="/fuwu/zhaomu/content-50-14175-1.html"
+                      title="奔走相告！马云公益基金会乡村学校计划招聘项目经理啦！">奔走相告！马云公益基金会乡村学校计划招聘</a></li>
+                  <li><i nz-icon nzType="caret-right" nzTheme="outline" style="float: left; width: 5%; color: black;"></i><a
+                      href="/fuwu/zhaomu/content-50-12455-1.html" title="联合国粮农组织实习计划">联合国粮农组织实习计划</a></li>
+                  <li><i nz-icon nzType="caret-right" nzTheme="outline" style="float: left; width: 5%; color: black;"></i><a
+                      href="/fuwu/zhaomu/content-50-11580-1.html" title="北京市红十字血液中心公开招聘工作人员公告">北京市红十字血液中心公开招聘工作人员公告</a>
+                  </li>
+                  <li><i nz-icon nzType="caret-right" nzTheme="outline" style="float: left; width: 5%; color: black;"></i><a
+                      href="/fuwu/zhaomu/content-50-9816-1.html"
+                      title="助力高校教师开展公益慈善通识教育 “敦和·善识计划”申报正式开启">助力高校教师开展公益慈善通识教育 “敦和</a></li>
+                </ul>
+              </div>
             </div>
+            <div class="box1_2">
+              <app-carousel style="width: 100%; height: 100%;" [array]="array" type="homepage"></app-carousel>
+            </div>
+            <div class="box1_3">
+              <div class="box2_listt">
+                <h3>政府</h3>
+              </div>
+            </div>
+          </div>
+          <!-- 学校 企业 益人-->
+          <div class="box2">
+            <div class="box2_1">
+              <div class="box2_listt">
+                <h3>学校</h3>
+              </div>
+            </div>
+            <div class="box2_2">
+              <div class="box2_listt">
+                <h3>企业</h3>
+              </div>
+            </div>
+            <div class="box2_3">
+              <div class="box2_listt">
+                <h3>益人</h3>
+              </div>
+            </div>
+          </div>
+          <!-- 好人 好事 评选 -->
+          <div class="box3">
+            <div class="box3_1">
+              <div class="box2_listt">
+                <h3>好人</h3>
+              </div>
+            </div>
+            <div class="box3_2">
+              <div class="box2_listt">
+                <h3>好事</h3>
+              </div>
+            </div>
+            <div class="box3_3">
+              <div class="box2_listt">
+                <h3>评选</h3>
+              </div>
+            </div>
+          </div>
+          <img title="" src="http://www.zggyw.org/uploadfile/2018/0315/20180315115204519.png"
+            style="border: 0px; display: inline; width: 100% ; height: 100px;"
+            original="http://www.zggyw.org/uploadfile/2018/0315/20180315115204519.png">
+          <!-- 公益网站联盟 -->
+          <div class="links common-box">
+            <dl>
+
+              <div class="admin_block">
+                <dt>政府门户</dt>
+
+                <dd>
+
+
+
+                  <a href="http://www.gov.cn/" target="_blank" title="中国政府网">中国政府网</a>
+
+
+                  <a href="http://www.cac.gov.cn/" target="_blank" title="国家网信办">国家网信办</a>
+
+
+                  <a href="http://www.mca.gov.cn/" target="_blank" title="国家民政部">国家民政部</a>
+
+
+                  <a href="http://www.mee.gov.cn/" target="_blank" title="国家生态环境部">国家生态环境部</a>
+
+
+                  <a href="http://www.mem.gov.cn/" target="_blank" title="国家应急管理部">国家应急管理部</a>
+
+
+                  <a href="http://www.wenming.cn/" target="_blank" title="中国文明网">中国文明网</a>
+
+
+                  <a href="http://www.ccyl.org.cn/" target="_blank" title="中国共青团">中国共青团</a>
+
+
+                  <a href="http://www.chinanpo.gov.cn/" target="_blank" title="中国社会组织网">中国社会组织网</a>
+
+
+                </dd>
+
+              </div>
+
+            </dl>
+            <dl>
+
+              <div class="admin_block">
+                <dt>公益机构</dt>
+
+                <dd>
+
+
+
+                  <a href="http://www.redcross.org.cn/" target="_blank" title="中国红十字会">中国红十字会</a>
+
+
+                  <a href="http://www.youcheng.org/" target="_blank" title="友成企业家扶贫基金会">友成企业家扶贫基金会</a>
+
+
+                  <a href="http://www.cgf.org.cn/" target="_blank" title="中国绿化基金会">中国绿化基金会</a>
+
+
+                  <a href="http://www.sygoc.org.cn/" target="_blank" title="中华思源工程扶贫基金会">中华思源工程扶贫基金会</a>
+
+
+                  <a href="http://www.onefoundation.cn/" target="_blank" title="壹基金">壹基金</a>
+
+
+                  <a href="http://www.sclf.org/" target="_blank" title="中国宋庆龄基金会">中国宋庆龄基金会</a>
+
+
+                  <a href="http://www.ccafc.org.cn/" target="_blank" title="中华少年儿童慈善救助基金会">中华少年儿童慈善救助基金会</a>
+
+
+                  <a href="http://www.cctf.org.cn/" target="_blank" title="中国儿童少年基金会">中国儿童少年基金会</a>
+
+
+                  <a href="http://www.cydf.org.cn/" target="_blank" title="中国青少年发展基金会">中国青少年发展基金会</a>
+
+
+                  <a href="http://www.cpwf.org.cn/" target="_blank" title="中国人口福利基金会">中国人口福利基金会</a>
+
+
+                  <a href="http://www.cwdf.org.cn/" target="_blank" title="中国妇女发展基金会">中国妇女发展基金会</a>
+
+
+                  <a href="http://www.fupin.org.cn/" target="_blank" title="中国扶贫基金会">中国扶贫基金会</a>
+
+
+                  <a href="http://new.crcf.org.cn/" target="_blank" title="中国红十字基金会">中国红十字基金会</a>
+
+
+                  <a href="http://www.charityalliance.org.cn/" target="_blank" title="中国慈善联合会">中国慈善联合会</a>
+
+
+                </dd>
+
+              </div>
+
+            </dl>
+            <dl>
+
+              <div class="admin_block">
+                <dt>媒体公益</dt>
+
+                <dd>
+
+
+
+                  <a href="http://www.xinxinwenw.com/list-3414-1.html" target="_blank" title="新新闻公益">新新闻公益</a>
+
+
+                  <a href="http://www.zggyw.org/" target="_blank" title="中国公益网">中国公益网</a>
+
+
+                  <a href="http://www.yimeitiw.com/" target="_blank" title="益媒体">益媒体</a>
+
+
+                  <a href="http://www.gongyishibao.com/" target="_blank" title="公益时报">公益时报</a>
+
+
+                  <a href="http://cn.chinadaily.com.cn/gongyi" target="_blank" title="中国日报网公益">中国日报网公益</a>
+
+
+                  <a href="http://gongyi.cnr.cn/" target="_blank" title="央广网公益">央广网公益</a>
+
+
+                  <a href="http://gongyi.cctv.com/" target="_blank" title="央视公益">央视公益</a>
+
+
+                  <a href="http://gongyi.163.com/" target="_blank" title="网易公益">网易公益</a>
+
+
+                  <a href="http://gongyi.ifeng.com/" target="_blank" title="凤凰公益">凤凰公益</a>
+
+
+                  <a href="http://gongyi.sina.com.cn/" target="_blank" title="新浪公益">新浪公益</a>
+
+
+                  <a href="http://gongyi.sohu.com/" target="_blank" title="搜狐公益">搜狐公益</a>
+
+
+                  <a href="http://gongyi.people.com.cn/" target="_blank" title="人民公益">人民公益</a>
+
+
+                  <a href="http://gy.youth.cn/" target="_blank" title="中青公益">中青公益</a>
+
+
+                  <a href="http://gongyi.gmw.cn/" target="_blank" title="光明公益">光明公益</a>
+
+
+                  <a href="http://www.xinhuanet.com/gongyi/index.htm" target="_blank" title="新华公益">新华公益</a>
+
+
+                  <a href="http://hope.huanqiu.com/" target="_blank" title="环球公益">环球公益</a>
+
+
+                </dd>
+
+              </div>
+
+            </dl>
+            <dl>
+
+              <div class="admin_block">
+                <dt>企业公益</dt>
+
+                <dd>
+
+
+
+                  <a href="http://dfbf.dfmc.com.cn/" target="_blank" title="东风公益基金会">东风公益基金会</a>
+
+
+                  <a href="http://www.vankefoundation.org/" target="_blank" title="万科公益基金会">万科公益基金会</a>
+
+
+                  <a href="http://gongyi.baidu.com/" target="_blank" title="百度公益">百度公益</a>
+
+
+                  <a href="http://gongyi.suning.com/" target="_blank" title="苏宁公益">苏宁公益</a>
+
+
+                  <a href="http://gongyi.meituan.com/" target="_blank" title="美团公益">美团公益</a>
+
+
+                  <a href="http://gongyi.jd.com/" target="_blank" title="京东公益">京东公益</a>
+
+
+                  <a href="http://www.alijijinhui.org/" target="_blank" title="阿里公益">阿里公益</a>
+
+
+                  <a href="http://www.qschou.com/" target="_blank" title="轻松筹">轻松筹</a>
+
+
+                  <a href="http://gongyi.qq.com/" target="_blank" title="腾讯公益">腾讯公益</a>
+
+
+                </dd>
+
+              </div>
+
+            </dl>
+            <dl>
+
+              <div class="admin_block">
+                <dt>友情链接</dt>
+
+                <dd>
+
+
+
+                  <a href="http://www.zgzyz.org.cn/" target="_blank" title="中国青年志愿者">中国青年志愿者</a>
+
+
+                  <a href="http://www.chinasocialwork.cn/" target="_blank" title="中华社会工作网">中华社会工作网</a>
+
+
+                  <a href="http://www.lvngo.com/" target="_blank" title="NGO资讯网">NGO资讯网</a>
+
+
+                  <a href="http://www.aizhiw.com/" target="_blank" title="爱职网">爱职网</a>
+
+
+                  <a href="http://www.xinxinwenw.com/" target="_blank" title="新新闻">新新闻</a>
+
+
+                  <a href="http://www.eco.gov.cn/" target="_blank" title="生态中国网">生态中国网</a>
+
+
+                  <a href="http://www.yimeitiw.com/" target="_blank" title="益媒体">益媒体</a>
+
+
+                  <a href="http://www.haogongyi.org.cn/" target="_blank" title="中国好公益平台">中国好公益平台</a>
+
+
+                  <a href="http://www.bnu1.org/" target="_blank" title="中国公益研究院">中国公益研究院</a>
+
+
+                  <a href="http://xunqin.mca.gov.cn/" target="_blank" title="全国救助寻亲网">全国救助寻亲网</a>
+
+
+                  <a href="http://cishan.chinanpo.gov.cn/" target="_blank" title="慈善中国">慈善中国</a>
+
+
+                </dd>
+
+              </div>
+
+            </dl>
           </div>
         </nz-content>
       </nz-layout>
@@ -131,8 +436,8 @@ nzDescription="您的账号在别处登录，您被迫下线，右上角关闭�
       <div nz-col nzSpan="12" nzOffset="6">
         <a href="http://www.zggyw.org/"> {{ "Home.Footer.HomePage" | translate }}</a> |
         <a href="http://www.zggyw.org/html/help/wzjs/gywm/"> {{ "Home.Footer.AboutUs" | translate }}</a> |
-        <a
-          href="http://www.zggyw.org/html/help/cjwt/zggywtgxz/"> {{ "Home.Footer.SubmissionGuidelines" | translate }}</a>
+        <a href="http://www.zggyw.org/html/help/cjwt/zggywtgxz/"> {{ "Home.Footer.SubmissionGuidelines" | translate
+          }}</a>
         |
         <a href="http://www.zggyw.org/html/help/wzjs/wzsm/"> {{ "Home.Footer.WebsiteStated" | translate }}</a> |
         <a href="http://www.zggyw.org/html/help/ywjs/ywhz/"> {{ "Home.Footer.BusinessCooperation" | translate }}</a>

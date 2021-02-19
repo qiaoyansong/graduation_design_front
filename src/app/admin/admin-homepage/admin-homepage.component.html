@@ -1,9 +1,13 @@
-<nz-alert *ngIf="UploadnewsFlag === '200'" nzType="success" nzMessage="上传文章成功" nzShowIcon nzCloseable></nz-alert>
-<nz-alert nzType="error" *ngIf="UploadnewsFlag === '115' || UploadActivityFlag === '115' || UploadAuctionFlag === '115' || UploadCommodityFlag === '115'" nzMessage="用户未登录" nzShowIcon nzCloseable></nz-alert>
-<nz-alert nzType="error" *ngIf="UploadnewsFlag === '116'" nzMessage="文章标题已经存在" nzShowIcon nzCloseable></nz-alert>
-<nz-alert *ngIf="UploadActivityFlag === '200'" nzType="success" nzMessage="上传活动成功" nzShowIcon nzCloseable></nz-alert>
-<nz-alert *ngIf="UploadAuctionFlag === '200'" nzType="success" nzMessage="上传拍卖成功" nzShowIcon nzCloseable></nz-alert>
-<nz-alert *ngIf="UploadCommodityFlag === '200'" nzType="success" nzMessage="上传商品成功" nzShowIcon nzCloseable></nz-alert>
+<nz-alert *ngIf="UploadnewsFlag === '200'" nzType="success" nzMessage="上传文章成功" nzCloseable nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert nzType="error" *ngIf="UploadnewsFlag === '116' || updateNewsFlag === '116'" nzCloseable nzMessage="文章标题已经存在" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert *ngIf="UploadActivityFlag === '200'" nzType="success" nzCloseable nzMessage="上传活动成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert *ngIf="UploadAuctionFlag === '200'" nzType="success"nzCloseable nzMessage="上传拍卖成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert *ngIf="UploadCommodityFlag === '200'" nzType="success" nzCloseable  nzMessage="上传商品成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert *ngIf="updateNewsFlag === '200'" nzType="success" nzCloseable  nzMessage="修改资讯信息成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert *ngIf="SearchNewsFlag === '100'|| SearchCommodityFlag === '100'" nzType="error" nzCloseable nzMessage="查询参数校验失败" (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert *ngIf="updateCommodityFlag === '200'" nzType="success" nzCloseable  nzMessage="修改商品信息成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert *ngIf="deleteCommodityFlag === '200'" nzType="success" nzCloseable  nzMessage="删除商品成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert *ngIf="deleteNewsFlag === '200'" nzType="success" nzCloseable  nzMessage="删除资讯成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
 <nz-layout>
   <nz-header nz-row>
     <div nz-col nzSpan="8">
@@ -97,7 +101,7 @@
     <!-- 用户求助 -->
     <app-user-seek-help *ngIf="select === 3" style="width: 100%;"></app-user-seek-help>
     <!-- 查看公益资讯 -->
-    <app-see-news *ngIf="select === 5" style="width: 100%;"></app-see-news>
+    <app-see-news *ngIf="select === 5" style="width: 100%;" (selectFlags)="getSearchNewsFlag($event)" (upsetFlags)="getUpsetNewsFlag($event)" (deleteFlags)="getDeleteNewsFlag($event)"></app-see-news>
     <!-- 上传公益资讯 -->
     <app-upload-news *ngIf="select === 4" style="width: 100%; height: 100%;" (uploadFlags)="getUploadNewsFlag($event)">
     </app-upload-news>
@@ -106,7 +110,7 @@
     <!-- 上传公益活动 -->
     <app-upload-activity *ngIf="select === 6" style="width: 100%; height: 100%;" (uploadFlags)="getUploadActivityFlag($event)"></app-upload-activity>
     <!-- 查看公益商品 -->
-    <app-see-commodity *ngIf="select === 9" style="width: 100%;"></app-see-commodity>
+    <app-see-commodity *ngIf="select === 9" style="width: 100%;" (selectFlags)="getSearchCommodityFlag($event)" (upsetFlags)="getUpdateCommodityFlag($event)" (deleteFlags)="getDeleteCommodityFlag($event)"></app-see-commodity>
     <!-- 上传公益商品 -->
     <app-upload-commodity *ngIf="select === 8" style="width: 100%;" (uploadFlags)="getUploadCommodityFlag($event)"></app-upload-commodity>
     <!-- 查看公益拍卖 -->

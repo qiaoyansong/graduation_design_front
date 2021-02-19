@@ -61,18 +61,174 @@ nz-select {
 }
 
 a {
-  color: white; 
+  color: white;
 }
 
 .ant-layout-header .ant-menu {
   margin: 22px auto;
 }
-.green{
+.green {
   background-color: rgba(9, 243, 9, 0.356);
 }
-.red{
+.red {
   background-color: rgba(247, 4, 4, 0.397);
 }
-.blackColorText{
+.blackColorText {
   color: black;
+}
+.box1 {
+  width: 100%;
+  height: 380px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.box2 {
+  width: 100%;
+  height: 380px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.box3 {
+  width: 100%;
+  height: 380px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.box1_1,
+.box2_1,
+.box3_1 {
+  width: 32%;
+  height: 100%;
+  float: left;
+  margin: 0 auto;
+}
+.box1_1 {
+}
+.box2_1 {
+  background-color: blueviolet;
+}
+.box3_1 {
+  background-color: blueviolet;
+}
+.box1_2,
+.box2_2,
+.box3_2 {
+  width: 32%;
+  height: 100%;
+  float: left;
+  margin-left: 19px;
+}
+.box1_2 {
+}
+.box2_2 {
+  background-color: cadetblue;
+}
+.box3_2 {
+  background-color: cadetblue;
+}
+.box1_3,
+.box2_3,
+.box3_3 {
+  width: 32%;
+  height: 100%;
+  float: right;
+}
+.box1_3 {
+  background-color: red;
+}
+.box2_3 {
+  background-color: red;
+}
+.box3_3 {
+  background-color: red;
+}
+
+.links {
+  padding: 20px 15px;
+  margin-top: 20px;
+}
+.common-box {
+  border: 1px solid #d3d3d3;
+  background: #fff;
+  width: 100%;
+  margin: 18px auto;
+  overflow: hidden;
+}
+.clear {
+  clear: both;
+}
+.links dt {
+  float: left;
+  width: 88px;
+  height: 23px;
+  line-height: 23px;
+  background: #d52a19;
+  border-radius: 4px;
+  color: #fff;
+  text-align: center;
+}
+.links dd a {
+  float: left;
+  margin-right: 30px;
+  color: #999;
+  line-height: 24px;
+  white-space: nowrap;
+}
+.links dd {
+  padding-left: 27px;
+  overflow: hidden;
+  zoom: 1;
+}
+.box2_listt {
+  width: 100%;
+  height: 10%;
+  line-height: 10%;
+  border-bottom: 2px solid #d20001;
+  padding: 5px 0;
+}
+.box2_body {
+  width: 100%;
+  height: 40%;
+  background-color: white;
+}
+.box2_head {
+  width: 100%;
+  height: 50%;
+  background-color: magenta;
+}
+.box2_body li {
+  width: 100%;
+  height: 20%;
+  line-height: 100%;
+  overflow: hidden;
+}
+.box2_body ul {
+  width: 100%;
+  height: 100%;
+  float: left;
+}
+.box2_body ul li a {
+  color: #3F3F3F;
+  display: inline-block;
+  width: 95%;
+  height: 100%;
+  line-height: 100%;
+  font-size: 17px;
+  text-align: left;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.box2_listt h3 {
+  height: 25px;
+  text-align: center;
+  font-weight: bold;
+  float: left;
+  text-align: right;
+  font-size: 16px;
+  color: #333;
+  display: block;
+  border-left: 4px solid #ba0000;
+  padding-top: 13px;
+  padding-left: 6px;
 }

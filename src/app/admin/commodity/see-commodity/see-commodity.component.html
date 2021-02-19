@@ -1,27 +1,132 @@
 <!-- 查看公益商品 -->
 <nz-layout style="height: 100%;">
-    <app-bread-crumb class="bread-crumb" isAdmin=true type='ckgysp'></app-bread-crumb>
-    <nz-content>
-      <nz-header class="content-header" style="display: flex;">
-        <!-- 列表升序、降序按钮 -->
-        <div class="order-div">
-          <nz-select [ngModel]="listSortOrderBy" (ngModelChange)="changeOrder($event)">
-            <nz-option nzValue="asc" nzLabel="升序"></nz-option>
-            <nz-option nzValue="desc" nzLabel="降序"></nz-option>
-          </nz-select>
-        </div>
-        <!-- 搜索框 -->
-        <div class="search-div">
-          <input nz-input placeholder="请输入搜索内容" [(ngModel)]="searchValue" style="width: 50%; margin-left: -240px;" />
-          <button nz-button nzType="primary" nzShape="circle"><i nz-icon nzType="search"></i></button>
-        </div>
-      </nz-header>
-      <nz-content class="content-data">查看公益商品</nz-content>
-      <!-- 分页 -->
-      <nz-footer class="page">
-        <!-- nzPageIndex开始页码 nzTotal 记录总数 nzPageSize 每一页的数据条数 都可以进行双向绑定-->
-        <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="sizeTotal" [nzPageSize]="10" nzShowQuickJumper
-          (nzPageIndexChange)="selectData()"></nz-pagination>
-      </nz-footer>
+  <app-bread-crumb class="bread-crumb" isAdmin=true type='ckgysp'></app-bread-crumb>
+  <nz-content>
+    <nz-content class="content-data">
+      <nz-table style="width: 100%; height: 100%;" #parentTable [(nzData)]="listOfParentData"
+        [(nzPageIndex)]="pageIndex" [nzShowQuickJumper]="true" [(nzPageSize)]="pageSize" [(nzTotal)]="sizeTotal"
+        [nzFrontPagination]="false" (nzPageIndexChange)="changePageIndex()">
+        <thead>
+          <tr>
+            <th></th>
+            <th [nzShowSort]="true" (nzSortOrderChange)="changeOrder($event)" [nzSortOrder]="listSortOrderBy">资讯ID</th>
+            <th nzCustomFilter>
+              商品标题
+              <nz-filter-trigger [(nzVisible)]="visible" [nzDropdownMenu]="menu">
+                <i nz-icon nzType="search"></i>
+              </nz-filter-trigger>
+            </th>
+            <!-- 搜索框 -->
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <div class="ant-table-filter-dropdown">
+                <div class="search-box">
+                  <input type="text" nz-input placeholder="输入商品标题" [(ngModel)]="searchValue" />
+                  <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
+                    查询
+                  </button>
+                  <button nz-button nzSize="small" (click)="reset()">重置</button>
+                </div>
+              </div>
+            </nz-dropdown-menu>
+            <th>上传时间</th>
+            <th>剩余数量</th>
+            <th>所需点数</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-template ngFor let-data [ngForOf]="parentTable.data">
+            <tr>
+              <td [nzExpand]="expandSet.has(data.id)" (nzExpandChange)="onExpandChange(data.id, $event)"></td>
+              <td>{{ data.id }}</td>
+              <td>{{ data.title }}</td>
+              <td>{{ data.pubdate | date:'yyyy年-MM月-d日 HH:mm:ss' : 'utc'}}</td>
+              <td>{{ data.quantity}}</td>
+              <td>{{ data.point }}</td>
+              <td>
+                <button nz-button [nzType]="'primary'" (click)="createTplModal(tplTitle, tplContent, tplFooter, data)"
+                  [nzLoading]="tplModalButtonLoading"><span>管理该条目</span></button>
+                <!-- 模态框头部 -->
+                <ng-template #tplTitle>
+                  <span>管理商品</span>
+                </ng-template>
+                <!-- 模态框内容 -->
+                <ng-template #tplContent let-params let-ref="modalRef">
+                  <!-- 上传公益商品表单 -->
+                  <form nz-form [formGroup]="uploadCommodityForm">
+                    <!-- 商品名称 -->
+                    <nz-form-item>
+                      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="title">商品标题</nz-form-label>
+                      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="商品标题不符合要求">
+                        <input nz-input formControlName="title" id="title" placeholder="只支持汉字，最多支持50个汉字"
+                          [(ngModel)]="commodity.title" />
+                      </nz-form-control>
+                    </nz-form-item>
+                    <!-- 商品摘要 -->
+                    <nz-form-item>
+                      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="summary">商品摘要</nz-form-label>
+                      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="商品摘要不符合要求">
+                        <textarea id="summary" formControlName="summary" rows="4" nz-input
+                          [(ngModel)]="commodity.summary" placeholder="只支持汉字，最多支持100个汉字"></textarea>
+                      </nz-form-control>
+                    </nz-form-item>
+                    <!-- 所需点数 -->
+                    <nz-form-item>
+                      <nz-form-label [nzSm]="6" [nzXs]="24"><span
+                          style="font-size: 24px; line-height: 100%; color: red;">*</span>
+                        所需点数
+                        <i nz-icon nzType="question" nzTheme="outline" nzTooltipTitle="最多100"
+                          nzTooltipPlacement="topCenter" nz-tooltip></i>
+                      </nz-form-label>
+                      <nz-slider style="width: 60%;" [(ngModel)]="commodity.point" [nzDisabled]="false" [nzMax]=100 [nzMin]=1
+                        [ngModelOptions]="{standalone: true}"></nz-slider>
+                    </nz-form-item>
+                    <!-- 商品剩余数量 -->
+                    <nz-form-item>
+                      <nz-form-label [nzSm]="6" [nzXs]="24"><span
+                          style="font-size: 24px; line-height: 100%; color: red;">*</span>
+                        商品剩余数量
+                        <i nz-icon nzType="question" nzTheme="outline" nzTooltipTitle="最多100"
+                          nzTooltipPlacement="topCenter" nz-tooltip></i>
+                      </nz-form-label>
+                      <nz-slider style="width: 60%;" [(ngModel)]="commodity.quantity" [nzDisabled]="false" [nzMax]=100 [nzMin]=1
+                        [ngModelOptions]="{standalone: true}"></nz-slider>
+                    </nz-form-item>
+                  </form>
+                </ng-template>
+                <!-- 模态框底部 -->
+                <ng-template #tplFooter>
+                  <button nz-button nzType="primary" (click)="destroyTplModal()">
+                    取消
+                  </button>
+                  <button nz-button nzType="primary" (click)="commitUpdate()" [nzLoading]="tplModalButtonLoading">
+                    提交更新
+                  </button>
+                </ng-template>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a nz-popconfirm nzPopconfirmTitle="确认删除么?" nzPopconfirmPlacement="bottom"
+                  (nzOnConfirm)="deletecommodityById(data.id)">删除该条目</a>
+              </td>
+            </tr>
+            <tr [nzExpand]="expandSet.has(data.id)">
+              <nz-table #innerTable (nzData)="data" nzSize="middle" [nzShowPagination]="false">
+                <thead>
+                  <tr>
+                    <th>商品摘要</th>
+                    <th>商品列表展示图片</th>
+                  </tr>
+                </thead>
+        <tbody>
+          <tr>
+            <td>{{ data.summary }}</td>
+            <td><img [src]="data.img" alt=""></td>
+          </tr>
+        </tbody>
+      </nz-table>
+      </tr>
+      </ng-template>
+      </tbody>
+      </nz-table>
     </nz-content>
-  </nz-layout>
+  </nz-content>
+</nz-layout>

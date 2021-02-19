@@ -5,6 +5,8 @@ import { AdminService } from 'src/app/service/admin.service';
 import { newsSourceValidator, newsSummaryValidator, newsTitleValidator } from 'src/app/validator/bussinessValidator';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { LoginService } from 'src/app/service/login.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-upload-news',
   templateUrl: './upload-news.component.html',
@@ -30,12 +32,16 @@ export class UploadNewsComponent implements OnInit {
   public isDisabled = false;
   // 上传标志位
   public flag;
+  // 是否登录标志位
+  public isLoginFlag;
   // 上传文章标志位
   @Output()
   public uploadFlags = new EventEmitter<string>();
   constructor(private adminService: AdminService,
     private fb: FormBuilder,
-    private msg: NzMessageService) {
+    private msg: NzMessageService,
+    private loginService: LoginService,
+    private router: Router) {
     this.news.type = '0';
     this.buildUploadNewsForm();
   }
@@ -156,6 +162,7 @@ export class UploadNewsComponent implements OnInit {
     if (this.checkNewsTitle() && this.checkData() && this.checkListImage() && this.checkNewsSource() && this.checkNewsSummary()) {
       this.news.article = this.data;
       this.news.img = this.imgLocation;
+      // 开始业务逻辑
       this.adminService.uploadNews(this.news).subscribe(data => {
         if (data.code === StatusCode.SUCCESS) {
           // 成功
@@ -179,9 +186,9 @@ export class UploadNewsComponent implements OnInit {
   }
 
   /**
- * 上传公益资讯列表图片
- * @param info 
- */
+  * 上传公益资讯列表图片
+  * @param info 
+  */
   handleNewsImagChange(info: NzUploadChangeParam): void {
     if (info.fileList.length == 0) {
       this.isDisabled = false;
@@ -194,5 +201,12 @@ export class UploadNewsComponent implements OnInit {
     } else if (info.file.status === 'error') {
       this.msg.error(`${info.file.name} 文件上传失败`);
     }
+  }
+
+  /**
+   * 导航去忘记密码界面
+   */
+  public afterClose(): void {
+    this.router.navigate(['/forgetpwd']);
   }
 }

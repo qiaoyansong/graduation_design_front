@@ -121,6 +121,8 @@ export class AdminLoginComponent implements OnInit {
           } else if (data.code === StatusCode.VERIFICATION_CODE_NOT_EXPIRED) {
             // 验证码并没有失效，显示文字提示
             this.flag = StatusCode.VERIFICATION_CODE_NOT_EXPIRED;
+            this.current += 1;
+            this.buildVerificationCodeForm();
             // 移动到顶部
             window.scrollTo(0, 0);
           } else if (data.code === StatusCode.VERIFICATION_CODE_FAILURE) {

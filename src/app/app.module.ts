@@ -59,6 +59,13 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzRateModule } from 'ng-zorro-antd/rate';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NewsTypePipePipe } from './pipe/news-type-pipe.pipe';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,6 +93,7 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
     UserInfoComponent,
     UserTgComponent,
     UserSeekHelpComponent,
+    NewsTypePipePipe,
   ],
   imports: [
     BrowserModule,
@@ -98,15 +106,21 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
     NzToolTipModule,
     NzDatePickerModule,
     FormsModule,
+    NzModalModule,
     NzFormModule,
+    NzDividerModule,
     NzRateModule,
+    NzPopconfirmModule,
     NzSliderModule,
     NzUploadModule,
     HttpClientModule,
     DevUIModule,
+    NzBadgeModule,
+    NzListModule,
     NzPaginationModule,
     NzIconModule,
     NzAlertModule,
+    NzTableModule,
     NzCarouselModule,
     ReactiveFormsModule,
     NzGridModule,

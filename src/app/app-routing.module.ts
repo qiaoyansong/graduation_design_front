@@ -7,6 +7,7 @@ import {CarouselComponent} from './carousel/carousel.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { AdminIsLoginGuard } from './guard/adminIsLogin.guard';
 import { IsLoginGuard } from './guard/isLogin.guard';
+import { IsNotLoginGuard } from './guard/isNotLogin.guard';
 import {HomeComponent} from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { PersonalComponent } from './personal/personal.component';
@@ -20,11 +21,11 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'caroul', component: CarouselComponent},
   {path: 'anchor', component: AnchorComponent},
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent, canActivate: [IsNotLoginGuard]},
   {path: 'register', component: RegisterComponent},
   {path: 'personal', component: PersonalComponent, canActivate: [IsLoginGuard]},
   {path: 'admin/homepage', component: AdminHomepageComponent, canActivate: [AdminIsLoginGuard]},
-  {path: 'admin/login', component: AdminLoginComponent},
+  {path: 'admin/login', component: AdminLoginComponent, canActivate: [IsNotLoginGuard]},
   {path: 'forgetpwd', component: ForgetPasswordComponent},
   {path: '**', component: ResultFofComponent},
 ];

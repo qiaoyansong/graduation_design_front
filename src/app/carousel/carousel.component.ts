@@ -14,7 +14,11 @@ export class CarouselComponent implements OnInit {
   public height: number;
   constructor() {
   }
-
+  /**
+   * 在哪里使用
+   */
+  @Input()
+  public type;
   @Input()
   public array: any;
 

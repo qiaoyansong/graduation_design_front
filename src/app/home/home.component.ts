@@ -27,6 +27,17 @@ export class HomeComponent implements OnInit {
   public userType: string;
   // 别处登录标识
   public otherFlag = false;
+  //主页展示图片
+  public array = [1,
+  2,
+  3];
+  data = [
+    'Racing car sprays burning fuel into crowd.',
+    'Japanese princess to wed commoner.',
+    'Australian walks 100km after outback crash.',
+    'Man charged over missing wedding girl.',
+    'Los Angeles battles huge wildfires.'
+  ];
   constructor(private languageService: LanguageService, private translate: TranslateService,
     private router: Router,
     private loginService: LoginService) {
@@ -43,6 +54,12 @@ export class HomeComponent implements OnInit {
         this.otherFlag = true;
         // 移动到顶部
         window.scrollTo(0, 0);
+      }else if(data.code === StatusCode.USER_IS_NOT_LOGGED_IN){
+        // 用户未登录
+        this.userName = '';
+        this.loginService.removeUser();
+        this.isLogin = false;
+        this.userType = '';
       } else {
         if (data.body != null) {
           // 如果用户名不为空 设置用户名
