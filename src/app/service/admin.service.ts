@@ -180,6 +180,35 @@ export class AdminService {
     });
   }
 
+   /**
+   * 用于获取用户信息
+   * @param params 筛选条件
+   */
+  public getUsers(params: any): Observable<any>{
+    let condition = {
+      'condition' : {
+        'orderBy':params.condition.orderBy,
+        'searchValue' : params.condition.searchValue
+      },
+        'curPage':params.curPage
+    }
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    return this.httpClient.post('http://localhost:8080/admin/getUsers', condition,{
+      withCredentials: true
+    });
+  }
+
+
+  /**
+   * 用于删除用户信息
+   * @param id 用户ID
+   */
+  public deleteUserById(id: any): Observable<any>{
+    return this.httpClient.get('http://localhost:8080/admin/deleteUserByID/'+ id, {
+      withCredentials: true
+    });
+  }
+
   /**
    * 用于修改资讯信息
    * @param params 筛选条件
@@ -232,6 +261,46 @@ export class AdminService {
     }
     // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
     return this.httpClient.post('http://localhost:8080/admin/updateCommodity', commodity,{
+      withCredentials: true
+    });
+  }
+
+  /**
+   * 用于修改活动信息
+   * @param params 筛选条件
+   */
+  public updateActivityByID(params: any): Observable<any>{
+    let activity = {
+      "id": params.id,
+      'peoples': params.peoples,
+      'beginTime': params.beginTime,
+      'endTime': params.endTime,
+      'difficulty': params.difficulty,
+      'title': params.title,
+      'summary': params.summary
+    }
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    return this.httpClient.post('http://localhost:8080/admin/updateActivity', activity,{
+      withCredentials: true
+    });
+  }
+
+  /**
+   * 用于修改拍卖信息
+   * @param params 筛选条件
+   */
+  public updateAuctionByID(params: any): Observable<any>{
+    let auction = {
+      'id': params.id,
+      'title': params.title,
+      'beginTime': params.beginTime,
+      'endTime': params.endTime,
+      'minPrice': params.minPrice,
+      'maxPrice': params.maxPrice,
+      'summary': params.summary,
+    }
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    return this.httpClient.post('http://localhost:8080/admin/updateAuction', auction,{
       withCredentials: true
     });
   }

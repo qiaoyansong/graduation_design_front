@@ -130,7 +130,8 @@ export class UploadActivityComponent implements OnInit {
    * 验证开始结束时间是否符合格式
    */
   public checkBeginAndEndTime(): boolean {
-    return this.dateRange == null ? false : true;;
+    return this.dateRange == null ? false : 
+    (this.dateRange[0] == null || this.dateRange[1] == null)? false: true;
   };
 
   /**

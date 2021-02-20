@@ -1,27 +1,54 @@
 <!-- 用户信息 -->
 <nz-layout style="height: 100%;">
-    <app-bread-crumb class="bread-crumb" isAdmin=true type='userInfo'></app-bread-crumb>
-    <nz-content>
-      <nz-header class="content-header" style="display: flex;">
-        <!-- 列表升序、降序按钮 -->
-        <div class="order-div">
-          <nz-select [ngModel]="listSortOrderBy" (ngModelChange)="changeOrder($event)">
-            <nz-option nzValue="asc" nzLabel="升序"></nz-option>
-            <nz-option nzValue="desc" nzLabel="降序"></nz-option>
-          </nz-select>
-        </div>
-        <!-- 搜索框 -->
-        <div class="search-div">
-          <input nz-input placeholder="请输入搜索内容" [(ngModel)]="searchValue" style="width: 50%; margin-left: -240px;" />
-          <button nz-button nzType="primary" nzShape="circle"><i nz-icon nzType="search"></i></button>
-        </div>
-      </nz-header>
-      <nz-content class="content-data">用户信息</nz-content>
-      <!-- 分页 -->
-      <nz-footer class="page">
-        <!-- nzPageIndex开始页码 nzTotal 记录总数 nzPageSize 每一页的数据条数 都可以进行双向绑定-->
-        <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="sizeTotal" [nzPageSize]="10" nzShowQuickJumper
-          (nzPageIndexChange)="selectData()"></nz-pagination>
-      </nz-footer>
+  <app-bread-crumb class="bread-crumb" isAdmin=true type='userInfo'></app-bread-crumb>
+  <nz-content>
+    <nz-content class="content-data">
+      <nz-table style="width: 100%; height: 100%;" #parentTable [(nzData)]="listOfParentData"
+        [(nzPageIndex)]="pageIndex" [nzShowQuickJumper]="true" [(nzPageSize)]="pageSize" [(nzTotal)]="sizeTotal"
+        [nzFrontPagination]="false" (nzPageIndexChange)="changePageIndex()">
+        <thead>
+          <tr>
+            <th [nzShowSort]="true" (nzSortOrderChange)="changeOrder($event)" [nzSortOrder]="listSortOrderBy">用户ID</th>
+            <th nzCustomFilter>
+              用户名
+              <nz-filter-trigger [(nzVisible)]="visible" [nzDropdownMenu]="menu">
+                <i nz-icon nzType="search"></i>
+              </nz-filter-trigger>
+            </th>
+            <!-- 搜索框 -->
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <div class="ant-table-filter-dropdown">
+                <div class="search-box">
+                  <input type="text" nz-input placeholder="输入用户名" [(ngModel)]="searchValue" />
+                  <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
+                    查询
+                  </button>
+                  <button nz-button nzSize="small" (click)="reset()">重置</button>
+                </div>
+              </div>
+            </nz-dropdown-menu>
+            <th>邮箱</th>
+            <th>信用</th>
+            <th>点数</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-template ngFor let-data [ngForOf]="parentTable.data">
+            <tr>
+              <td>{{ data.id }}</td>
+              <td>{{ data.userName }}</td>
+              <td>{{ data.mailbox }}</td>
+              <td>{{ data.credit }}</td>
+              <td>{{ data.point }}</td>
+              <td>
+                <a nz-popconfirm nzPopconfirmTitle="确认删除么?" nzPopconfirmPlacement="bottom"
+                  (nzOnConfirm)="deleteNewsById(data.id)">删除该条目</a>
+              </td>
+            </tr>
+          </ng-template>
+        </tbody>
+      </nz-table>
     </nz-content>
-  </nz-layout>
+  </nz-content>
+</nz-layout>

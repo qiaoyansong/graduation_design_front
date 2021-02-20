@@ -4,10 +4,15 @@
 <nz-alert *ngIf="UploadAuctionFlag === '200'" nzType="success"nzCloseable nzMessage="上传拍卖成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
 <nz-alert *ngIf="UploadCommodityFlag === '200'" nzType="success" nzCloseable  nzMessage="上传商品成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
 <nz-alert *ngIf="updateNewsFlag === '200'" nzType="success" nzCloseable  nzMessage="修改资讯信息成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
-<nz-alert *ngIf="SearchNewsFlag === '100'|| SearchCommodityFlag === '100'" nzType="error" nzCloseable nzMessage="查询参数校验失败" (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert *ngIf="searchFlag" nzType="error" nzCloseable nzMessage="查询参数校验失败" (nzOnClose)="afterClose()"></nz-alert>
 <nz-alert *ngIf="updateCommodityFlag === '200'" nzType="success" nzCloseable  nzMessage="修改商品信息成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
 <nz-alert *ngIf="deleteCommodityFlag === '200'" nzType="success" nzCloseable  nzMessage="删除商品成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
 <nz-alert *ngIf="deleteNewsFlag === '200'" nzType="success" nzCloseable  nzMessage="删除资讯成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert *ngIf="deleteActivityFlag === '200'" nzType="success" nzCloseable  nzMessage="删除活动成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert *ngIf="deleteAuctionFlag === '200'" nzType="success" nzCloseable  nzMessage="删除拍卖成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert *ngIf="updateActivityFlag === '200'" nzType="success" nzCloseable  nzMessage="修改活动信息成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert *ngIf="updateAuctionFlag === '200'" nzType="success" nzCloseable  nzMessage="修改拍卖信息成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert *ngIf="deleteUserFlag === '200'" nzType="success" nzCloseable  nzMessage="删除用户成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
 <nz-layout>
   <nz-header nz-row>
     <div nz-col nzSpan="8">
@@ -29,7 +34,7 @@
         <ul nz-menu nzMode="inline" [nzTheme]="theme ? 'dark' : 'light'" [nzInlineCollapsed]="isCollapsed">
           <li nz-submenu nz-tooltip nzTooltipPlacement="right" nzTitle="用户相关" nzOpen nzIcon="appstore">
             <ul>
-              <li nz-menu-item nzSelected>
+              <li nz-menu-item [nzSelected] = "select === 1">
                 用户信息
                 <a (click)="getInfo(1)"></a>
               </li>
@@ -95,7 +100,7 @@
       </div>
     </nz-sider>
     <!-- 用户信息 -->
-    <app-user-info *ngIf="select === 1" style="width: 100%;"></app-user-info>
+    <app-user-info *ngIf="select === 1" style="width: 100%;" (selectFlags)="getSearchUserFlag($event)" (deleteFlags)="getDeleteUserFlag($event)"></app-user-info>
     <!-- 用户投稿 -->
     <app-user-tg *ngIf="select === 2" style="width: 100%;"></app-user-tg>
     <!-- 用户求助 -->
@@ -106,7 +111,7 @@
     <app-upload-news *ngIf="select === 4" style="width: 100%; height: 100%;" (uploadFlags)="getUploadNewsFlag($event)">
     </app-upload-news>
     <!-- 查看公益活动 -->
-    <app-see-activity *ngIf="select === 7" style="width: 100%;"></app-see-activity>
+    <app-see-activity *ngIf="select === 7" style="width: 100%;" (selectFlags)="getSearchActivityFlag($event)" (upsetFlags)="getUpdateActivityFlag($event)" (deleteFlags)="getDeleteActivityFlag($event)"></app-see-activity>
     <!-- 上传公益活动 -->
     <app-upload-activity *ngIf="select === 6" style="width: 100%; height: 100%;" (uploadFlags)="getUploadActivityFlag($event)"></app-upload-activity>
     <!-- 查看公益商品 -->
@@ -114,7 +119,7 @@
     <!-- 上传公益商品 -->
     <app-upload-commodity *ngIf="select === 8" style="width: 100%;" (uploadFlags)="getUploadCommodityFlag($event)"></app-upload-commodity>
     <!-- 查看公益拍卖 -->
-    <app-see-auction *ngIf="select === 11" style="width: 100%;"></app-see-auction>
+    <app-see-auction *ngIf="select === 11" style="width: 100%;" (selectFlags)="getSearchAuctionFlag($event)" (upsetFlags)="getUpdateAuctionFlag($event)" (deleteFlags)="getDeleteAuctionFlag($event)"></app-see-auction>
     <!-- 上传公益拍卖 -->
     <app-upload-auction *ngIf="select === 10" style="width: 100%;" (uploadFlags)="getUploadAuctionFlag($event)"></app-upload-auction>
   </nz-layout>

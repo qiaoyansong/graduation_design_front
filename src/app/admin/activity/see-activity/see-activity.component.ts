@@ -223,9 +223,14 @@ export class SeeActivityComponent implements OnInit {
    * 提交更新
    */
   public commitUpdate(): void {
-    /*if (this.checkNewsTitle() && this.checkNewsSource() && this.checkNewsSummary()) {
+    if (this.checkActivityTitle() && this.checkActivitySummary() && this.checkBeginAndEndTime()) {
       this.tplModalButtonLoading = true;
-      this.adminService.updateNewsByID(this.news).subscribe(data => {
+      // 设置难度
+      this.activity.difficulty = this.value + '';
+      // 设置开始结束时间
+      this.activity.beginTime = this.dateRange[0];
+      this.activity.endTime = this.dateRange[1];
+      this.adminService.updateActivityByID(this.activity).subscribe(data => {
         if (data.code === StatusCode.SUCCESS) {
           // 成功
           this.flag = StatusCode.SUCCESS;
@@ -236,17 +241,12 @@ export class SeeActivityComponent implements OnInit {
           this.flag = StatusCode.USER_IS_NOT_LOGGED_IN;
           // 移动到顶部
           window.scrollTo(0, 0);
-        } else if (data.code === StatusCode.NEWS_TITLE_IS_EXISTS) {
-          // 文章标题已经存在
-          this.flag = StatusCode.NEWS_TITLE_IS_EXISTS;
-          // 移动到顶部
-          window.scrollTo(0, 0);
         }
         this.tplModalButtonLoading = false;
         this.upsetFlags.emit(this.flag);
         this.destroyTplModal();
       });
-    }*/
+    }
   }
 
   /**
@@ -273,6 +273,7 @@ export class SeeActivityComponent implements OnInit {
    * 验证开始结束时间是否符合格式
    */
   public checkBeginAndEndTime(): boolean {
-    return this.dateRange == null ? false : true;;
+    return this.dateRange == null ? false : 
+    (this.dateRange[0] == null || this.dateRange[1] == null)? false: true;
   };
 }

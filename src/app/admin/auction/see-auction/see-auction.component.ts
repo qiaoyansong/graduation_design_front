@@ -41,7 +41,7 @@ export class SeeAuctionComponent implements OnInit {
   dateRange = [];
   // 公益拍卖商品
   public auction = {
-    'id': 'id',
+    'id': '',
     'title': '',
     'beginTime': '',
     'endTime': '',
@@ -221,6 +221,28 @@ export class SeeAuctionComponent implements OnInit {
    * 提交更新
    */
   public commitUpdate(): void {
+    if (this.checkNewsTitle() && this.checkNewsSummary() && this.checkBeginAndEndTime()) {
+      this.tplModalButtonLoading = true;
+      // 设置开始结束时间
+      this.auction.beginTime = this.dateRange[0];
+      this.auction.endTime = this.dateRange[1];
+      this.adminService.updateAuctionByID(this.auction).subscribe(data => {
+        if (data.code === StatusCode.SUCCESS) {
+          // 成功
+          this.flag = StatusCode.SUCCESS;
+          // 移动到顶部
+          window.scrollTo(0, 0);
+        } else if (data.code === StatusCode.USER_IS_NOT_LOGGED_IN) {
+          // 未登录
+          this.flag = StatusCode.USER_IS_NOT_LOGGED_IN;
+          // 移动到顶部
+          window.scrollTo(0, 0);
+        }
+        this.tplModalButtonLoading = false;
+        this.upsetFlags.emit(this.flag);
+        this.destroyTplModal();
+      });
+    }
   }
 
 
@@ -249,6 +271,7 @@ export class SeeAuctionComponent implements OnInit {
    * 验证开始结束时间是否符合格式
    */
   public checkBeginAndEndTime(): boolean {
-    return this.dateRange == null ? false : true;;
+    return this.dateRange == null ? false : 
+    (this.dateRange[0] == null || this.dateRange[1] == null)? false: true;
   };
 }
