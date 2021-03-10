@@ -26,9 +26,9 @@ export class AdminLoginComponent implements OnInit {
   public current = 0;
 
   //登录界面展示图片
-  public array = ['http://localhost:8080/register/1.jpg',
-    'http://localhost:8080/register/2.jpg',
-    'http://localhost:8080/register/3.jpg'];
+  public array = ['http://localhost:8080/image/register/1.jpg',
+    'http://localhost:8080/image/register/2.jpg',
+    'http://localhost:8080/image/register/3.jpg'];
 
   // 下一步是否可选标志位 false 代表可选
   public disabled = false;

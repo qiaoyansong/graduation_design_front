@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { LanguageService } from '../service/language.service';
+import { LanguageService } from '../../service/language.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { mailboxValidator, passwordValidator, userNameValidator, verificationCodeValidator } from '../validator/bussinessValidator';
-import { RegisterService } from '../service/register.service';
-import { StatusCode } from '../enumType/StatusCode';
+import { mailboxValidator, passwordValidator, userNameValidator, verificationCodeValidator } from '../../validator/bussinessValidator';
+import { RegisterService } from '../../service/register.service';
+import { StatusCode } from '../../enumType/StatusCode';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
@@ -76,9 +76,9 @@ export class RegisterComponent implements OnInit {
   public errorMsg: string;
 
   //注册界面展示图片
-  public array = ['http://localhost:8080/register/1.jpg',
-  'http://localhost:8080/register/2.jpg',
-  'http://localhost:8080/register/3.jpg'];
+  public array = ['http://localhost:8080/image/register/1.jpg',
+  'http://localhost:8080/image/register/2.jpg',
+  'http://localhost:8080/image/register/3.jpg'];
 
   public changeLanguage(value: string): void {
     this.languageService.setLanguage(value);

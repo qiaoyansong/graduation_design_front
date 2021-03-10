@@ -129,7 +129,7 @@ export class HomeComponent implements OnInit {
     this.isLogin = false;
     // 请求退出操作
     this.loginService.logout(this.userName).subscribe(data => {
-
+        this.loginService.removeUser();
     }
     );
   }

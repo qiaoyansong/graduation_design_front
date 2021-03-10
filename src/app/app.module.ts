@@ -28,17 +28,17 @@ import {NzInputModule} from 'ng-zorro-antd/input';
 import {NzSelectModule} from 'ng-zorro-antd/select';
 import {NzMenuModule} from 'ng-zorro-antd/menu';
 import {HomeComponent} from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './user/login/login.component';
+import { RegisterComponent } from './user/register/register.component';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-import { PersonalComponent } from './personal/personal.component';
+import { PersonalComponent } from './user/personal/personal.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { AdminHomepageComponent } from './admin/admin-homepage/admin-homepage.component';
-import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ForgetPasswordComponent } from './user/forget-password/forget-password.component';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
@@ -66,6 +66,10 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NewsTypePipePipe } from './pipe/news-type-pipe.pipe';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { InfoComponent } from './user/info/info.component';
+import { TgComponent } from './user/tg/tg.component';
+import { SeekHelpComponent } from './user/seek-help/seek-help.component';
+import { ModifyPasswordComponent } from './user/modify-password/modify-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -94,6 +98,10 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     UserTgComponent,
     UserSeekHelpComponent,
     NewsTypePipePipe,
+    InfoComponent,
+    TgComponent,
+    SeekHelpComponent,
+    ModifyPasswordComponent,
   ],
   imports: [
     BrowserModule,

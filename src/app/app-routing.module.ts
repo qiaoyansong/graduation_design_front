@@ -4,14 +4,14 @@ import { AdminHomepageComponent } from './admin/admin-homepage/admin-homepage.co
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import {AnchorComponent} from './anchor/anchor.component';
 import {CarouselComponent} from './carousel/carousel.component';
-import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ForgetPasswordComponent } from './user/forget-password/forget-password.component';
 import { AdminIsLoginGuard } from './guard/adminIsLogin.guard';
 import { IsLoginGuard } from './guard/isLogin.guard';
 import { IsNotLoginGuard } from './guard/isNotLogin.guard';
 import {HomeComponent} from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { PersonalComponent } from './personal/personal.component';
-import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './user/login/login.component';
+import { PersonalComponent } from './user/personal/personal.component';
+import { RegisterComponent } from './user/register/register.component';
 import {ResultFofComponent} from './result-page/result-fof/result-fof.component';
 import {TinyEditorComponent} from './tiny-editor/tiny-editor.component';
 

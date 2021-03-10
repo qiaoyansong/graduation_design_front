@@ -132,4 +132,35 @@ export class LoginService {
     });
   }
 
+  /**
+   * 用于用户修改密码获取验证码
+   * @param user 用户信息
+   */
+   public modifyPasswordGetVerificationCode(user: any): Observable<any>{
+    let param =  {
+      "userName":user.userName,
+      'mailbox': user.mailbox
+    }
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    return this.httpClient.post('http://localhost:8080/modifypwd/getVerificationCode', param,{
+      withCredentials: true
+    });
+  }
+
+  /**
+   * 修改密码
+   * @param user 用户信息
+   */
+   public modifyPassword(user: any): Observable<any>{
+    let param =  {
+      'userName':user.userName,
+      'mailbox': user.mailbox,
+      'password': user.password,
+      'verificationCode': user.verificationCode
+    }
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    return this.httpClient.post('http://localhost:8080/modifypwd/modifyPassword', param,{
+      withCredentials: true
+    });
+  }
 }

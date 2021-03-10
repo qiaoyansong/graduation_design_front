@@ -1,0 +1,80 @@
+<nz-layout>
+    <nz-header nz-row>
+        <div nz-col nzSpan="8">
+            <a routerLink="/" ><img alt="微尘logo" src="http://localhost:8080/image/logo.png" /></a>
+        </div>
+    </nz-header>
+    <nz-layout>
+        <!-- 导航栏 -->
+        <nz-sider nzTheme="light">
+            <div class="wrapper">
+                <button nz-button nzType="primary" (click)="toggleCollapsed()" style="background-color: #1890ff;
+            border-color: #1890ff; margin-left: -137px;">
+                    <i nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+                </button>
+                <nz-switch [(ngModel)]="theme">
+                    <span checked>Dark</span>
+                    <span unchecked>Light</span>
+                </nz-switch>
+                <ul nz-menu nzMode="inline" [nzTheme]="theme ? 'dark' : 'light'" [nzInlineCollapsed]="isCollapsed">
+                    <li nz-submenu nz-tooltip nzTooltipPlacement="right" nzTitle="个人中心" nzOpen nzIcon="appstore">
+                        <ul>
+                            <li nz-menu-item [nzSelected]="select === 1">
+                                个人信息
+                                <a (click)="getInfo(1)"></a>
+                            </li>
+                            <li nz-menu-item [nzSelected]="select === 2">
+                                资讯投稿
+                                <a (click)="getInfo(2)"></a>
+                            </li>
+                            <li nz-menu-item [nzSelected]="select === 3">
+                                个人求助
+                                <a (click)="getInfo(3)"></a>
+                            </li>
+                            <li nz-menu-item [nzSelected]="select === 4">
+                                修改密码
+                                <a (click)="getInfo(3)"></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nz-sider>
+        <!-- 个人信息 -->
+        <app-info *ngIf="select === 1" style="width: 100%;"></app-info>
+        <!-- 资讯投稿 -->
+        <app-tg *ngIf="select === 2" style="width: 100%;"></app-tg>
+        <!-- 个人求助 -->
+        <app-seek-help *ngIf="select === 3" style="width: 100%;"></app-seek-help>
+        <!-- 修改密码 -->
+        <app-modify-password *ngIf="select === 4" style="width: 100%;"></app-modify-password>
+    </nz-layout>
+    <!-- 声明信息 -->
+    <nz-footer>
+        <div nz-row>
+            <div nz-col nzSpan="12" nzOffset="6">
+                <a href="http://www.zggyw.org/"> {{ "Home.Footer.HomePage" | translate }}</a> |
+                <a href="http://www.zggyw.org/html/help/wzjs/gywm/"> {{ "Home.Footer.AboutUs" | translate }}</a> |
+                <a href="http://www.zggyw.org/html/help/cjwt/zggywtgxz/"> {{ "Home.Footer.SubmissionGuidelines" |
+                    translate
+                    }}</a>
+                |
+                <a href="http://www.zggyw.org/html/help/wzjs/wzsm/"> {{ "Home.Footer.WebsiteStated" | translate }}</a> |
+                <a href="http://www.zggyw.org/html/help/ywjs/ywhz/"> {{ "Home.Footer.BusinessCooperation" | translate
+                    }}</a>
+            </div>
+            <div nz-col nzSpan="12" nzOffset="6">
+                微尘版权所有
+            </div>
+            <div nz-col nzSpan="12" nzOffset="6">
+                联系我：1012077930@qq.com
+            </div>
+            <div nz-col nzSpan="12" nzOffset="6">
+                <a href="http://www.12377.cn/" target="_blank">违法和不良信息举报中心</a>
+                |
+                <a href="http://www.piyao.org.cn/" target="_blank">中国互联网联合辟谣平台</a>
+            </div>
+        </div>
+    </nz-footer>
+</nz-layout>
+<app-back-top [height]="2"></app-back-top>

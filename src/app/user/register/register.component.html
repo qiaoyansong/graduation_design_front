@@ -1,18 +1,14 @@
 <nz-alert *ngIf="flag === '103'" nzType="success" nzMessage="生成验证码成功，有效期1分钟" nzShowIcon  nzCloseable></nz-alert>
 <nz-alert nzType="warning" *ngIf="flag === '104'" nzMessage="验证码未失效，不再生成新的验证码" nzShowIcon  nzCloseable></nz-alert>
 <nz-alert nzType="error" *ngIf="flag === '101'" nzMessage="邮件发送失败，请重试" nzShowIcon  nzCloseable></nz-alert>
+<nz-alert nzType="error" *ngIf="flag === '105'" nzMessage="验证码失效，需要用重新申请验证码" nzShowIcon  nzCloseable></nz-alert>
+<nz-alert nzType="error" *ngIf="flag === '106'" nzMessage="验证码验证失败，请到邮箱查看验证码" nzShowIcon  nzCloseable></nz-alert>
+<nz-alert nzType="error" *ngIf="flag === '109'" nzMessage="系统发生未知错误" nzShowIcon  nzCloseable></nz-alert>
 <nz-layout>
   <nz-layout>
     <nz-header nz-row>
       <div nz-col nzSpan="8">
-        <img alt="微尘logo" src="../../assets/images/logo.png" />
-      </div>
-      <div nz-col nzSpan="8">
-        {{ "Home.BeforeSearchInput" | translate }}：
-        <nz-select ngModel="zh" (ngModelChange)="changeLanguage($event)">
-          <nz-option nzValue="zh" nzLabel="简体中文"></nz-option>
-          <nz-option nzValue="en" nzLabel="英语"></nz-option>
-        </nz-select>
+        <a routerLink="/" ><img alt="微尘logo" src="http://localhost:8080/image/logo.png" /></a>
       </div>
     </nz-header>
     <app-carousel [array]='array' height=400></app-carousel>

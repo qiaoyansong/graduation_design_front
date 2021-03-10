@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
-import {LanguageService} from '../service/language.service';
-import { LoginService } from '../service/login.service';
-import { StatusCode } from '../enumType/StatusCode';
-import { passwordValidator, userNameValidator } from '../validator/bussinessValidator';
-import { userType } from '../enumType/UserType';
+import {LanguageService} from '../../service/language.service';
+import { LoginService } from '../../service/login.service';
+import { StatusCode } from '../../enumType/StatusCode';
+import { passwordValidator, userNameValidator } from '../../validator/bussinessValidator';
+import { userType } from '../../enumType/UserType';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -41,8 +41,8 @@ export class LoginComponent implements OnInit {
   public isShow = false;
 
   //显示图片
-  public array = ['http://localhost:8080/login/1.jpg',
-  'http://localhost:8080/login/2.jpg'];
+  public array = ['http://localhost:8080/image/login/1.jpg',
+  'http://localhost:8080/image/login/2.jpg'];
   ngOnInit(): void {
   }
 
@@ -132,7 +132,7 @@ export class LoginComponent implements OnInit {
    * 导航去个人中心
    */
   public goToPersonCenter(): void {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/personal'], { queryParams: { userName: this.user.userName } });
   }
 
   /**

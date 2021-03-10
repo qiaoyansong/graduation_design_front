@@ -4,14 +4,7 @@
   <nz-layout>
     <nz-header nz-row>
         <div nz-col nzSpan="8">
-            <img alt="微尘logo" src="../../assets/images/logo.png"/>
-        </div>
-        <div nz-col nzSpan="8">
-            {{ "Home.BeforeSearchInput" | translate }}：
-            <nz-select ngModel="zh" (ngModelChange)="changeLanguage($event)">
-              <nz-option nzValue="zh" nzLabel="简体中文"></nz-option>
-              <nz-option nzValue="en" nzLabel="英语"></nz-option>
-            </nz-select>
+          <a routerLink="/" ><img alt="微尘logo" src="http://localhost:8080/image/logo.png" /></a>
         </div>
  </nz-header>
  <app-carousel [array]='array' height=400></app-carousel>
