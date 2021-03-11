@@ -70,6 +70,8 @@ import { InfoComponent } from './user/info/info.component';
 import { TgComponent } from './user/tg/tg.component';
 import { SeekHelpComponent } from './user/seek-help/seek-help.component';
 import { ModifyPasswordComponent } from './user/modify-password/modify-password.component';
+import { ReceivingAddressComponent } from './user/receiving-address/receiving-address.component';
+import { GoodsPurchasedComponent } from './user/goods-purchased/goods-purchased.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -102,6 +104,8 @@ import { ModifyPasswordComponent } from './user/modify-password/modify-password.
     TgComponent,
     SeekHelpComponent,
     ModifyPasswordComponent,
+    ReceivingAddressComponent,
+    GoodsPurchasedComponent,
   ],
   imports: [
     BrowserModule,

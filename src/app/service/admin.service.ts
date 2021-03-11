@@ -15,6 +15,7 @@ export class AdminService {
    */
   public uploadNews(params: any): Observable<any>{
     let news =  {
+      'userId': params.id,
       'title': params.title,
       'source': params.source,
       'summary': params.summary,

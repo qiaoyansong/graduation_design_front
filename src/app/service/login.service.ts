@@ -51,6 +51,13 @@ export class LoginService {
   }
 
   /**
+   * 获取用户ID
+   * @returns 用户ID
+   */
+  public getUserId(): number{
+    return this.user.id;
+  }
+  /**
    * 是否登录
    */
   public isLogin(): boolean{

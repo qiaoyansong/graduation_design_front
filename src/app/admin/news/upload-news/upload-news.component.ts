@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 export class UploadNewsComponent implements OnInit {
   // 文章
   public news = {
+    'id':'',
     'title': '',
     'source': '',
     'summary': '',
@@ -44,6 +45,7 @@ export class UploadNewsComponent implements OnInit {
     private router: Router) {
     this.news.type = '0';
     this.buildUploadNewsForm();
+    this.news.id = this.loginService.getUserId()+'';
   }
 
   /**
