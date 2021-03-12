@@ -72,6 +72,8 @@ import { SeekHelpComponent } from './user/seek-help/seek-help.component';
 import { ModifyPasswordComponent } from './user/modify-password/modify-password.component';
 import { ReceivingAddressComponent } from './user/receiving-address/receiving-address.component';
 import { GoodsPurchasedComponent } from './user/goods-purchased/goods-purchased.component';
+import { TgjdComponent } from './user/tgjd/tgjd.component';
+import { NewsCheckPipePipe } from './pipe/news-check-pipe.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -106,6 +108,8 @@ import { GoodsPurchasedComponent } from './user/goods-purchased/goods-purchased.
     ModifyPasswordComponent,
     ReceivingAddressComponent,
     GoodsPurchasedComponent,
+    TgjdComponent,
+    NewsCheckPipePipe,
   ],
   imports: [
     BrowserModule,

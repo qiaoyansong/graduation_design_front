@@ -1,4 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { StatusCode } from 'src/app/enumType/StatusCode';
+import { AdminService } from 'src/app/service/admin.service';
+import { newsSourceValidator, newsSummaryValidator, newsTitleValidator } from 'src/app/validator/bussinessValidator';
+import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { LoginService } from 'src/app/service/login.service';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-tg',
@@ -7,9 +16,202 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TgComponent implements OnInit {
 
-  constructor() { }
+  // 文章
+  public news = {
+    'id':'',
+    'title': '',
+    'source': '',
+    'summary': '',
+    'article': '',
+    'type': '',
+    'img': ''
+  }
+  // 上传的数据
+  public data: any;
+  // 图片地址
+  public imgLocation;
+  // 上传公益资讯表单
+  public uploadNewsForm: FormGroup;
+  // 能否上传图片
+  public isDisabled = false;
+  // 上传标志位
+  public flag;
+  // 是否登录标志位
+  public isLoginFlag;
+  // 上传文章标志位
+  @Output()
+  public uploadFlags = new EventEmitter<string>();
+  constructor(private userService: UserService,
+    private fb: FormBuilder,
+    private msg: NzMessageService,
+    private loginService: LoginService,
+    private router: Router) {
+    this.news.type = '0';
+    this.buildUploadNewsForm();
+    this.news.id = this.loginService.getUserId()+'';
+  }
+
+  /**
+   * 构建上传公益资讯表单
+   */
+  public buildUploadNewsForm(): void {
+    this.uploadNewsForm = this.fb.group(
+      {
+        title: [this.news.title, [newsTitleValidator()]],
+        source: [this.news.source, [newsSourceValidator()]],
+        summary: [this.news.summary, [newsSummaryValidator()]],
+      });
+    this.isDisabled = false;
+  }
 
   ngOnInit(): void {
   }
 
+  // 富文本编辑器
+  tinyInit = {
+    height: 500,
+    menubar: 'file edit view',
+    plugins: [
+      'advlist autolink lists link image charmap print preview anchor',
+      'searchreplace visualblocks code fullscreen',
+      'insertdatetime media table paste code help wordcount'
+    ],
+    gecko_spellcheck: false,
+    file_browser_callback_types: 'image',
+    language: 'zh_CN',
+    toolbar:
+      'undo redo | formatselect | bold italic backcolor | \
+      alignleft aligncenter alignright alignjustify | \
+      bullist numlist outdent indent | removeformat | table | image | help',
+    images_upload_handler(blobInfo, succFun, failFun) {
+      let xhr: XMLHttpRequest;
+      let formData: FormData;
+      xhr = new XMLHttpRequest();
+      xhr.open('POST', 'http://localhost:8080/upload/pic', true);
+      formData = new FormData();
+      formData.append('file', blobInfo.blob());
+      xhr.onload = () => {
+        let json;
+        if (xhr.status !== 200) {
+          failFun('HTTP Error: ' + xhr.status);
+          return;
+        }
+        json = JSON.parse(xhr.responseText);
+        // location就是json返回的图片地址返回的数据必须含有location字段
+        if (!json || typeof json.location !== 'string') {
+          failFun('上传成功');
+          return;
+        }
+        succFun("http://localhost:8080/upload/pic/" + json.location);
+      };
+      xhr.send(formData);
+    }
+  }
+
+  /**
+   * 切换文章类型
+   * @param value 文章种类
+   */
+  public changeNewsType(value: string): void {
+    this.news.type = value;
+  }
+
+  /**
+    * 验证文章标题是否符合格式
+    */
+  public checkNewsTitle(): boolean {
+    const value = this.news.title;
+    const reg = /^[\u4e00-\u9fa5]{1,50}$/;
+    const result = reg.test(value);
+    return result;
+  };
+
+  /**
+    * 验证文章来源是否符合格式
+    */
+  public checkNewsSource(): boolean {
+    const value = this.news.source;
+    const reg = /^[\u4e00-\u9fa5]{1,10}$/;
+    const result = reg.test(value);
+    return result;
+  };
+
+  /**
+    * 验证文章摘要是否符合格式
+    */
+  public checkNewsSummary(): boolean {
+    const value = this.news.summary;
+    const reg = /^.{1,100}$/;
+    const result = reg.test(value);
+    return result;
+  };
+
+  /**
+    * 验证列表图片是否符合格式
+    */
+  public checkListImage(): boolean {
+    return this.imgLocation == null ? false : true;;
+  };
+
+  /**
+   * 验证富文本编辑器内容是否符合格式
+   */
+  public checkData(): boolean {
+    return this.data == null ? false : true;;
+  };
+
+  /**
+   * 上传文章
+   */
+  public uploadNews(): void {
+    if (this.checkNewsTitle() && this.checkData() && this.checkListImage() && this.checkNewsSource() && this.checkNewsSummary()) {
+      this.news.article = this.data;
+      this.news.img = this.imgLocation;
+      // 开始业务逻辑
+      this.userService.uploadNews(this.news).subscribe(data => {
+        if (data.code === StatusCode.SUCCESS) {
+          // 成功
+          this.flag = StatusCode.SUCCESS;
+          // 移动到顶部
+          window.scrollTo(0, 0);
+        } else if (data.code === StatusCode.USER_IS_NOT_LOGGED_IN) {
+          // 未登录
+          this.flag = StatusCode.USER_IS_NOT_LOGGED_IN;
+          // 移动到顶部
+          window.scrollTo(0, 0);
+        } else if (data.code === StatusCode.NEWS_TITLE_IS_EXISTS) {
+          // 文章标题已经存在
+          this.flag = StatusCode.NEWS_TITLE_IS_EXISTS;
+          // 移动到顶部
+          window.scrollTo(0, 0);
+        }
+        this.uploadFlags.emit(this.flag);
+      });
+    }
+  }
+
+  /**
+  * 上传公益资讯列表图片
+  * @param info 
+  */
+  handleNewsImagChange(info: NzUploadChangeParam): void {
+    if (info.fileList.length == 0) {
+      this.isDisabled = false;
+    }
+    if (info.file.status === 'done' && info.file.response.fileName != null) {
+      this.msg.success(`${info.file.name} 文件上传成功`);
+      this.isDisabled = true;
+      // 图片存放地址
+      this.imgLocation = "http://localhost:8080/upload/pic/" + info.file.response.location;
+    } else if (info.file.status === 'error') {
+      this.msg.error(`${info.file.name} 文件上传失败`);
+    }
+  }
+
+  /**
+   * 导航去忘记密码界面
+   */
+  public afterClose(): void {
+    this.router.navigate(['/forgetpwd']);
+  }
 }

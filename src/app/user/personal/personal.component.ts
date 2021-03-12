@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { StatusCode } from 'src/app/enumType/StatusCode';
 
 @Component({
   selector: 'app-personal',
@@ -12,10 +14,13 @@ export class PersonalComponent implements OnInit {
 
   // 是否内嵌菜单
   public isCollapsed = false;
+
   // 主题
   public theme = true;
-
-  constructor() {
+  
+  // 上传文章标志位
+  public UploadnewsFlag;
+  constructor(private router: Router) {
     this.select = 1;
   }
 
@@ -35,5 +40,24 @@ export class PersonalComponent implements OnInit {
    */
   public getInfo(value: number): void {
     this.select = value;
+  }
+
+  /**
+   * 从上传文章子组件获取上传标志位
+   */
+   public getUploadNewsFlag(msg): void {
+    this.UploadnewsFlag = msg;
+    if (this.UploadnewsFlag === StatusCode.SUCCESS) {
+      this.select = 7;
+    } else if (this.UploadnewsFlag === StatusCode.USER_IS_NOT_LOGGED_IN) {
+      this.router.navigate(['']);
+    }
+  }
+
+  /**
+   * 重置错误标志位
+   */
+   public afterClose(): void {
+    this.UploadnewsFlag = '';
   }
 }

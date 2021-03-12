@@ -41,7 +41,7 @@
               <td>{{ data.title }}</td>
               <td>{{ data.pubdate | date:'yyyy年-MM月-d日 HH:mm:ss' : 'utc'}}</td>
               <td>{{ data.type | newsTypePipe}}</td>
-              <td>{{ data.flag }}</td>
+              <td>{{ data.flag | newsCheckPipe}}</td>
               <td>
                 <button nz-button [nzType]="'primary'"
                   (click)="createTplModal(tplTitle, tplContent, tplFooter, data)" [nzLoading]="tplModalButtonLoading"><span>管理该条目</span></button>

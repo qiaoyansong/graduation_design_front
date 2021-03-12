@@ -230,5 +230,8 @@ export class AdminLoginComponent implements OnInit {
    */
   public reLogin(): void{
     this.current = 0;
+    this.user.password = '';
+    this.user.mailbox = '';
+    this.user.verificationCode = '';
   }
 }

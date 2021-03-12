@@ -1,3 +1,7 @@
+<nz-alert *ngIf="UploadnewsFlag === '200'" nzType="success" nzMessage="上传文章成功" nzCloseable nzShowIcon
+    (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert nzType="error" *ngIf="UploadnewsFlag === '116'" nzCloseable nzMessage="文章标题已经存在" nzShowIcon
+    (nzOnClose)="afterClose()"></nz-alert>
 <nz-layout>
     <nz-header nz-row>
         <div nz-col nzSpan="8">
@@ -23,17 +27,33 @@
                                 个人信息
                                 <a (click)="getInfo(1)"></a>
                             </li>
+                            <li nz-menu-item [nzSelected]="select === 4">
+                                修改密码
+                                <a (click)="getInfo(4)"></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li nz-submenu nz-tooltip nzTooltipPlacement="right" nzTitle="投稿相关" nzOpen nzIcon="appstore">
+                        <ul>
                             <li nz-menu-item [nzSelected]="select === 2">
                                 资讯投稿
                                 <a (click)="getInfo(2)"></a>
                             </li>
+                            <li nz-menu-item [nzSelected]="select === 7">
+                                投稿进度
+                                <a (click)="getInfo(7)"></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li nz-submenu nz-tooltip nzTooltipPlacement="right" nzTitle="求助相关" nzOpen nzIcon="appstore">
+                        <ul>
                             <li nz-menu-item [nzSelected]="select === 3">
                                 个人求助
                                 <a (click)="getInfo(3)"></a>
                             </li>
-                            <li nz-menu-item [nzSelected]="select === 4">
-                                修改密码
-                                <a (click)="getInfo(3)"></a>
+                            <li nz-menu-item [nzSelected]="select === 8">
+                                求助进度
+                                <a (click)="getInfo(8)"></a>
                             </li>
                         </ul>
                     </li>
@@ -41,11 +61,11 @@
                         <ul>
                             <li nz-menu-item [nzSelected]="select === 5">
                                 收货地址
-                                <a (click)="getInfo(4)"></a>
+                                <a (click)="getInfo(5)"></a>
                             </li>
                             <li nz-menu-item [nzSelected]="select === 6">
                                 已购商品
-                                <a (click)="getInfo(5)"></a>
+                                <a (click)="getInfo(6)"></a>
                             </li>
                         </ul>
                     </li>
@@ -55,7 +75,9 @@
         <!-- 个人信息 -->
         <app-info *ngIf="select === 1" style="width: 100%;"></app-info>
         <!-- 资讯投稿 -->
-        <app-tg *ngIf="select === 2" style="width: 100%;"></app-tg>
+        <app-tg *ngIf="select === 2" style="width: 100%;" (uploadFlags)="getUploadNewsFlag($event)"></app-tg>
+        <!-- 投稿进度 -->
+        <app-tgjd *ngIf="select === 7" style="width: 100%;"></app-tgjd>
         <!-- 个人求助 -->
         <app-seek-help *ngIf="select === 3" style="width: 100%;"></app-seek-help>
         <!-- 修改密码 -->
