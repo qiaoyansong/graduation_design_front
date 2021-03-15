@@ -1,7 +1,18 @@
 <nz-alert *ngIf="UploadnewsFlag === '200'" nzType="success" nzMessage="上传文章成功" nzCloseable nzShowIcon
     (nzOnClose)="afterClose()"></nz-alert>
-<nz-alert nzType="error" *ngIf="UploadnewsFlag === '116'" nzCloseable nzMessage="文章标题已经存在" nzShowIcon
+<nz-alert nzType="success" *ngIf="modifyPasswordFlag === '200'" nzCloseable nzMessage="修改密码成功" nzShowIcon
     (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert nzType="error" *ngIf="modifyPasswordFlag === '101'" nzCloseable nzMessage="发送验证码邮件失败" nzShowIcon
+    (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert nzType="error" *ngIf="modifyPasswordFlag === '104'" nzCloseable nzMessage="验证码未失效，不再生成新的验证码" nzShowIcon
+    (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert nzType="error" *ngIf="modifyPasswordFlag === '105'" nzCloseable nzMessage="验证码失效，需要重新申请验证码" nzShowIcon
+    (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert nzType="error" *ngIf="modifyPasswordFlag === '106'" nzCloseable nzMessage="验证码验证失败，请到邮箱查看验证码" nzShowIcon
+    (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert nzType="error" *ngIf="modifyPasswordFlag === '109'" nzCloseable nzMessage="系统发生未知错误" nzShowIcon
+    (nzOnClose)="afterClose()"></nz-alert>
+
 <nz-layout>
     <nz-header nz-row>
         <div nz-col nzSpan="8">
@@ -81,7 +92,8 @@
         <!-- 个人求助 -->
         <app-seek-help *ngIf="select === 3" style="width: 100%;"></app-seek-help>
         <!-- 修改密码 -->
-        <app-modify-password *ngIf="select === 4" style="width: 100%;"></app-modify-password>
+        <app-modify-password *ngIf="select === 4" style="width: 100%;" (uploadFlags)="getModifyPasswordFlag($event)">
+        </app-modify-password>
         <!-- 收货地址 -->
         <app-receiving-address *ngIf="select === 5" style="width: 100%;"></app-receiving-address>
         <!-- 已购商品 -->

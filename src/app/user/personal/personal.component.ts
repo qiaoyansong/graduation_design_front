@@ -20,6 +20,10 @@ export class PersonalComponent implements OnInit {
   
   // 上传文章标志位
   public UploadnewsFlag;
+
+  // 修改密码标志位
+  public modifyPasswordFlag;
+
   constructor(private router: Router) {
     this.select = 1;
   }
@@ -55,9 +59,17 @@ export class PersonalComponent implements OnInit {
   }
 
   /**
+   * 从修改密码子组件获取修改密码标志位
+   */
+   public getModifyPasswordFlag(msg): void {
+    this.modifyPasswordFlag = msg;
+  }
+
+  /**
    * 重置错误标志位
    */
    public afterClose(): void {
     this.UploadnewsFlag = '';
+    this.modifyPasswordFlag = '';
   }
 }
