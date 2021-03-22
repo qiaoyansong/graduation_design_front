@@ -6,7 +6,14 @@ import { LoginService } from "../service/login.service";
     providedIn: 'root',
 })
 export class IsNotLoginGuard implements CanActivate{
-    constructor(private loginService: LoginService, private router: Router) {}
+    constructor(private loginService: LoginService, private router: Router) {
+        this.loginService.getSaveInfo().subscribe(data => {
+            if (data.body != null) {
+                // 如果用户名不为空 设置用户名
+                this.loginService.setUser(data.body);
+            }
+        });
+    }
     canActivate():true | UrlTree{
         return this.checkLogin();
     }

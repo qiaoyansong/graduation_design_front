@@ -1,1 +1,55 @@
-<p>info works!</p>
+<div class="general-info">
+    <div class="general-info-t">
+        <div class="general-info-avatar">
+            <!-- 头像 -->
+            <nz-avatar *ngIf="user.headPortrait == null " [ngStyle]="{ 'background-color': color }"
+                [nzText]="user.userName" nzSize="large" style="vertical-align: middle;"></nz-avatar>
+            <nz-avatar *ngIf="user.headPortrait != null " nzIcon="user" nzSrc="{{user.headPortrait}}" nzSize="large"
+                style="vertical-align: middle;"></nz-avatar>
+        </div>
+        <div class="general-info-t-info">
+            <div class="profile-name-info">
+                <!-- 名字 -->
+                <div class="person-name">{{user.userName}}</div>
+                <nz-upload nzAction="http://localhost:8080/upload/pic" [nzHeaders]="{ authorization: 'authorization-text' }"
+                    (nzChange)="handleNewsImagChange($event)" [nzDisabled]="isDisabled">
+                    <button nz-button><i nz-icon nzType="upload"></i>上传头像</button>
+                </nz-upload>
+            </div>
+        </div>
+    </div>
+    <!---->
+    <div id="base-info" class="base-info">
+        <div class="base-info-head">基本信息</div>
+        <div class="base-info-content">
+            <div class="base-info-content-show">
+                <ul>
+                    <li>
+                        <div class="content-show-l">用户昵称</div>
+                        <div class="content-show-r">{{user.userName}}</div>
+                    </li>
+                    <li>
+                        <div class="content-show-l">用户ID</div>
+                        <div class="content-show-r">{{user.id}}</div>
+                    </li>
+                    <li>
+                        <div class="content-show-l">用户邮箱</div>
+                        <div class="content-show-r">{{user.mailbox}}</div>
+                    </li>
+                    <li>
+                        <div class="content-show-l">用户信用</div>
+                        <div class="content-show-r">
+                            <nz-rate [ngModel]="user.credit" nzAllowHalf [nzCharacter]="characterIcon"
+                                [nzDisabled]=true></nz-rate>
+                            <ng-template #characterIcon><i nz-icon nzType="heart"></i></ng-template>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="content-show-l">点数</div>
+                        <div class="content-show-r">{{user.point}}</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

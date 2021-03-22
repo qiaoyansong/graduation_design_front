@@ -65,6 +65,14 @@ export class LoginService {
   public getMailBox(): string{
     return this.user.mailbox;
   }
+
+  /**
+   * 获取用户
+   * @returns 用户
+   */
+   public getUser(): any{
+    return this.user;
+  }
   /**
    * 是否登录
    */

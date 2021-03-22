@@ -74,6 +74,8 @@ import { ReceivingAddressComponent } from './user/receiving-address/receiving-ad
 import { GoodsPurchasedComponent } from './user/goods-purchased/goods-purchased.component';
 import { TgjdComponent } from './user/tgjd/tgjd.component';
 import { NewsCheckPipePipe } from './pipe/news-check-pipe.pipe';
+import { NzCascaderModule } from 'ng-zorro-antd/cascader';
+import { LocationPipe } from './pipe/location.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -110,6 +112,7 @@ import { NewsCheckPipePipe } from './pipe/news-check-pipe.pipe';
     GoodsPurchasedComponent,
     TgjdComponent,
     NewsCheckPipePipe,
+    LocationPipe,
   ],
   imports: [
     BrowserModule,
@@ -121,6 +124,7 @@ import { NewsCheckPipePipe } from './pipe/news-check-pipe.pipe';
     EditorModule,
     NzToolTipModule,
     NzDatePickerModule,
+    NzCascaderModule,
     FormsModule,
     NzModalModule,
     NzFormModule,

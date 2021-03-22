@@ -5,7 +5,7 @@
   <!-- 首部信息 -->
   <nz-header nz-row>
     <div nz-col nzSpan="8">
-      <a routerLink="/" ><img alt="微尘logo" src="http://localhost:8080/image/logo.png" /></a>
+      <a routerLink="/"><img alt="微尘logo" src="http://localhost:8080/image/logo.png" /></a>
     </div>
     <div nz-col nzSpan="8">
       <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
@@ -22,7 +22,9 @@
           class="red" (click)="register()" nz-button nzType="default">注册</button></div>
       <!-- 登陆成功显示用户 -->
       <div *ngIf="isLogin && userType === 'GENERAL_USER'">
-        <nz-avatar [ngStyle]="{ 'background-color': color }" [nzText]="userName" nzSize="large"
+        <nz-avatar *ngIf="headPortrait == null " [ngStyle]="{ 'background-color': color }" [nzText]="userName"
+          nzSize="large" style="vertical-align: middle;"></nz-avatar>
+          <nz-avatar *ngIf="headPortrait != null " nzIcon="user" nzSrc="{{headPortrait}}" nzSize="large"
           style="vertical-align: middle;"></nz-avatar>
         <a nz-dropdown [nzDropdownMenu]="menu" class="blackColorText">
           选项
@@ -110,18 +112,21 @@
               <div class="box2_head"></div>
               <div class="box2_body">
                 <ul>
-                  <li><i nz-icon nzType="caret-right" nzTheme="outline" style="float: left; width: 5%; color: black;"></i><a
-                      href="/fuwu/zhaomu/content-50-17485-1.html" title="北京冬奥今起招募赛会志愿者">北京冬奥今起招募赛会志愿者</a></li>
-                  <li><i nz-icon nzType="caret-right" nzTheme="outline" style="float: left; width: 5%; color: black;"></i><a
-                      href="/fuwu/zhaomu/content-50-14175-1.html"
+                  <li><i nz-icon nzType="caret-right" nzTheme="outline"
+                      style="float: left; width: 5%; color: black;"></i><a href="/fuwu/zhaomu/content-50-17485-1.html"
+                      title="北京冬奥今起招募赛会志愿者">北京冬奥今起招募赛会志愿者</a></li>
+                  <li><i nz-icon nzType="caret-right" nzTheme="outline"
+                      style="float: left; width: 5%; color: black;"></i><a href="/fuwu/zhaomu/content-50-14175-1.html"
                       title="奔走相告！马云公益基金会乡村学校计划招聘项目经理啦！">奔走相告！马云公益基金会乡村学校计划招聘</a></li>
-                  <li><i nz-icon nzType="caret-right" nzTheme="outline" style="float: left; width: 5%; color: black;"></i><a
-                      href="/fuwu/zhaomu/content-50-12455-1.html" title="联合国粮农组织实习计划">联合国粮农组织实习计划</a></li>
-                  <li><i nz-icon nzType="caret-right" nzTheme="outline" style="float: left; width: 5%; color: black;"></i><a
-                      href="/fuwu/zhaomu/content-50-11580-1.html" title="北京市红十字血液中心公开招聘工作人员公告">北京市红十字血液中心公开招聘工作人员公告</a>
+                  <li><i nz-icon nzType="caret-right" nzTheme="outline"
+                      style="float: left; width: 5%; color: black;"></i><a href="/fuwu/zhaomu/content-50-12455-1.html"
+                      title="联合国粮农组织实习计划">联合国粮农组织实习计划</a></li>
+                  <li><i nz-icon nzType="caret-right" nzTheme="outline"
+                      style="float: left; width: 5%; color: black;"></i><a href="/fuwu/zhaomu/content-50-11580-1.html"
+                      title="北京市红十字血液中心公开招聘工作人员公告">北京市红十字血液中心公开招聘工作人员公告</a>
                   </li>
-                  <li><i nz-icon nzType="caret-right" nzTheme="outline" style="float: left; width: 5%; color: black;"></i><a
-                      href="/fuwu/zhaomu/content-50-9816-1.html"
+                  <li><i nz-icon nzType="caret-right" nzTheme="outline"
+                      style="float: left; width: 5%; color: black;"></i><a href="/fuwu/zhaomu/content-50-9816-1.html"
                       title="助力高校教师开展公益慈善通识教育 “敦和·善识计划”申报正式开启">助力高校教师开展公益慈善通识教育 “敦和</a></li>
                 </ul>
               </div>

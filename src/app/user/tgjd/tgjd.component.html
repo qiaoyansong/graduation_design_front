@@ -29,7 +29,6 @@
               <th>上传时间</th>
               <th>资讯类型</th>
               <th>资讯是否审核</th>
-              <th>操作</th>
             </tr>
           </thead>
           <tbody>
@@ -41,71 +40,6 @@
                 <td>{{ data.pubdate | date:'yyyy年-MM月-d日 HH:mm:ss' : 'utc'}}</td>
                 <td>{{ data.type | newsTypePipe}}</td>
                 <td>{{ data.flag | newsCheckPipe}}</td>
-                <td>
-                  <button nz-button [nzType]="'primary'"
-                    (click)="createTplModal(tplTitle, tplContent, tplFooter, data)" [nzLoading]="tplModalButtonLoading"><span>管理该条目</span></button>
-                  <!-- 模态框头部 -->
-                  <ng-template #tplTitle>
-                    <span>管理资讯</span>
-                  </ng-template>
-                  <!-- 模态框内容 -->
-                  <ng-template #tplContent let-params let-ref="modalRef">
-                    <!-- 上传公益资讯表单 -->
-                    <form nz-form [formGroup]="uploadNewsForm">
-                      <!-- 文章标题 -->
-                      <nz-form-item>
-                        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="title">文章标题</nz-form-label>
-                        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="文章标题不符合要求">
-                          <input nz-input formControlName="title" id="title" [(ngModel)]="news.title"
-                            placeholder="只支持汉字，最多支持50个汉字" />
-                        </nz-form-control>
-                      </nz-form-item>
-                      <!-- 文章来源 -->
-                      <nz-form-item>
-                        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="source" nzRequired>文章来源</nz-form-label>
-                        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="文章来源不符合要求">
-                          <input nz-input id="source" formControlName="source" [(ngModel)]="news.source"
-                            placeholder="只支持汉字，最多支持10个汉字" />
-                        </nz-form-control>
-                      </nz-form-item>
-                      <!-- 摘要 -->
-                      <nz-form-item>
-                        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="summary" nzRequired>摘要</nz-form-label>
-                        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="摘要不符合要求">
-                          <textarea id="summary" formControlName="summary" rows="4" nz-input [(ngModel)]="news.summary"
-                            placeholder="只支持汉字，最多支持100个汉字"></textarea>
-                        </nz-form-control>
-                      </nz-form-item>
-                      <!-- 文章类型 -->
-                      <nz-form-item>
-                        <nz-form-label [nzSm]="6" [nzXs]="24">文章类型</nz-form-label>
-                        <nz-select [ngModel]="news.type" (ngModelChange)="changeNewsType($event)"
-                          [ngModelOptions]="{standalone: true}" style="width: 20%;">
-                          <nz-option nzValue="0" nzLabel="国内"></nz-option>
-                          <nz-option nzValue="1" nzLabel="政府"></nz-option>
-                          <nz-option nzValue="2" nzLabel="学校"></nz-option>
-                          <nz-option nzValue="3" nzLabel="企业"></nz-option>
-                          <nz-option nzValue="4" nzLabel="益人"></nz-option>
-                          <nz-option nzValue="5" nzLabel="好人"></nz-option>
-                          <nz-option nzValue="6" nzLabel="好事"></nz-option>
-                          <nz-option nzValue="7" nzLabel="评选"></nz-option>
-                        </nz-select>
-                      </nz-form-item>
-                    </form>
-                  </ng-template>
-                  <!-- 模态框底部 -->
-                  <ng-template #tplFooter>
-                    <button nz-button nzType="primary" (click)="destroyTplModal()">
-                      取消
-                    </button>
-                    <button nz-button nzType="primary" (click)="commitUpdate()" [nzLoading]="tplModalButtonLoading">
-                      提交更新
-                    </button>
-                  </ng-template>
-                  <nz-divider nzType="vertical"></nz-divider>
-                  <a nz-popconfirm nzPopconfirmTitle="确认取消投稿么?" nzPopconfirmPlacement="bottom"
-                    (nzOnConfirm)="deleteNewsById(data.id)">取消投稿改文章</a>
-                </td>
               </tr>
               <tr [nzExpand]="expandSet.has(data.id)">
                 <nz-table #innerTable (nzData)="data" nzSize="middle" [nzShowPagination]="false">

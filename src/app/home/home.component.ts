@@ -27,6 +27,9 @@ export class HomeComponent implements OnInit {
   public userType: string;
   // 别处登录标识
   public otherFlag = false;
+
+  //头像
+  public headPortrait = null;
   //主页展示图片
   public array = [1,
   2,
@@ -75,6 +78,7 @@ export class HomeComponent implements OnInit {
           this.userType = '';
         }
       }
+      this.headPortrait = this.loginService.getUser().headPortrait;
     });
   }
 

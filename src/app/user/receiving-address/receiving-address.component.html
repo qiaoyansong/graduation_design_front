@@ -1,1 +1,133 @@
-<p>receiving-address works!</p>
+<nz-table #basicTable [nzData]="data">
+    <thead>
+        <tr>
+            <th>电话号码</th>
+            <th>收货人姓名</th>
+            <th>省</th>
+            <th>市</th>
+            <th>区</th>
+            <th>具体地址</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of basicTable.data">
+            <td>{{data.telephone}}</td>
+            <td>{{data.name}}</td>
+            <td>{{data.province | location}}</td>
+            <td>{{data.city | location}}</td>
+            <td>{{data.area | location}}</td>
+            <td>{{data.location}}</td>
+            <td>
+                <a nz-popconfirm nzPopconfirmTitle="确认删除么?" nzPopconfirmPlacement="bottom"
+                (nzOnConfirm)="deleteLocationsById(data.id)">删除该条目</a>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a (click)="createTplModal(tplTitle1, tplContent1, tplFooter1, data)">修改该条目</a>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+<button nz-button nzType="primary" (click)="createTplModal(tplTitle, tplContent, tplFooter)">上传收货地址</button>
+
+<!-- 模态框头部 -->
+<ng-template #tplTitle>
+    <span>添加收货地址</span>
+</ng-template>
+<!-- 模态框内容 -->
+<ng-template #tplContent let-params let-ref="modalRef">
+    <!-- 上传收货地址表单 -->
+    <form nz-form [formGroup]="uploadLocationForm">
+        <!-- 手机号码 -->
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="telephone">手机号码</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="手机号码不符合要求">
+                <input nz-input formControlName="telephone" id="telephone" [(ngModel)]="location.telephone" />
+            </nz-form-control>
+        </nz-form-item>
+        <!-- 收货人姓名 -->
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name" nzRequired>收货人姓名</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="收货人姓名不符合要求">
+                <input nz-input id="name" formControlName="name" [(ngModel)]="location.name"
+                    placeholder="只支持汉字，最多支持10个汉字" />
+            </nz-form-control>
+        </nz-form-item>
+        <!-- 省市区 -->
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24">地址</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+                <nz-cascader [nzAllowClear]=false [nzOptions]="nzOptions" [(ngModel)]="values"
+                    [ngModelOptions]="{standalone: true}"> </nz-cascader>
+            </nz-form-control>
+        </nz-form-item>
+        <!-- 具体地址 -->
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="location">具体地址</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="具体地址不符合要求">
+                <textarea id="location" formControlName="location" rows="4" nz-input [(ngModel)]="location.location"
+                    placeholder="最多100个字符"></textarea>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</ng-template>
+<!-- 模态框底部 -->
+<ng-template #tplFooter>
+    <button nz-button nzType="primary" (click)="destroyTplModal()">
+        取消
+    </button>
+    <button nz-button nzType="primary" [nzLoading]="tplModalButtonLoading" (click)="addLocation()">
+        添加收货地址
+    </button>
+</ng-template>
+
+<!-- 修改收货地址模态框 -->
+<!-- 模态框头部 -->
+<ng-template #tplTitle1>
+    <span>修改收货地址</span>
+</ng-template>
+<!-- 模态框内容 -->
+<ng-template #tplContent1 let-params let-ref="modalRef">
+    <!-- 修改收货地址表单 -->
+    <form nz-form [formGroup]="updateLocationForm">
+        <!-- 手机号码 -->
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="telephone">手机号码</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="手机号码不符合要求">
+                <input nz-input formControlName="telephone" id="telephone" [(ngModel)]="updateLocation.telephone" />
+            </nz-form-control>
+        </nz-form-item>
+        <!-- 收货人姓名 -->
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name" nzRequired>收货人姓名</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="收货人姓名不符合要求">
+                <input nz-input id="name" formControlName="name" [(ngModel)]="updateLocation.name"
+                    placeholder="只支持汉字，最多支持10个汉字" />
+            </nz-form-control>
+        </nz-form-item>
+        <!-- 省市区 -->
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24">地址</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+                <nz-cascader [nzAllowClear]=false [nzOptions]="nzOptions" [(ngModel)]="values"
+                    [ngModelOptions]="{standalone: true}"> </nz-cascader>
+            </nz-form-control>
+        </nz-form-item>
+        <!-- 具体地址 -->
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="location">具体地址</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="具体地址不符合要求">
+                <textarea id="location" formControlName="location" rows="4" nz-input [(ngModel)]="updateLocation.location"
+                    placeholder="最多100个字符"></textarea>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</ng-template>
+<!-- 模态框底部 -->
+<ng-template #tplFooter1>
+    <button nz-button nzType="primary" (click)="destroyTplModal()">
+        取消
+    </button>
+    <button nz-button nzType="primary" (click)="updateLocations()">
+        提交修改
+    </button>
+</ng-template>
