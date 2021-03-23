@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../service/language.service';
 import { LoginService } from '../service/login.service';
 import { StatusCode } from '../enumType/StatusCode';
+import { HomepageService } from '../service/homepage.service';
 
 @Component({
   selector: 'app-home',
@@ -31,9 +32,9 @@ export class HomeComponent implements OnInit {
   //头像
   public headPortrait = null;
   //主页展示图片
-  public array = [1,
-  2,
-  3];
+  public array = ["http://localhost:8080/upload/pic/2021032317365104843.jpg",
+  "http://localhost:8080/upload/pic/2021032317384910063.jpg",
+  "http://localhost:8080/upload/pic/2021032317475252074.jpg"];
   data = [
     'Racing car sprays burning fuel into crowd.',
     'Japanese princess to wed commoner.',
@@ -41,9 +42,26 @@ export class HomeComponent implements OnInit {
     'Man charged over missing wedding girl.',
     'Los Angeles battles huge wildfires.'
   ];
+  // 国内
+  public guonei;
+  // 政府
+  public zhengfu;
+  // 学校
+  public xuexiao;
+  // 企业
+  public qiye;
+  // 益人
+  public yiren;
+  // 好人
+  public haoren;
+  // 好事
+  public haoshi;
+  // 评选
+  public pingxuan;
   constructor(private languageService: LanguageService, private translate: TranslateService,
     private router: Router,
-    private loginService: LoginService) {
+    private loginService: LoginService,
+    private homepageService: HomepageService) {
     this.otherFlag = false;
     this.translate.use('zh');
     // 判断当前session有没有登陆过，及时页面刷新仍能保留数据
@@ -79,6 +97,30 @@ export class HomeComponent implements OnInit {
         }
       }
       this.headPortrait = this.loginService.getUser().headPortrait;
+    });
+    this.homepageService.getListOfHomepageGuoNei().subscribe(data => {
+      this.guonei = data.body;
+    });
+    this.homepageService.getListOfHomepageZhengFu().subscribe(data => {
+      this.zhengfu = data.body;
+    });
+    this.homepageService.getListOfHomepageXueXiao().subscribe(data => {
+      this.xuexiao = data.body;
+    });
+    this.homepageService.getListOfHomepageQiYe().subscribe(data => {
+      this.qiye = data.body;
+    });
+    this.homepageService.getListOfHomepageYiRen().subscribe(data => {
+      this.yiren = data.body;
+    });
+    this.homepageService.getListOfHomepageHaoRen().subscribe(data => {
+      this.haoren = data.body;
+    });
+    this.homepageService.getListOfHomepageHaoShi().subscribe(data => {
+      this.haoshi = data.body;
+    });
+    this.homepageService.getListOfHomepagePingXuan().subscribe(data => {
+      this.pingxuan = data.body;
     });
   }
 

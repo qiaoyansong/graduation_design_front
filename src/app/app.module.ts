@@ -76,6 +76,7 @@ import { TgjdComponent } from './user/tgjd/tgjd.component';
 import { NewsCheckPipePipe } from './pipe/news-check-pipe.pipe';
 import { NzCascaderModule } from 'ng-zorro-antd/cascader';
 import { LocationPipe } from './pipe/location.pipe';
+import { NewsDetailComponent } from './admin/news/news-detail/news-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -113,6 +114,7 @@ import { LocationPipe } from './pipe/location.pipe';
     TgjdComponent,
     NewsCheckPipePipe,
     LocationPipe,
+    NewsDetailComponent,
   ],
   imports: [
     BrowserModule,

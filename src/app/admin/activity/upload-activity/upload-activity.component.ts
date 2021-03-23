@@ -104,7 +104,7 @@ export class UploadActivityComponent implements OnInit {
    */
   public checkActivityTitle(): boolean {
     const value = this.activity.title;
-    const reg = /^[\u4e00-\u9fa5]{1,50}$/;
+    const reg = /^.{1,100}$/;
     const result = reg.test(value);
     return result;
   };

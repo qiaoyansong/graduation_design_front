@@ -163,6 +163,24 @@ export class AdminService {
     });
   }
 
+   /**
+   * 用于获取用户投稿信息
+   * @param params 筛选条件
+   */
+    public getUserNews(params: any): Observable<any>{
+      let condition = {
+        'condition' : {
+          'orderBy':params.condition.orderBy,
+          'searchValue' : params.condition.searchValue
+        },
+          'curPage':params.curPage
+      }
+      // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+      return this.httpClient.post('http://localhost:8080/admin/getUserNews', condition,{
+        withCredentials: true
+      });
+    }
+
   /**
    * 用于获取商品信息
    * @param params 筛选条件
@@ -206,6 +224,36 @@ export class AdminService {
    */
   public deleteUserById(id: any): Observable<any>{
     return this.httpClient.get('http://localhost:8080/admin/deleteUserByID/'+ id, {
+      withCredentials: true
+    });
+  }
+
+  /**
+   * 用于获取资讯详情
+   * @param id 资讯ID
+   */
+   public getNewInfoById(id: any): Observable<any>{
+    return this.httpClient.get('http://localhost:8080/admin/getNewInfoById/'+ id, {
+      withCredentials: true
+    });
+  }
+
+  /**
+   * 同意用户投稿
+   * @param id 资讯ID
+   */
+   public agreeUserNews(id: any): Observable<any>{
+    return this.httpClient.get('http://localhost:8080/admin/agreeUserNewsById/'+ id, {
+      withCredentials: true
+    });
+  }
+
+  /**
+   * 拒绝用户投稿
+   * @param id 资讯ID
+   */
+   public refuseUserNews(id: any): Observable<any>{
+    return this.httpClient.get('http://localhost:8080/admin/refuseUserNewsById/'+ id, {
       withCredentials: true
     });
   }

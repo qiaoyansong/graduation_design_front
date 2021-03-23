@@ -39,8 +39,10 @@
       </div>
       <!-- 登陆成功显示管理员 -->
       <div *ngIf="isLogin && userType != 'GENERAL_USER'">
-        <nz-avatar [ngStyle]="{ 'background-color': color }" [nzText]="userName" nzSize="large"
-          style="vertical-align: middle;"></nz-avatar>
+        <nz-avatar *ngIf="headPortrait == null " [ngStyle]="{ 'background-color': color }" [nzText]="userName"
+        nzSize="large" style="vertical-align: middle;"></nz-avatar>
+        <nz-avatar *ngIf="headPortrait != null " nzIcon="user" nzSrc="{{headPortrait}}" nzSize="large"
+        style="vertical-align: middle;"></nz-avatar>
         <a nz-dropdown [nzDropdownMenu]="menu" class="blackColorText">
           选项
           <i nz-icon nzType="down"></i>
@@ -60,8 +62,8 @@
       <nz-header>
         <ul nz-menu nzMode="horizontal">
           <li nz-menu-item>
-            <i nz-icon nzType="mail"></i>
-            Navigation One
+            <i nz-icon nzType="read" nzTheme="outline"></i>
+            资讯
           </li>
           <li nz-menu-item>
             <i nz-icon nzType="appstore"></i>
@@ -109,34 +111,35 @@
               <div class="box2_listt">
                 <h3>国内</h3>
               </div>
-              <div class="box2_head"></div>
               <div class="box2_body">
                 <ul>
-                  <li><i nz-icon nzType="caret-right" nzTheme="outline"
-                      style="float: left; width: 5%; color: black;"></i><a href="/fuwu/zhaomu/content-50-17485-1.html"
-                      title="北京冬奥今起招募赛会志愿者">北京冬奥今起招募赛会志愿者</a></li>
-                  <li><i nz-icon nzType="caret-right" nzTheme="outline"
-                      style="float: left; width: 5%; color: black;"></i><a href="/fuwu/zhaomu/content-50-14175-1.html"
-                      title="奔走相告！马云公益基金会乡村学校计划招聘项目经理啦！">奔走相告！马云公益基金会乡村学校计划招聘</a></li>
-                  <li><i nz-icon nzType="caret-right" nzTheme="outline"
-                      style="float: left; width: 5%; color: black;"></i><a href="/fuwu/zhaomu/content-50-12455-1.html"
-                      title="联合国粮农组织实习计划">联合国粮农组织实习计划</a></li>
-                  <li><i nz-icon nzType="caret-right" nzTheme="outline"
-                      style="float: left; width: 5%; color: black;"></i><a href="/fuwu/zhaomu/content-50-11580-1.html"
-                      title="北京市红十字血液中心公开招聘工作人员公告">北京市红十字血液中心公开招聘工作人员公告</a>
-                  </li>
-                  <li><i nz-icon nzType="caret-right" nzTheme="outline"
-                      style="float: left; width: 5%; color: black;"></i><a href="/fuwu/zhaomu/content-50-9816-1.html"
-                      title="助力高校教师开展公益慈善通识教育 “敦和·善识计划”申报正式开启">助力高校教师开展公益慈善通识教育 “敦和</a></li>
+                  <div class="box2_head">
+                    <a href="/newsDetail/4"><img src="http://localhost:8080/upload/pic/2021021819024298217.jpg" alt=""></a>
+                  </div>
+                  <li *ngFor="let item of guonei">
+                    <i nz-icon nzType="caret-right" nzTheme="outline"
+                      style="float: left; width: 5%; color: black;"></i><a href="/newsDetail/{{item.id}}"
+                      title="{{item.title}}">{{item.title}}</a></li>
                 </ul>
               </div>
             </div>
             <div class="box1_2">
               <app-carousel style="width: 100%; height: 100%;" [array]="array" type="homepage"></app-carousel>
             </div>
-            <div class="box1_3">
+            <div class="box1_1">
               <div class="box2_listt">
                 <h3>政府</h3>
+              </div>
+              <div class="box2_body">
+                <ul>
+                  <div class="box2_head">
+                    <a href="/newsDetail/7"><img src="http://localhost:8080/upload/pic/2021021819073811660.jpg" alt=""></a>
+                  </div>
+                  <li *ngFor="let item of zhengfu">
+                    <i nz-icon nzType="caret-right" nzTheme="outline"
+                      style="float: left; width: 5%; color: black;"></i><a href="/newsDetail/{{item.id}}"
+                      title="{{item.title}}">{{item.title}}</a></li>
+                </ul>
               </div>
             </div>
           </div>
@@ -146,15 +149,48 @@
               <div class="box2_listt">
                 <h3>学校</h3>
               </div>
+              <div class="box2_body">
+                <ul>
+                  <div class="box2_head">
+                    <a href="/newsDetail/22"><img src="http://localhost:8080/upload/pic/2021032317450192652.jpg" alt=""></a>
+                  </div>
+                  <li *ngFor="let item of xuexiao">
+                    <i nz-icon nzType="caret-right" nzTheme="outline"
+                      style="float: left; width: 5%; color: black;"></i><a href="/newsDetail/{{item.id}}"
+                      title="{{item.title}}">{{item.title}}</a></li>
+                </ul>
+              </div>
             </div>
             <div class="box2_2">
               <div class="box2_listt">
                 <h3>企业</h3>
               </div>
+              <div class="box2_body">
+                <ul>
+                  <div class="box2_head">
+                    <a href="/newsDetail/26"><img src="http://localhost:8080/upload/pic/2021032317494999526.jpg" alt=""></a>
+                  </div>
+                  <li *ngFor="let item of qiye">
+                    <i nz-icon nzType="caret-right" nzTheme="outline"
+                      style="float: left; width: 5%; color: black;"></i><a href="/newsDetail/{{item.id}}"
+                      title="{{item.title}}">{{item.title}}</a></li>
+                </ul>
+              </div>
             </div>
             <div class="box2_3">
               <div class="box2_listt">
                 <h3>益人</h3>
+              </div>
+              <div class="box2_body">
+                <ul>
+                  <div class="box2_head">
+                    <a href="/newsDetail/31"><img src="http://localhost:8080/upload/pic/2021032317545567416.jpg" alt=""></a>
+                  </div>
+                  <li *ngFor="let item of yiren">
+                    <i nz-icon nzType="caret-right" nzTheme="outline"
+                      style="float: left; width: 5%; color: black;"></i><a href="/newsDetail/{{item.id}}"
+                      title="{{item.title}}">{{item.title}}</a></li>
+                </ul>
               </div>
             </div>
           </div>
@@ -164,15 +200,48 @@
               <div class="box2_listt">
                 <h3>好人</h3>
               </div>
+              <div class="box2_body">
+                <ul>
+                  <div class="box2_head">
+                    <a href="/newsDetail/35"><img src="http://localhost:8080/upload/pic/2021032317581407217.jpg" alt=""></a>
+                  </div>
+                  <li *ngFor="let item of haoren">
+                    <i nz-icon nzType="caret-right" nzTheme="outline"
+                      style="float: left; width: 5%; color: black;"></i><a href="/newsDetail/{{item.id}}"
+                      title="{{item.title}}">{{item.title}}</a></li>
+                </ul>
+              </div>
             </div>
             <div class="box3_2">
               <div class="box2_listt">
                 <h3>好事</h3>
               </div>
+              <div class="box2_body">
+                <ul>
+                  <div class="box2_head">
+                    <a href="/newsDetail/41"><img src="http://localhost:8080/upload/pic/2021032318050613548.jpg" alt=""></a>
+                  </div>
+                  <li *ngFor="let item of haoshi">
+                    <i nz-icon nzType="caret-right" nzTheme="outline"
+                      style="float: left; width: 5%; color: black;"></i><a href="/newsDetail/{{item.id}}"
+                      title="{{item.title}}">{{item.title}}</a></li>
+                </ul>
+              </div>
             </div>
             <div class="box3_3">
               <div class="box2_listt">
                 <h3>评选</h3>
+              </div>
+              <div class="box2_body">
+                <ul>
+                  <div class="box2_head">
+                    <a href="/newsDetail/18"><img src="http://localhost:8080/upload/pic/2021032317384910063.jpg" alt=""></a>
+                  </div>
+                  <li *ngFor="let item of pingxuan">
+                    <i nz-icon nzType="caret-right" nzTheme="outline"
+                      style="float: left; width: 5%; color: black;"></i><a href="/newsDetail/{{item.id}}"
+                      title="{{item.title}}">{{item.title}}</a></li>
+                </ul>
               </div>
             </div>
           </div>
@@ -433,15 +502,6 @@
   <!-- 版权信息 -->
   <nz-footer>
     <div nz-row>
-      <div nz-col nzSpan="12" nzOffset="6">
-        <a href="http://www.zggyw.org/"> {{ "Home.Footer.HomePage" | translate }}</a> |
-        <a href="http://www.zggyw.org/html/help/wzjs/gywm/"> {{ "Home.Footer.AboutUs" | translate }}</a> |
-        <a href="http://www.zggyw.org/html/help/cjwt/zggywtgxz/"> {{ "Home.Footer.SubmissionGuidelines" | translate
-          }}</a>
-        |
-        <a href="http://www.zggyw.org/html/help/wzjs/wzsm/"> {{ "Home.Footer.WebsiteStated" | translate }}</a> |
-        <a href="http://www.zggyw.org/html/help/ywjs/ywhz/"> {{ "Home.Footer.BusinessCooperation" | translate }}</a>
-      </div>
       <div nz-col nzSpan="12" nzOffset="6">
         微尘版权所有
       </div>

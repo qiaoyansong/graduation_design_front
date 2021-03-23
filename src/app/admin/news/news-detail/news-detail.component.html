@@ -1,0 +1,14 @@
+<div class="arc">
+    <div class="title">
+        <h1>{{news.title}}</h1>
+    </div>
+    <div class="resource">来源：{{news.source}} 发布时间：{{ news.pubdate | date:'yyyy年-MM月-d日 HH:mm:ss' : 'utc'}}</div>
+    <div class="des">
+        {{news.summary}}
+    </div>
+    <div class="content" [innerHTML]="safeArticle">
+    </div>
+    <button nz-button [nzType]="'primary'" (click)="agree()"><span>同意投稿</span></button>
+    <nz-divider nzType="vertical"></nz-divider>
+    <button nz-button [nzType]="'primary'" (click)="refuse()"><span>拒绝投稿</span></button>
+</div>

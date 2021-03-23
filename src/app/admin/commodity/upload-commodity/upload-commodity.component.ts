@@ -123,7 +123,7 @@ export class UploadCommodityComponent implements OnInit {
     */
    public checkNewsTitle(): boolean {
     const value = this.commodity.title;
-    const reg = /^[\u4e00-\u9fa5]{1,50}$/;
+    const reg = /^.{1,100}$/;
     const result = reg.test(value);
     return result;
   };

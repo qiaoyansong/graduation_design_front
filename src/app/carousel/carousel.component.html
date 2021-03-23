@@ -5,7 +5,7 @@
     </d-carousel-item>
   </d-carousel>
 </section>
-<section *ngIf="type == 'homepage'">
+<section *ngIf="type == 'homepage'" style="height: 100%;width: 90%;">
   <d-carousel autoplay=true autoplaySpeed="3000">
     <d-carousel-item *ngFor="let i of array" >
       <a><img src="{{ i }}" style="height: 100%;width: 100%;" alt="{{i}}"/></a>

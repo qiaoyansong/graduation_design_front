@@ -1,0 +1,35 @@
+.arc {
+    padding: 5px 0;
+}
+.resource {
+    height: 30px;
+    line-height: 28px;
+    border-bottom: 1px solid #DEDEDE;
+    text-align: center;
+    margin-bottom: 8px;
+}
+.des {
+    height: 50px;
+    padding: 5px;
+    line-height: 25px;
+    border: #CCC 1px dotted;
+    overflow: hidden;
+}
+.content {
+    font-size: 14px;
+    padding: 10px 0 15px 0;
+    line-height: 25px;
+    color: #333;
+}
+p{
+    padding-top: 10px;
+    text-indent: 2em;
+    text-align: left;
+}
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}

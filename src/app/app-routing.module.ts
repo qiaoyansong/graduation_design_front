@@ -14,6 +14,7 @@ import { PersonalComponent } from './user/personal/personal.component';
 import { RegisterComponent } from './user/register/register.component';
 import {ResultFofComponent} from './result-page/result-fof/result-fof.component';
 import {TinyEditorComponent} from './tiny-editor/tiny-editor.component';
+import { NewsDetailComponent } from './admin/news/news-detail/news-detail.component';
 
 const routes: Routes = [
   {path: 'tinyEditor', component: TinyEditorComponent},
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: 'admin/homepage', component: AdminHomepageComponent, canActivate: [AdminIsLoginGuard]},
   {path: 'admin/login', component: AdminLoginComponent, canActivate: [IsNotLoginGuard]},
   {path: 'forgetpwd', component: ForgetPasswordComponent},
+  {path: 'admin/newsDetail', component: NewsDetailComponent,  canActivate: [AdminIsLoginGuard]},
   {path: '**', component: ResultFofComponent},
 ];
 

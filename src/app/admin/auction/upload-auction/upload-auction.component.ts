@@ -125,11 +125,11 @@ export class UploadAuctionComponent implements OnInit {
   }
 
   /**
-    * 验证商品标题是否符合格式
-    */
-  public checkNewsTitle(): boolean {
+   * 验证文章标题是否符合格式
+   */
+   public checkNewsTitle(): boolean {
     const value = this.auction.title;
-    const reg = /^[\u4e00-\u9fa5]{1,50}$/;
+    const reg = /^.{1,100}$/;
     const result = reg.test(value);
     return result;
   };

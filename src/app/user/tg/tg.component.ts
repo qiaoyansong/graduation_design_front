@@ -18,7 +18,7 @@ export class TgComponent implements OnInit {
 
   // 文章
   public news = {
-    'id':'',
+    'id': '',
     'title': '',
     'source': '',
     'summary': '',
@@ -48,7 +48,7 @@ export class TgComponent implements OnInit {
     private router: Router) {
     this.news.type = '0';
     this.buildUploadNewsForm();
-    this.news.id = this.loginService.getUserId()+'';
+    this.news.id = this.loginService.getUserId() + '';
   }
 
   /**
@@ -117,11 +117,11 @@ export class TgComponent implements OnInit {
   }
 
   /**
-    * 验证文章标题是否符合格式
-    */
+   * 验证文章标题是否符合格式
+   */
   public checkNewsTitle(): boolean {
     const value = this.news.title;
-    const reg = /^[\u4e00-\u9fa5]{1,50}$/;
+    const reg = /^.{1,100}$/;
     const result = reg.test(value);
     return result;
   };
@@ -131,7 +131,7 @@ export class TgComponent implements OnInit {
     */
   public checkNewsSource(): boolean {
     const value = this.news.source;
-    const reg = /^[\u4e00-\u9fa5]{1,10}$/;
+    const reg = /^.{1,10}$/;
     const result = reg.test(value);
     return result;
   };
