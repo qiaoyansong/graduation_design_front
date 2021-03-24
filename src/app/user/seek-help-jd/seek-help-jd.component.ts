@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StatusCode } from 'src/app/enumType/StatusCode';
-import { AdminService } from 'src/app/service/admin.service';
 import { LoginService } from 'src/app/service/login.service';
 import { newsSourceValidator, newsTitleValidator } from 'src/app/validator/bussinessValidator';
 import { TemplateRef, ViewContainerRef } from '@angular/core';
@@ -10,11 +9,11 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
-  selector: 'app-tgjd',
-  templateUrl: './tgjd.component.html',
-  styleUrls: ['./tgjd.component.scss']
+  selector: 'app-seek-help-jd',
+  templateUrl: './seek-help-jd.component.html',
+  styleUrls: ['./seek-help-jd.component.scss']
 })
-export class TgjdComponent implements OnInit {
+export class SeekHelpJdComponent implements OnInit {
 
   // 当前页数
   public pageIndex: number;
@@ -60,9 +59,6 @@ export class TgjdComponent implements OnInit {
   @Output()
   public upsetFlags = new EventEmitter<string>();
 
-  // 取消上传文章标志位
-  @Output()
-  public deleteFlags = new EventEmitter<string>();
   constructor(private userService: UserService,
     private router: Router,
     private loginService: LoginService,
@@ -79,7 +75,8 @@ export class TgjdComponent implements OnInit {
       'condition': {
         'userId':'',
         'orderBy': '',
-        'searchValue': ''
+        'searchValue': '',
+        'flag' : '0'
       },
       'curPage': ''
     };
@@ -91,13 +88,13 @@ export class TgjdComponent implements OnInit {
     } else {
       condition.condition.orderBy = 'desc';
     }
-    this.userService.getNews(condition).subscribe(data => {
+    this.userService.seekHelpList(condition).subscribe(data => {
       if (data.code === StatusCode.SUCCESS) {
         this.sizeTotal = data.totalSize;
         this.listOfParentData = data.body;
       } else if (data.code === StatusCode.USER_IS_NOT_LOGGED_IN) {
         this.loginService.removeUser();
-        this.router.navigate(['/admin/login']);
+        this.router.navigate(['']);
       } else if (data.code == StatusCode.VALID_EXCEPTION) {
         // 参数校验错误
         this.errorFlag = StatusCode.VALID_EXCEPTION;
@@ -148,59 +145,6 @@ export class TgjdComponent implements OnInit {
   }
 
   /**
-   * 创建模态框
-   * @param tplTitle 
-   * @param tplContent 
-   * @param tplFooter 
-   * @param data 
-   */
-  public createTplModal(tplTitle: TemplateRef<{}>, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>, data: any): void {
-    this.news.title = data.title;
-    this.news.source = data.source;
-    this.news.summary = data.summary;
-    this.news.type = data.type;
-    this.news.id = data.id;
-    this.buildUploadNewsForm();
-    this.newsModal = this.modal.create({
-      nzTitle: tplTitle,
-      nzContent: tplContent,
-      nzFooter: tplFooter,
-      nzMaskClosable: false,
-      nzClosable: false,
-      nzComponentParams: {
-        value: 'Template Context'
-      },
-    });
-  }
-
-  /**
-   * 构建上传公益资讯表单
-   */
-  public buildUploadNewsForm(): void {
-    this.uploadNewsForm = this.fb.group(
-      {
-        title: [this.news.title, [newsTitleValidator()]],
-        source: [this.news.source, [newsSourceValidator()]],
-        summary: [this.news.summary, [newsSourceValidator()]],
-      });
-  }
-
-  /**
-   * 切换文章类型
-   * @param value 文章种类
-   */
-  public changeNewsType(value: string): void {
-    this.news.type = value;
-  }
-
-  /**
-   * 销毁模态框
-   */
-  public destroyTplModal(): void {
-    this.newsModal!.destroy();
-  }
-
-  /**
     * 验证文章标题是否符合格式
     */
   public checkNewsTitle(): boolean {
@@ -211,22 +155,9 @@ export class TgjdComponent implements OnInit {
   };
 
   /**
-    * 验证文章来源是否符合格式
-    */
-  public checkNewsSource(): boolean {
-    const value = this.news.source;
-    const reg = /^[\u4e00-\u9fa5]{1,10}$/;
-    const result = reg.test(value);
-    return result;
-  };
-
-  /**
-    * 验证文章摘要是否符合格式
-    */
-  public checkNewsSummary(): boolean {
-    const value = this.news.summary;
-    const reg = /^.{1,100}$/;
-    const result = reg.test(value);
-    return result;
-  };
+   * 根据求助ID获取求助详细信息
+   */
+   public getSeekHelpInfoById(id: any): void {
+    this.router.navigate(['/seekHelpDetail'], { queryParams: { id: id } });
+  }
 }

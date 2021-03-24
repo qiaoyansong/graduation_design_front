@@ -17,7 +17,7 @@ export class PersonalComponent implements OnInit {
 
   // 主题
   public theme = true;
-  
+
   // 上传文章标志位
   public UploadnewsFlag;
 
@@ -33,6 +33,11 @@ export class PersonalComponent implements OnInit {
   // 修改收货地址标志位
   public updateLocationFlag;
 
+  // 求助标志位
+  public seekHelpFlag;
+
+  // 查询求助信息标志位
+  public SearchSeekHelpFlag
   constructor(private router: Router) {
     this.select = 1;
   }
@@ -58,7 +63,7 @@ export class PersonalComponent implements OnInit {
   /**
    * 从上传文章子组件获取上传标志位
    */
-   public getUploadNewsFlag(msg): void {
+  public getUploadNewsFlag(msg): void {
     this.UploadnewsFlag = msg;
     if (this.UploadnewsFlag === StatusCode.SUCCESS) {
       this.select = 7;
@@ -70,16 +75,16 @@ export class PersonalComponent implements OnInit {
   /**
    * 从修改密码子组件获取修改密码标志位
    */
-   public getModifyPasswordFlag(msg): void {
+  public getModifyPasswordFlag(msg): void {
     this.modifyPasswordFlag = msg;
   }
 
   /**
-   * 从修改密码子组件获取修改密码标志位
+   * 从上传收货地址获取上船收货地址标志位
    */
-   public getUploadLocationsFlag(msg): void {
+  public getUploadLocationsFlag(msg): void {
     this.UploadLocationsFlag = msg;
-    if(msg === StatusCode.SUCCESS){
+    if (msg === StatusCode.SUCCESS) {
       this.select = 1;
     }
   }
@@ -87,17 +92,20 @@ export class PersonalComponent implements OnInit {
   /**
    * 重置错误标志位
    */
-   public afterClose(): void {
+  public afterClose(): void {
     this.UploadnewsFlag = '';
     this.modifyPasswordFlag = '';
     this.UploadLocationsFlag = '';
     this.deleteLocationFlag = '';
+    this.seekHelpFlag = '';
+    this.UploadLocationsFlag = '';
+    this.SearchSeekHelpFlag = '';
   }
 
   /**
   * 从查询拍卖子组件获取删除拍卖标志位
   */
-   public getDeleteLocationFlag(msg): void {
+  public getDeleteLocationFlag(msg): void {
     this.deleteLocationFlag = msg;
     if (this.deleteLocationFlag === StatusCode.SUCCESS) {
       this.select = 1;
@@ -109,12 +117,34 @@ export class PersonalComponent implements OnInit {
   /**
   * 从查询拍卖子组件获取删除拍卖标志位
   */
-   public getUpdateLocationFlag(msg): void {
+  public getUpdateLocationFlag(msg): void {
     this.updateLocationFlag = msg;
     if (this.updateLocationFlag === StatusCode.SUCCESS) {
       this.select = 1;
     } else if (this.updateLocationFlag === StatusCode.USER_IS_NOT_LOGGED_IN) {
       this.router.navigate(['']);
+    }
+  }
+
+  /**
+  * 从查询拍卖子组件获取删除拍卖标志位
+  */
+  public getSeekHelpFlag(msg): void {
+    this.seekHelpFlag = msg;
+    if (this.seekHelpFlag === StatusCode.SUCCESS) {
+      this.select = 1;
+    } else if (this.seekHelpFlag === StatusCode.USER_IS_NOT_LOGGED_IN) {
+      this.router.navigate(['']);
+    }
+  }
+
+   /**
+   * 从查询资讯子组件获取查看标志位
+   */
+    public getSearchNewsFlag(msg): void {
+      this.SearchSeekHelpFlag = msg;
+      if (this.SearchSeekHelpFlag === StatusCode.USER_IS_NOT_LOGGED_IN) {
+        this.router.navigate(['']);
     }
   }
 }

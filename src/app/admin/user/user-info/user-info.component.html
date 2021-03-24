@@ -44,6 +44,27 @@
               <td>
                 <a nz-popconfirm nzPopconfirmTitle="确认删除么?" nzPopconfirmPlacement="bottom"
                   (nzOnConfirm)="deleteNewsById(data.id)">删除该条目</a>
+                <nz-divider nzType="vertical"></nz-divider>
+                <button nz-button [nzType]="'primary'"
+                  (click)="createTplModal(tplTitle, tplContent, tplFooter, data)"><span>管理该条目</span></button>
+                <!-- 模态框头部 -->
+                <ng-template #tplTitle>
+                  <span>管理资讯</span>
+                </ng-template>
+                <!-- 模态框内容 -->
+                <ng-template #tplContent let-params let-ref="modalRef">
+                  用户信用：<nz-rate [nzCount]="10" [(ngModel)]="user.credit" [nzCharacter]="characterIcon" nzAllowHalf></nz-rate>
+                  <ng-template #characterIcon><i nz-icon nzType="heart"></i></ng-template>
+                </ng-template>
+                <!-- 模态框底部 -->
+                <ng-template #tplFooter>
+                  <button nz-button nzType="primary" (click)="destroyTplModal()">
+                    取消
+                  </button>
+                  <button nz-button nzType="primary" (click)="commit()">
+                    提交更新
+                  </button>
+                </ng-template>
               </td>
             </tr>
           </ng-template>

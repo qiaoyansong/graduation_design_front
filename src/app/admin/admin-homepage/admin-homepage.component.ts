@@ -53,6 +53,8 @@ export class AdminHomepageComponent implements OnInit {
   public deleteUserFlag;
   // 用户未登录
   public isNotLogin = false;
+  // 用户修改信息标志位
+  public updateUserInfoFlag;
   // 查询参数校验失败
   public searchFlag = false;
   /**
@@ -145,6 +147,18 @@ export class AdminHomepageComponent implements OnInit {
     if (this.updateNewsFlag === StatusCode.SUCCESS) {
       this.select = 4;
     } else if (this.updateNewsFlag === StatusCode.USER_IS_NOT_LOGGED_IN) {
+      this.router.navigate(['']);
+    }
+  }
+
+  /**
+   * 获取修改用户信息标志位
+   */
+  public getUpdateUserInfoFlag(msg): void {
+    this.updateUserInfoFlag = msg;
+    if (this.updateUserInfoFlag === StatusCode.SUCCESS) {
+      this.select = 2;
+    } else if (this.updateUserInfoFlag === StatusCode.USER_IS_NOT_LOGGED_IN) {
       this.router.navigate(['']);
     }
   }
@@ -317,5 +331,6 @@ export class AdminHomepageComponent implements OnInit {
     this.deleteUserFlag = '';
     this.isNotLogin = false;
     this.searchFlag = false;
+    this.updateUserInfoFlag = '';
   }
-} 
+}

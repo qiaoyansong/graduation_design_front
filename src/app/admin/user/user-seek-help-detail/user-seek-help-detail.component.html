@@ -1,0 +1,10 @@
+<div class="arc">
+    <div class="title">
+        <h1>{{help.title}}</h1>
+    </div>
+    <div class="content" [innerHTML]="safeArticle">
+    </div>
+    <button nz-button [nzType]="'primary'" (click)="agree()"><span>同意投稿</span></button>
+    <nz-divider nzType="vertical"></nz-divider>
+    <button nz-button [nzType]="'primary'" (click)="refuse()"><span>拒绝投稿</span></button>
+</div>

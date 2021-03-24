@@ -105,4 +105,44 @@ export class UserService {
       withCredentials: true
     });
   }
+
+  /**
+  * 用于用户求助申请
+  * @param id 收货地址信息
+  */
+   public seekHelp(params: any): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/seekHelp/submit', params, {
+      withCredentials: true
+    });
+  }
+
+  /**
+  * 用于用户求助申请
+  * @param id 收货地址信息
+  */
+   public seekHelpList(params: any): Observable<any> {
+    let condition = {
+      'condition': {
+        'orderBy': params.condition.orderBy,
+        'searchValue': params.condition.searchValue,
+        'userId': params.condition.userId,
+        'flag': params.condition.flag
+      },
+      'curPage': params.curPage
+    }
+    return this.httpClient.post('http://localhost:8080/seekHelp/listall', condition, {
+      withCredentials: true
+    });
+  }
+
+   /**
+  * 查看具体的求助信息
+  * @param id 求助信息ID
+  */
+    public getSeekHelpInfoById(id: any): Observable<any> {
+      return this.httpClient.get('http://localhost:8080/seekHelp/getDetail/' + id, {
+        withCredentials: true
+      });
+    }
+
 }

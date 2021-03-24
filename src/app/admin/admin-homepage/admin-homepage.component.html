@@ -13,6 +13,7 @@
 <nz-alert *ngIf="updateActivityFlag === '200'" nzType="success" nzCloseable  nzMessage="修改活动信息成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
 <nz-alert *ngIf="updateAuctionFlag === '200'" nzType="success" nzCloseable  nzMessage="修改拍卖信息成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
 <nz-alert *ngIf="deleteUserFlag === '200'" nzType="success" nzCloseable  nzMessage="删除用户成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert *ngIf="updateUserInfoFlag === '200'" nzType="success" nzCloseable  nzMessage="修改用户信息成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
 <nz-layout>
   <nz-header nz-row>
     <div nz-col nzSpan="8">
@@ -100,7 +101,7 @@
       </div>
     </nz-sider>
     <!-- 用户信息 -->
-    <app-user-info *ngIf="select === 1" style="width: 100%;" (selectFlags)="getSearchUserFlag($event)" (deleteFlags)="getDeleteUserFlag($event)"></app-user-info>
+    <app-user-info *ngIf="select === 1" style="width: 100%;" (selectFlags)="getSearchUserFlag($event)" (deleteFlags)="getDeleteUserFlag($event)" (upsetFlags)="getUpdateUserInfoFlag($event)"></app-user-info>
     <!-- 用户投稿 -->
     <app-user-tg *ngIf="select === 2" style="width: 100%;"></app-user-tg>
     <!-- 用户求助 -->

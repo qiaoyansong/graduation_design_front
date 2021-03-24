@@ -15,6 +15,8 @@ import { RegisterComponent } from './user/register/register.component';
 import {ResultFofComponent} from './result-page/result-fof/result-fof.component';
 import {TinyEditorComponent} from './tiny-editor/tiny-editor.component';
 import { NewsDetailComponent } from './admin/news/news-detail/news-detail.component';
+import { SeekHelpDetailComponent } from './user/seek-help-detail/seek-help-detail.component';
+import { UserSeekHelpDetailComponent } from './admin/user/user-seek-help-detail/user-seek-help-detail.component';
 
 const routes: Routes = [
   {path: 'tinyEditor', component: TinyEditorComponent},
@@ -29,6 +31,8 @@ const routes: Routes = [
   {path: 'admin/login', component: AdminLoginComponent, canActivate: [IsNotLoginGuard]},
   {path: 'forgetpwd', component: ForgetPasswordComponent},
   {path: 'admin/newsDetail', component: NewsDetailComponent,  canActivate: [AdminIsLoginGuard]},
+  {path: 'seekHelpDetail', component: SeekHelpDetailComponent,  canActivate: [IsLoginGuard]},
+  {path: 'admin/seekHelpDetail', component: UserSeekHelpDetailComponent,  canActivate: [AdminIsLoginGuard]},
   {path: '**', component: ResultFofComponent},
 ];
 

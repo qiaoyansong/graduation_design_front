@@ -258,6 +258,28 @@ export class AdminService {
     });
   }
 
+
+  /**
+   * 同意用户求助
+   * @param id 求助ID
+   */
+   public agreeSeekHelp(id: any): Observable<any>{
+    return this.httpClient.get('http://localhost:8080/seekHelp/agree/'+ id, {
+      withCredentials: true
+    });
+  }
+
+  /**
+   * 拒绝用户求助
+   * @param id 求助ID
+   */
+   public refuseSeekHelp(id: any): Observable<any>{
+    return this.httpClient.get('http://localhost:8080/seekHelp/refuse/'+ id, {
+      withCredentials: true
+    });
+  }
+
+
   /**
    * 用于修改资讯信息
    * @param params 筛选条件
@@ -350,6 +372,17 @@ export class AdminService {
     }
     // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
     return this.httpClient.post('http://localhost:8080/admin/updateAuction', auction,{
+      withCredentials: true
+    });
+  }
+
+  /**
+   * 修改用户信息
+   * @param user 用户信息
+   */
+   public modifyUserInfo(user: any): Observable<any>{
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    return this.httpClient.post('http://localhost:8080/admin/modifyUserInfo', user,{
       withCredentials: true
     });
   }

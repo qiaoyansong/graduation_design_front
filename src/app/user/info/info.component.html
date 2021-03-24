@@ -11,8 +11,9 @@
             <div class="profile-name-info">
                 <!-- 名字 -->
                 <div class="person-name">{{user.userName}}</div>
-                <nz-upload nzAction="http://localhost:8080/upload/pic" [nzHeaders]="{ authorization: 'authorization-text' }"
-                    (nzChange)="handleNewsImagChange($event)" [nzDisabled]="isDisabled">
+                <nz-upload nzAction="http://localhost:8080/upload/pic"
+                    [nzHeaders]="{ authorization: 'authorization-text' }" (nzChange)="handleNewsImagChange($event)"
+                    [nzDisabled]="isDisabled">
                     <button nz-button><i nz-icon nzType="upload"></i>上传头像</button>
                 </nz-upload>
             </div>
@@ -39,8 +40,8 @@
                     <li>
                         <div class="content-show-l">用户信用</div>
                         <div class="content-show-r">
-                            <nz-rate [ngModel]="user.credit" nzAllowHalf [nzCharacter]="characterIcon"
-                                [nzDisabled]=true></nz-rate>
+                            <nz-rate [nzCount]="10" [ngModel]="user.credit" [nzCharacter]="characterIcon"
+                                [nzDisabled]=true nzAllowHalf></nz-rate>
                             <ng-template #characterIcon><i nz-icon nzType="heart"></i></ng-template>
                         </div>
                     </li>

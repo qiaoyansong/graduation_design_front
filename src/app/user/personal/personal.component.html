@@ -2,6 +2,8 @@
     (nzOnClose)="afterClose()"></nz-alert>
 <nz-alert *ngIf="UploadLocationsFlag === '200'" nzType="success" nzMessage="上传收货地址成功" nzCloseable nzShowIcon
     (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert *ngIf="seekHelpFlag === '200'" nzType="success" nzMessage="上传求助信息成功" nzCloseable nzShowIcon
+    (nzOnClose)="afterClose()"></nz-alert>
 <nz-alert *ngIf="deleteLocationFlag === '200'" nzType="success" nzMessage="删除收货地址成功" nzCloseable nzShowIcon
     (nzOnClose)="afterClose()"></nz-alert>
 <nz-alert *ngIf="updateLocationFlag === '200'" nzType="success" nzMessage="修改收货地址成功" nzCloseable nzShowIcon
@@ -18,6 +20,7 @@
     (nzOnClose)="afterClose()"></nz-alert>
 <nz-alert nzType="error" *ngIf="modifyPasswordFlag === '109' || UploadLocationsFlag === '109'" nzCloseable
     nzMessage="系统发生未知错误" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert *ngIf="SearchSeekHelpFlag === '100'" nzType="error" nzCloseable nzMessage="查询参数校验失败" (nzOnClose)="afterClose()"></nz-alert>
 
 <nz-layout>
     <nz-header nz-row>
@@ -96,13 +99,17 @@
         <!-- 投稿进度 -->
         <app-tgjd *ngIf="select === 7" style="width: 100%;"></app-tgjd>
         <!-- 个人求助 -->
-        <app-seek-help *ngIf="select === 3" style="width: 100%;"></app-seek-help>
+        <app-seek-help *ngIf="select === 3" style="width: 100%;" (uploadFlags)="getSeekHelpFlag($event)">
+        </app-seek-help>
+        <!-- 个人求助 -->
+        <app-seek-help-jd *ngIf="select === 8" style="width: 100%;" (selectFlags)="getSearchNewsFlag($event)">
+        </app-seek-help-jd>
         <!-- 修改密码 -->
         <app-modify-password *ngIf="select === 4" style="width: 100%;" (uploadFlags)="getModifyPasswordFlag($event)">
         </app-modify-password>
         <!-- 收货地址 -->
-        <app-receiving-address *ngIf="select === 5" style="width: 100%;" (uploadFlags)="getUploadLocationsFlag($event)" (deleteFlags)="getDeleteLocationFlag($event)"
-        (upsetFlags)="getUpdateLocationFlag($event)">
+        <app-receiving-address *ngIf="select === 5" style="width: 100%;" (uploadFlags)="getUploadLocationsFlag($event)"
+            (deleteFlags)="getDeleteLocationFlag($event)" (upsetFlags)="getUpdateLocationFlag($event)">
         </app-receiving-address>
         <!-- 已购商品 -->
         <app-goods-purchased *ngIf="select === 6" style="width: 100%;"></app-goods-purchased>

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { StatusCode } from 'src/app/enumType/StatusCode';
 import { AdminService } from 'src/app/service/admin.service';
 import { LoginService } from 'src/app/service/login.service';
-import { commoditySummaryValidator , newsSummaryValidator } from 'src/app/validator/bussinessValidator';
+import { commoditySummaryValidator, newsSummaryValidator } from 'src/app/validator/bussinessValidator';
 import { TemplateRef } from '@angular/core';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
@@ -14,7 +14,7 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
   styleUrls: ['./user-info.component.scss']
 })
 export class UserInfoComponent implements OnInit {
-  
+
   // 当前页数
   public pageIndex: number;
   // 当前每页的数据条数
@@ -54,9 +54,17 @@ export class UserInfoComponent implements OnInit {
   // 删除用户标志位
   @Output()
   public deleteFlags = new EventEmitter<string>();
+  @Output()
+  public upsetFlags = new EventEmitter<string>();
+  // 模态框
+  public userModal?: NzModalRef;
+  // 修改用户信息表单
+  public modifyUserForm: FormGroup;
   constructor(private adminService: AdminService,
     private router: Router,
-    private loginService: LoginService) {
+    private loginService: LoginService,
+    private modal: NzModalService,
+    private fb: FormBuilder) {
     this.pageIndex = 1;
     this.pageSize = 10;
     this.listSortOrderBy = 'ascend';
@@ -92,7 +100,7 @@ export class UserInfoComponent implements OnInit {
       this.selectFlags.emit(this.errorFlag);
     });
   }
-  
+
   ngOnInit(): void {
     this.getData();
   }
@@ -147,4 +155,43 @@ export class UserInfoComponent implements OnInit {
     });
   }
 
+  /**
+   * 创建模态框
+   * @param tplTitle 
+   * @param tplContent 
+   * @param tplFooter 
+   * @param data 
+   */
+  public createTplModal(tplTitle: TemplateRef<{}>, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>, data: any): void {
+    this.user.id = data.id;
+    this.user.credit = data.credit;
+    this.userModal = this.modal.create({
+      nzTitle: tplTitle,
+      nzContent: tplContent,
+      nzFooter: tplFooter,
+      nzMaskClosable: false,
+      nzClosable: false,
+      nzComponentParams: {
+        value: 'Template Context'
+      },
+    });
+  }
+
+  /**
+   * 销毁模态框
+   */
+  public destroyTplModal(): void {
+    this.userModal!.destroy();
+  }
+
+  /**
+  * 提交用户信息修改
+  */
+  public commit(): void {
+    this.adminService.modifyUserInfo(this.user).subscribe(data => {
+      this.flag = data.code;
+      this.destroyTplModal();
+      this.upsetFlags.emit(this.flag);
+    });
+  }
 }

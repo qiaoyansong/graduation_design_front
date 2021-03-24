@@ -121,7 +121,7 @@ export class TgComponent implements OnInit {
    */
   public checkNewsTitle(): boolean {
     const value = this.news.title;
-    const reg = /^.{1,100}$/;
+    const reg = /^.{1,50}$/;
     const result = reg.test(value);
     return result;
   };

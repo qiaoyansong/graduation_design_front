@@ -104,7 +104,7 @@ export class UploadActivityComponent implements OnInit {
    */
   public checkActivityTitle(): boolean {
     const value = this.activity.title;
-    const reg = /^.{1,100}$/;
+    const reg = /^.{1,50}$/;
     const result = reg.test(value);
     return result;
   };

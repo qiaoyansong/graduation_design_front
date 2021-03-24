@@ -77,6 +77,9 @@ import { NewsCheckPipePipe } from './pipe/news-check-pipe.pipe';
 import { NzCascaderModule } from 'ng-zorro-antd/cascader';
 import { LocationPipe } from './pipe/location.pipe';
 import { NewsDetailComponent } from './admin/news/news-detail/news-detail.component';
+import { SeekHelpJdComponent } from './user/seek-help-jd/seek-help-jd.component';
+import { SeekHelpDetailComponent } from './user/seek-help-detail/seek-help-detail.component';
+import { UserSeekHelpDetailComponent } from './admin/user/user-seek-help-detail/user-seek-help-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -115,6 +118,9 @@ import { NewsDetailComponent } from './admin/news/news-detail/news-detail.compon
     NewsCheckPipePipe,
     LocationPipe,
     NewsDetailComponent,
+    SeekHelpJdComponent,
+    SeekHelpDetailComponent,
+    UserSeekHelpDetailComponent,
   ],
   imports: [
     BrowserModule,
