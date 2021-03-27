@@ -17,6 +17,10 @@ import {TinyEditorComponent} from './tiny-editor/tiny-editor.component';
 import { NewsDetailComponent } from './admin/news/news-detail/news-detail.component';
 import { SeekHelpDetailComponent } from './user/seek-help-detail/seek-help-detail.component';
 import { UserSeekHelpDetailComponent } from './admin/user/user-seek-help-detail/user-seek-help-detail.component';
+import { NewsListComponent } from './news-list/news-list.component';
+import { CommodityListComponent } from './commodity-list/commodity-list.component';
+import { AuctionListComponent } from './auction-list/auction-list.component';
+import { ActivityListComponent } from './activity-list/activity-list.component';
 
 const routes: Routes = [
   {path: 'tinyEditor', component: TinyEditorComponent},
@@ -33,6 +37,10 @@ const routes: Routes = [
   {path: 'admin/newsDetail', component: NewsDetailComponent,  canActivate: [AdminIsLoginGuard]},
   {path: 'seekHelpDetail', component: SeekHelpDetailComponent,  canActivate: [IsLoginGuard]},
   {path: 'admin/seekHelpDetail', component: UserSeekHelpDetailComponent,  canActivate: [AdminIsLoginGuard]},
+  {path: 'newsList', component: NewsListComponent},
+  {path: 'auctionList', component: AuctionListComponent},
+  {path: 'commodityList', component: CommodityListComponent},
+  {path: 'activityList', component: ActivityListComponent},
   {path: '**', component: ResultFofComponent},
 ];
 

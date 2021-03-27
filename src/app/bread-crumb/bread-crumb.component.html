@@ -19,6 +19,10 @@
     <i nz-icon nzType="user"></i>
     管理员登录
   </nz-breadcrumb-item>
+  <nz-breadcrumb-item *ngIf="type === 'newsList'">
+    <i nz-icon nzType="read" nzTheme="outline"></i>
+    资讯列表
+  </nz-breadcrumb-item>
 </nz-breadcrumb>
 <nz-breadcrumb *ngIf="isAdmin">
   <nz-breadcrumb-item>

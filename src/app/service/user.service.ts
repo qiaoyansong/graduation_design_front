@@ -51,6 +51,17 @@ export class UserService {
   }
 
   /**
+ * 用于获取资讯信息
+ * @param params 筛选条件
+ */
+   public getNews2(params: any): Observable<any> {
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    return this.httpClient.post('http://localhost:8080/news/getNews', params, {
+      withCredentials: true
+    });
+  }
+
+  /**
    * 用于上传头像
    * @param params 头像地址
    */
