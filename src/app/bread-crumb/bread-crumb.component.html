@@ -23,6 +23,26 @@
     <i nz-icon nzType="read" nzTheme="outline"></i>
     资讯列表
   </nz-breadcrumb-item>
+  <nz-breadcrumb-item *ngIf="type === 'newsDetail'">
+    <i nz-icon nzType="read" nzTheme="outline"></i>
+    <a [routerLink]="['/newsList']">资讯列表</a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item *ngIf="type === 'newsDetail'">
+    <i nz-icon nzType="read" nzTheme="outline"></i>
+    资讯详情
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item *ngIf="type === 'activityList'">
+    <i nz-icon nzType="schedule" nzTheme="outline"></i>
+    活动列表
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item *ngIf="type === 'auctionList'">
+    <i nz-icon nzType="shopping-cart" nzTheme="outline"></i>
+    拍卖列表
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item *ngIf="type === 'commodityList'">
+    <i nz-icon nzType="shopping" nzTheme="outline"></i>
+    商品兑换列表
+  </nz-breadcrumb-item>
 </nz-breadcrumb>
 <nz-breadcrumb *ngIf="isAdmin">
   <nz-breadcrumb-item>

@@ -96,7 +96,9 @@ export class HomeComponent implements OnInit {
           this.userType = '';
         }
       }
-      this.headPortrait = this.loginService.getUser().headPortrait;
+      if(this.loginService.getUser() != null){
+        this.headPortrait = this.loginService.getUser().headPortrait;
+      }
     });
     this.homepageService.getListOfHomepageGuoNei().subscribe(data => {
       this.guonei = data.body;
@@ -193,4 +195,11 @@ export class HomeComponent implements OnInit {
   public afterClose(): void{
     this.router.navigate(['/forgetpwd']);
   }
+
+   /**
+   * 根据资讯ID获取详细信息
+   */
+    public getNewInfoById(id: any): void {
+      this.router.navigate(['/news'], { queryParams: { id: id } });
+    }
 }

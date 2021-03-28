@@ -54,9 +54,9 @@ export class UserService {
  * 用于获取资讯信息
  * @param params 筛选条件
  */
-   public getNews2(params: any): Observable<any> {
+  public getNews2(params: any): Observable<any> {
     // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
-    return this.httpClient.post('http://localhost:8080/news/getNews', params, {
+    return this.httpClient.post('http://localhost:8080/news/newsList', params, {
       withCredentials: true
     });
   }
@@ -121,7 +121,7 @@ export class UserService {
   * 用于用户求助申请
   * @param id 收货地址信息
   */
-   public seekHelp(params: any): Observable<any> {
+  public seekHelp(params: any): Observable<any> {
     return this.httpClient.post('http://localhost:8080/seekHelp/submit', params, {
       withCredentials: true
     });
@@ -131,7 +131,7 @@ export class UserService {
   * 用于用户求助申请
   * @param id 收货地址信息
   */
-   public seekHelpList(params: any): Observable<any> {
+  public seekHelpList(params: any): Observable<any> {
     let condition = {
       'condition': {
         'orderBy': params.condition.orderBy,
@@ -146,14 +146,68 @@ export class UserService {
     });
   }
 
-   /**
-  * 查看具体的求助信息
-  * @param id 求助信息ID
-  */
-    public getSeekHelpInfoById(id: any): Observable<any> {
-      return this.httpClient.get('http://localhost:8080/seekHelp/getDetail/' + id, {
-        withCredentials: true
-      });
-    }
+  /**
+ * 查看具体的求助信息
+ * @param id 求助信息ID
+ */
+  public getSeekHelpInfoById(id: any): Observable<any> {
+    return this.httpClient.get('http://localhost:8080/seekHelp/getDetail/' + id, {
+      withCredentials: true
+    });
+  }
 
+  /**
+ * 用于获取资讯详情
+ * @param id 资讯ID
+ */
+  public getNewInfoById(id: any): Observable<any> {
+    return this.httpClient.get('http://localhost:8080/news/getNewInfoById/' + id, {
+      withCredentials: true
+    });
+  }
+
+  /**
+   * 用于追加文章评论
+   * @param params 收货地址
+   */
+   public addArticleReview(params: any): Observable<any> {
+     console.log(params)
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    return this.httpClient.post('http://localhost:8080/news/addArticleReview', params, {
+      withCredentials: true
+    });
+  }
+
+  /**
+   * 用于获取文章评论
+   * @param params 收货地址
+   */
+   public getArticleReviews(params: any): Observable<any> {
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    return this.httpClient.post('http://localhost:8080/news/getArticleReviews', params, {
+      withCredentials: true
+    });
+  }
+
+  /**
+   * 用于获取文章评论
+   * @param params 收货地址
+   */
+   public getLastedReviews(): Observable<any> {
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    return this.httpClient.get('http://localhost:8080/news/getLastedReviews', {
+      withCredentials: true
+    });
+  }
+
+  /**
+   * 用于获取文章评论
+   * @param params 收货地址
+   */
+   public getHotNews(): Observable<any> {
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    return this.httpClient.get('http://localhost:8080/news/getHotNews', {
+      withCredentials: true
+    });
+  }
 }

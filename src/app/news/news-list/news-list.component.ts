@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { StatusCode } from '../enumType/StatusCode';
-import { AdminService } from '../service/admin.service';
-import { HomepageService } from '../service/homepage.service';
-import { LanguageService } from '../service/language.service';
-import { LoginService } from '../service/login.service';
-import { UserService } from '../service/user.service';
+import { StatusCode } from '../../enumType/StatusCode';
+import { AdminService } from '../../service/admin.service';
+import { HomepageService } from '../../service/homepage.service';
+import { LanguageService } from '../../service/language.service';
+import { LoginService } from '../../service/login.service';
+import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'app-news-list',
@@ -34,8 +34,10 @@ export class NewsListComponent implements OnInit {
   public data;
   //头像
   public headPortrait = null;
-  // 国内资讯
-  public guonei;
+  // 最热资讯
+  public hotNews;
+  // 最新资讯
+  public lastedNews;
   // 当前页数
   public pageIndex: number;
   // 当前每页的数据条数
@@ -83,9 +85,15 @@ export class NewsListComponent implements OnInit {
           this.userType = '';
         }
       }
-      this.headPortrait = this.loginService.getUser().headPortrait;
-      this.homepageService.getListOfHomepageGuoNei().subscribe(data => {
-        this.guonei = data.body;
+      if(this.loginService.getUser() != null){
+        this.headPortrait = this.loginService.getUser().headPortrait;
+      }
+      
+      this.userService.getHotNews().subscribe(data => {
+        this.hotNews = data.body;
+      });
+      this.userService.getLastedReviews().subscribe(data => {
+        this.lastedNews = data.body;
       });
     });
   }
@@ -176,5 +184,12 @@ export class NewsListComponent implements OnInit {
    */
   public changePageIndex(): void {
     this.getData();
+  }
+
+  /**
+   * 根据资讯ID获取详细信息
+   */
+   public getNewInfoById(id: any): void {
+    this.router.navigate(['/news'], { queryParams: { id: id } });
   }
 }

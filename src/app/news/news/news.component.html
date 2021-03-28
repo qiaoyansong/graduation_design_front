@@ -1,0 +1,173 @@
+<nz-alert *ngIf="otherFlag" nzType="error" nzCloseable nzMessage="在别处登录"
+    nzDescription="您的账号在别处登录，您被迫下线，右上角关闭此消息框，可以立刻修改密码" (nzOnClose)="afterClose()">
+</nz-alert>
+<nz-alert *ngIf="flag === '200'" nzType="success" nzMessage="追加评论成功" nzCloseable nzShowIcon
+    (nzOnClose)="afterCloseAltert()"></nz-alert>
+<!-- 首部信息 -->
+<nz-header nz-row style="background-color: white;
+height: 120px;">
+    <div nz-col nzSpan="8">
+        <a routerLink="/"><img alt="微尘logo" src="http://localhost:8080/image/logo.png" /></a>
+    </div>
+    <div nz-col nzSpan="8" style="margin-left: 240px;">
+        <div *ngIf="!isLogin"><button nz-button class="green" nzType="default" (click)="login()">登录</button><button
+                class="red" (click)="register()" nz-button nzType="default">注册</button></div>
+        <!-- 登陆成功显示用户 -->
+        <div *ngIf="isLogin && userType === 'GENERAL_USER'">
+            <nz-avatar *ngIf="headPortrait == null " [ngStyle]="{ 'background-color': color }" [nzText]="userName"
+                nzSize="large" style="vertical-align: middle;"></nz-avatar>
+            <nz-avatar *ngIf="headPortrait != null " nzIcon="user" nzSrc="{{headPortrait}}" nzSize="large"
+                style="vertical-align: middle;"></nz-avatar>
+            <a nz-dropdown [nzDropdownMenu]="menu" class="blackColorText">
+                选项
+                <i nz-icon nzType="down"></i>
+            </a>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+                <ul nz-menu nzSelectable>
+                    <li nz-menu-item (click)="goToPersonalPage()">个人主页</li>
+                    <li nz-menu-item (click)="logout()">退出</li>
+                </ul>
+            </nz-dropdown-menu>
+        </div>
+        <!-- 登陆成功显示管理员 -->
+        <div *ngIf="isLogin && userType != 'GENERAL_USER'">
+            <nz-avatar *ngIf="headPortrait == null " [ngStyle]="{ 'background-color': color }" [nzText]="userName"
+                nzSize="large" style="vertical-align: middle;"></nz-avatar>
+            <nz-avatar *ngIf="headPortrait != null " nzIcon="user" nzSrc="{{headPortrait}}" nzSize="large"
+                style="vertical-align: middle;"></nz-avatar>
+            <a nz-dropdown [nzDropdownMenu]="menu" class="blackColorText">
+                选项
+                <i nz-icon nzType="down"></i>
+            </a>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+                <ul nz-menu nzSelectable>
+                    <li nz-menu-item (click)="goToAdminPersonalPage()">管理员后台界面</li>
+                    <li nz-menu-item (click)="logout()">退出</li>
+                </ul>
+            </nz-dropdown-menu>
+        </div>
+    </div>
+</nz-header>
+<nz-content>
+    <nz-layout style="background-color: white;">
+        <!-- 导航栏 -->
+        <nz-header style="    height: 106px;
+        padding: 0 50px;
+        color: rgba(0,0,0,.65);
+        line-height: 64px;
+        background: white;">
+            <ul nz-menu nzMode="horizontal">
+                <li nz-menu-item>
+                    <i nz-icon nzType="read" nzTheme="outline"></i>
+                    <a [routerLink]="['/newsList']">资讯</a>
+                </li>
+                <li nz-menu-item>
+                    <i nz-icon nzType="schedule" nzTheme="outline"></i>
+                    <a [routerLink]="['/activityList']">活动</a>
+                </li>
+                <li nz-menu-item>
+                    <i nz-icon nzType="shopping-cart" nzTheme="outline"></i>
+                    <a [routerLink]="['/auctionList']">拍卖</a>
+                </li>
+                <li nz-menu-item>
+                    <i nz-icon nzType="shopping" nzTheme="outline"></i>
+                    <a [routerLink]="['/commodityList']">商品兑换</a>
+                </li>
+            </ul>
+        </nz-header>
+        <nz-layout style="background-color: white;">
+            <app-bread-crumb type='newsDetail' style="width: 18%;"></app-bread-crumb>
+        </nz-layout>
+        <!-- 文章内容 -->
+        <nz-layout style="width: 80%;">
+            <nz-content style="width: 100%;">
+                <div class="arc">
+                    <div class="title">
+                        <h1>{{news.title}}</h1>
+                    </div>
+                    <div class="resource">来源：{{news.source}} 发布时间：{{ news.pubdate | date:'yyyy年-MM月-d日 HH:mm:ss' :
+                        'utc'}}</div>
+                    <div class="des">
+                        {{news.summary}}
+                    </div>
+                    <div class="content" [innerHTML]="safeArticle">
+                    </div>
+                </div>
+            </nz-content>
+        </nz-layout>
+        <nz-layout style="width: 80%;height: 20px;
+        color: black;
+        line-height: 20px;
+        text-align: left;
+        background-color: white;">
+            文章评论
+        </nz-layout>
+        <!-- 文章评论 -->
+        <nz-layout style="width: 80%; background-color: white;">
+            <a style="color: red;
+            display: block;
+            width: 20ox;
+            height: 20px;
+            line-height: 20px;
+            margin-left: -627px;" (click)="addArticleReview(tplTitle,tplContent,tplFooter)">追加评论</a>
+            <nz-list nzItemLayout="horizontal">
+                <nz-list-item *ngFor="let item of data" style="background-color: white;">
+                    <nz-list-item-meta>
+                        <nz-list-item-meta-title style="text-align: left;">
+                            {{ item.pubdate | date:'yyyy年-MM月-d日 HH:mm:ss' : 'utc' }}
+                        </nz-list-item-meta-title>
+                        <nz-list-item-meta-description>
+                            {{item.content}}
+                        </nz-list-item-meta-description>
+                    </nz-list-item-meta>
+                </nz-list-item>
+            </nz-list>
+        </nz-layout>
+        <nz-layout style="width: 80%; background-color: white;">
+              <nz-pagination [(nzPageIndex)]="pageIndex" [nzTotal]="sizeTotal" [(nzPageSize)]="pageSize" nzShowQuickJumper (nzPageIndexChange)="changePageIndex()"></nz-pagination>
+          </nz-layout>
+        <!-- 模态框头部 -->
+        <ng-template #tplTitle>
+            <span>评论</span>
+        </ng-template>
+        <!-- 模态框内容 -->
+        <ng-template #tplContent let-params let-ref="modalRef">
+            <!-- 上传公益资讯表单 -->
+            <form nz-form [formGroup]="addArticleReviewForm">
+                <!-- 评论内容 -->
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="content" nzRequired>评论内容</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="评论内容不符合要求">
+                        <textarea id="content" formControlName="content" rows="4" nz-input [(ngModel)]="review.content"
+                            placeholder="最多支持100个字符"></textarea>
+                    </nz-form-control>
+                </nz-form-item>
+            </form>
+        </ng-template>
+        <!-- 模态框底部 -->
+        <ng-template #tplFooter>
+            <button nz-button nzType="primary" (click)="destroyTplModal()">
+                取消
+            </button>
+            <button nz-button nzType="primary" (click)="commit()">
+                追加评论
+            </button>
+        </ng-template>
+    </nz-layout>
+</nz-content>
+<nz-footer style="background: #333;">
+    <div nz-row>
+        <div nz-col nzSpan="12" nzOffset="6" style="color: white;">
+            微尘版权所有
+        </div>
+        <div nz-col nzSpan="12" nzOffset="6" style="color: white;">
+            联系我：1012077930@qq.com
+        </div>
+        <div nz-col nzSpan="12" nzOffset="6" style="color: white;">
+            <a href="http://www.12377.cn/" target="_blank">违法和不良信息举报中心</a>
+            |
+            <a href="http://www.piyao.org.cn/" target="_blank">中国互联网联合辟谣平台</a>
+        </div>
+    </div>
+</nz-footer>
+<app-back-top [height]="2"></app-back-top>

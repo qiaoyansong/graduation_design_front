@@ -80,10 +80,11 @@ import { NewsDetailComponent } from './admin/news/news-detail/news-detail.compon
 import { SeekHelpJdComponent } from './user/seek-help-jd/seek-help-jd.component';
 import { SeekHelpDetailComponent } from './user/seek-help-detail/seek-help-detail.component';
 import { UserSeekHelpDetailComponent } from './admin/user/user-seek-help-detail/user-seek-help-detail.component';
-import { NewsListComponent } from './news-list/news-list.component';
+import { NewsListComponent } from './news/news-list/news-list.component';
 import { ActivityListComponent } from './activity-list/activity-list.component';
 import { AuctionListComponent } from './auction-list/auction-list.component';
 import { CommodityListComponent } from './commodity-list/commodity-list.component';
+import { NewsComponent } from './news/news/news.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -129,6 +130,7 @@ import { CommodityListComponent } from './commodity-list/commodity-list.componen
     ActivityListComponent,
     AuctionListComponent,
     CommodityListComponent,
+    NewsComponent,
   ],
   imports: [
     BrowserModule,
