@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { StatusCode } from '../enumType/StatusCode';
-import { AdminService } from '../service/admin.service';
-import { HomepageService } from '../service/homepage.service';
-import { LanguageService } from '../service/language.service';
-import { LoginService } from '../service/login.service';
-import { UserService } from '../service/user.service';
+import { StatusCode } from 'src/app/enumType/StatusCode';
+import { AdminService } from '../../service/admin.service';
+import { HomepageService } from '../../service/homepage.service';
+import { LanguageService } from '../../service/language.service';
+import { LoginService } from '../../service/login.service';
+import { UserService } from '../../service/user.service';
 
 @Component({
-  selector: 'app-commodity-list',
-  templateUrl: './commodity-list.component.html',
-  styleUrls: ['./commodity-list.component.scss']
+  selector: 'app-auction-list',
+  templateUrl: './auction-list.component.html',
+  styleUrls: ['./auction-list.component.scss']
 })
-export class CommodityListComponent implements OnInit {
+export class AuctionListComponent implements OnInit {
 
- 
+  
   // 搜索内容
   public searchValue: string;
   // 是否登录
@@ -181,5 +181,6 @@ export class CommodityListComponent implements OnInit {
   public changePageIndex(): void {
     this.getData();
   }
+
 
 }

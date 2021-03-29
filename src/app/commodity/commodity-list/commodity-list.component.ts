@@ -9,11 +9,13 @@ import { LoginService } from '../../service/login.service';
 import { UserService } from '../../service/user.service';
 
 @Component({
-  selector: 'app-news-list',
-  templateUrl: './news-list.component.html',
-  styleUrls: ['./news-list.component.scss']
+  selector: 'app-commodity-list',
+  templateUrl: './commodity-list.component.html',
+  styleUrls: ['./commodity-list.component.scss']
 })
-export class NewsListComponent implements OnInit {
+export class CommodityListComponent implements OnInit {
+
+
   // 搜索内容
   public searchValue: string;
   // 是否登录
@@ -34,10 +36,8 @@ export class NewsListComponent implements OnInit {
   public data;
   //头像
   public headPortrait = null;
-  // 最热资讯
-  public hotNews;
-  // 最新资讯
-  public lastedNews;
+  // 国内资讯
+  public guonei;
   // 当前页数
   public pageIndex: number;
   // 当前每页的数据条数
@@ -85,15 +85,11 @@ export class NewsListComponent implements OnInit {
           this.userType = '';
         }
       }
-      if(this.loginService.getUser() != null){
+      if (this.loginService.getUser() != null) {
         this.headPortrait = this.loginService.getUser().headPortrait;
       }
-      
-      this.userService.getHotNews().subscribe(data => {
-        this.hotNews = data.body;
-      });
-      this.userService.getLastedNews().subscribe(data => {
-        this.lastedNews = data.body;
+      this.homepageService.getListOfHomepageGuoNei().subscribe(data => {
+        this.guonei = data.body;
       });
     });
   }
@@ -109,7 +105,7 @@ export class NewsListComponent implements OnInit {
     };
     condition.curPage = this.pageIndex + '';
     condition.condition.orderBy = 'desc';
-    this.userService.getNews2(condition).subscribe(data => {
+    this.userService.getCommodity(condition).subscribe(data => {
       if (data.code === StatusCode.SUCCESS) {
         this.sizeTotal = data.totalSize;
         this.data = data.body;
@@ -187,9 +183,9 @@ export class NewsListComponent implements OnInit {
   }
 
   /**
-   * 根据资讯ID获取详细信息
-   */
-   public getNewInfoById(id: any): void {
-    this.router.navigate(['/news'], { queryParams: { id: id } });
+  * 根据商品ID获取详细信息
+  */
+  public getCommdityInfoById(id: any): void {
+    this.router.navigate(['/commodity'], { queryParams: { id: id } });
   }
 }

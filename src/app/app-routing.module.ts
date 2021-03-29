@@ -18,10 +18,13 @@ import { NewsDetailComponent } from './admin/news/news-detail/news-detail.compon
 import { SeekHelpDetailComponent } from './user/seek-help-detail/seek-help-detail.component';
 import { UserSeekHelpDetailComponent } from './admin/user/user-seek-help-detail/user-seek-help-detail.component';
 import { NewsListComponent } from './news/news-list/news-list.component';
-import { CommodityListComponent } from './commodity-list/commodity-list.component';
-import { AuctionListComponent } from './auction-list/auction-list.component';
-import { ActivityListComponent } from './activity-list/activity-list.component';
+import { CommodityListComponent } from './commodity/commodity-list/commodity-list.component';
+import { AuctionListComponent } from './auction/auction-list/auction-list.component';
+import { ActivityListComponent } from './activity/activity-list/activity-list.component';
 import { NewsComponent } from './news/news/news.component';
+import { ActivityComponent } from './activity/activity/activity.component';
+import { AuctionComponent } from './auction/auction/auction.component';
+import { CommodityComponent } from './commodity/commodity/commodity.component';
 
 const routes: Routes = [
   {path: 'tinyEditor', component: TinyEditorComponent},
@@ -40,6 +43,9 @@ const routes: Routes = [
   {path: 'admin/seekHelpDetail', component: UserSeekHelpDetailComponent,  canActivate: [AdminIsLoginGuard]},
   {path: 'newsList', component: NewsListComponent},
   {path: 'news', component: NewsComponent},
+  {path: 'activity', component: ActivityComponent},
+  {path: 'auction', component: AuctionComponent},
+  {path: 'commodity', component: CommodityComponent},
   {path: 'auctionList', component: AuctionListComponent},
   {path: 'commodityList', component: CommodityListComponent},
   {path: 'activityList', component: ActivityListComponent},

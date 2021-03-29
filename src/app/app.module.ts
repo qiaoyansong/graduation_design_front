@@ -81,10 +81,14 @@ import { SeekHelpJdComponent } from './user/seek-help-jd/seek-help-jd.component'
 import { SeekHelpDetailComponent } from './user/seek-help-detail/seek-help-detail.component';
 import { UserSeekHelpDetailComponent } from './admin/user/user-seek-help-detail/user-seek-help-detail.component';
 import { NewsListComponent } from './news/news-list/news-list.component';
-import { ActivityListComponent } from './activity-list/activity-list.component';
-import { AuctionListComponent } from './auction-list/auction-list.component';
-import { CommodityListComponent } from './commodity-list/commodity-list.component';
+import { ActivityListComponent } from './activity/activity-list/activity-list.component';
+import { AuctionListComponent } from './auction/auction-list/auction-list.component';
+import { CommodityListComponent } from './commodity/commodity-list/commodity-list.component';
 import { NewsComponent } from './news/news/news.component';
+import { ActivityComponent } from './activity/activity/activity.component';
+import { CommodityComponent } from './commodity/commodity/commodity.component';
+import { AuctionComponent } from './auction/auction/auction.component';
+import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 @NgModule({
   declarations: [
     AppComponent,
@@ -131,6 +135,9 @@ import { NewsComponent } from './news/news/news.component';
     AuctionListComponent,
     CommodityListComponent,
     NewsComponent,
+    ActivityComponent,
+    CommodityComponent,
+    AuctionComponent,
   ],
   imports: [
     BrowserModule,
@@ -147,6 +154,7 @@ import { NewsComponent } from './news/news/news.component';
     NzModalModule,
     NzFormModule,
     NzDividerModule,
+    NzStatisticModule,
     NzRateModule,
     NzPopconfirmModule,
     NzSliderModule,

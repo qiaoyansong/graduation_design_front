@@ -1,21 +1,28 @@
+import { TemplateRef, ViewEncapsulation } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { StatusCode } from '../../enumType/StatusCode';
-import { AdminService } from '../../service/admin.service';
-import { HomepageService } from '../../service/homepage.service';
-import { LanguageService } from '../../service/language.service';
-import { LoginService } from '../../service/login.service';
-import { UserService } from '../../service/user.service';
+import { StatusCode } from 'src/app/enumType/StatusCode';
+import { LoginService } from 'src/app/service/login.service';
+import { UserService } from 'src/app/service/user.service';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { newsSummaryValidator } from 'src/app/validator/bussinessValidator';
 
 @Component({
-  selector: 'app-news-list',
-  templateUrl: './news-list.component.html',
-  styleUrls: ['./news-list.component.scss']
+  selector: 'app-commodity',
+  templateUrl: './commodity.component.html',
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./commodity.component.scss']
 })
-export class NewsListComponent implements OnInit {
-  // 搜索内容
-  public searchValue: string;
+export class CommodityComponent implements OnInit {
+
+  
+  public queryParams;
+  public news;
+  // 商品内容
+  public safeArticle;
   // 是否登录
   public isLogin: boolean;
   // 用户名
@@ -30,29 +37,29 @@ export class NewsListComponent implements OnInit {
   public userType: string;
   // 别处登录标识
   public otherFlag = false;
-  // 数据
-  public data;
   //头像
   public headPortrait = null;
-  // 最热资讯
-  public hotNews;
-  // 最新资讯
-  public lastedNews;
   // 当前页数
   public pageIndex: number;
   // 当前每页的数据条数
   public pageSize: number;
   // 当前数据条数
   public sizeTotal: number;
-  constructor(private languageService: LanguageService, private translate: TranslateService,
+  constructor(public activeRouter: ActivatedRoute,
+    private translate: TranslateService,
     private router: Router,
     private loginService: LoginService,
-    private homepageService: HomepageService,
-    private userService: UserService) {
+    private sanitizer: DomSanitizer,
+    private userService: UserService,
+    private modal: NzModalService,
+    private fb: FormBuilder) {
     this.otherFlag = false;
-    this.pageIndex = 1;
     this.translate.use('zh');
+    this.pageIndex = 1;
     this.pageSize = 10;
+    this.activeRouter.queryParams.subscribe(params => {
+      this.queryParams = params.id;
+    });
     // 判断当前session有没有登陆过，及时页面刷新仍能保留数据
     this.loginService.getSaveInfo().subscribe(data => {
       if (data.code === StatusCode.LOGIN_ELSEWHERE) {
@@ -85,50 +92,16 @@ export class NewsListComponent implements OnInit {
           this.userType = '';
         }
       }
-      if(this.loginService.getUser() != null){
+      if (this.loginService.getUser() != null) {
         this.headPortrait = this.loginService.getUser().headPortrait;
       }
-      
-      this.userService.getHotNews().subscribe(data => {
-        this.hotNews = data.body;
-      });
-      this.userService.getLastedNews().subscribe(data => {
-        this.lastedNews = data.body;
-      });
     });
-  }
-
-  public getData(): void {
-    // 查询数据 根据当前页数以及排序查看
-    let condition = {
-      'condition': {
-        'orderBy': '',
-        'searchValue': ''
-      },
-      'curPage': ''
-    };
-    condition.curPage = this.pageIndex + '';
-    condition.condition.orderBy = 'desc';
-    this.userService.getNews2(condition).subscribe(data => {
-      if (data.code === StatusCode.SUCCESS) {
-        this.sizeTotal = data.totalSize;
-        this.data = data.body;
-      }
+    this.userService.getCommodityInfoById(this.queryParams).subscribe(data => {
+      this.news = data.body;
+      this.safeArticle = this.sanitizer.bypassSecurityTrustHtml(this.news.content)
     });
   }
   ngOnInit(): void {
-    this.language = this.languageService.getLanguage();
-    this.translate.use(this.language);
-    // 每次随机生成颜色 生成[0,3]的随机数
-    this.color = this.colorList[Math.floor(Math.random() * 4)];
-    this.getData();
-  }
-
-  /**
-  * 搜索框
-  */
-  public search(): void {
-    console.log('value' + this.searchValue);
   }
 
   /**
@@ -179,17 +152,4 @@ export class NewsListComponent implements OnInit {
     this.router.navigate(['/register']);
   }
 
-  /**
-   * 改变页码时
-   */
-  public changePageIndex(): void {
-    this.getData();
-  }
-
-  /**
-   * 根据资讯ID获取详细信息
-   */
-   public getNewInfoById(id: any): void {
-    this.router.navigate(['/news'], { queryParams: { id: id } });
-  }
 }

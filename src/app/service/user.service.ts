@@ -170,8 +170,8 @@ export class UserService {
    * 用于追加文章评论
    * @param params 收货地址
    */
-   public addArticleReview(params: any): Observable<any> {
-     console.log(params)
+  public addArticleReview(params: any): Observable<any> {
+    console.log(params)
     // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
     return this.httpClient.post('http://localhost:8080/news/addArticleReview', params, {
       withCredentials: true
@@ -182,7 +182,7 @@ export class UserService {
    * 用于获取文章评论
    * @param params 收货地址
    */
-   public getArticleReviews(params: any): Observable<any> {
+  public getArticleReviews(params: any): Observable<any> {
     // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
     return this.httpClient.post('http://localhost:8080/news/getArticleReviews', params, {
       withCredentials: true
@@ -193,9 +193,9 @@ export class UserService {
    * 用于获取文章评论
    * @param params 收货地址
    */
-   public getLastedReviews(): Observable<any> {
+  public getLastedNews(): Observable<any> {
     // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
-    return this.httpClient.get('http://localhost:8080/news/getLastedReviews', {
+    return this.httpClient.get('http://localhost:8080/news/getLastedNews', {
       withCredentials: true
     });
   }
@@ -204,9 +204,64 @@ export class UserService {
    * 用于获取文章评论
    * @param params 收货地址
    */
-   public getHotNews(): Observable<any> {
+  public getHotNews(): Observable<any> {
     // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
     return this.httpClient.get('http://localhost:8080/news/getHotNews', {
+      withCredentials: true
+    });
+  }
+
+  /**
+   * 用于获取商品信息
+   * @param params 筛选条件
+   */
+   public getCommodity(params: any): Observable<any>{
+    let condition = {
+      'condition' : {
+        'orderBy':params.condition.orderBy,
+      },
+        'curPage':params.curPage
+    }
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    return this.httpClient.post('http://localhost:8080/commodity/commodityList', condition,{
+      withCredentials: true
+    });
+  }
+
+  
+  /**
+   * 用于获取资讯信息
+   * @param params 筛选条件
+   */
+   public getActivity(params: any): Observable<any>{
+    let condition = {
+      'condition' : {
+        'orderBy':params.condition.orderBy,
+      },
+        'curPage':params.curPage
+    }
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    return this.httpClient.post('http://localhost:8080/activity/activityList', condition,{
+      withCredentials: true
+    });
+  }
+
+  /**
+ * 用于获取商品详情
+ * @param id 商品ID
+ */
+   public getCommodityInfoById(id: any): Observable<any> {
+    return this.httpClient.get('http://localhost:8080/commodity/getCommodityInfoById/' + id, {
+      withCredentials: true
+    });
+  }
+
+  /**
+ * 用于获取活动详情
+ * @param id 活动ID
+ */
+   public getActivityInfoById(id: any): Observable<any> {
+    return this.httpClient.get('http://localhost:8080/activity/getActivityInfoById/' + id, {
       withCredentials: true
     });
   }

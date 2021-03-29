@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { StatusCode } from '../enumType/StatusCode';
-import { AdminService } from '../service/admin.service';
-import { HomepageService } from '../service/homepage.service';
-import { LanguageService } from '../service/language.service';
-import { LoginService } from '../service/login.service';
-import { UserService } from '../service/user.service';
+import { StatusCode } from '../../enumType/StatusCode';
+import { AdminService } from '../../service/admin.service';
+import { HomepageService } from '../../service/homepage.service';
+import { LanguageService } from '../../service/language.service';
+import { LoginService } from '../../service/login.service';
+import { UserService } from '../../service/user.service';
 
 @Component({
-  selector: 'app-auction-list',
-  templateUrl: './auction-list.component.html',
-  styleUrls: ['./auction-list.component.scss']
+  selector: 'app-activity-list',
+  templateUrl: './activity-list.component.html',
+  styleUrls: ['./activity-list.component.scss']
 })
-export class AuctionListComponent implements OnInit {
+export class ActivityListComponent implements OnInit {
 
-  
   // 搜索内容
   public searchValue: string;
   // 是否登录
@@ -105,7 +104,7 @@ export class AuctionListComponent implements OnInit {
     };
     condition.curPage = this.pageIndex + '';
     condition.condition.orderBy = 'desc';
-    this.userService.getNews2(condition).subscribe(data => {
+    this.userService.getActivity(condition).subscribe(data => {
       if (data.code === StatusCode.SUCCESS) {
         this.sizeTotal = data.totalSize;
         this.data = data.body;
@@ -182,5 +181,10 @@ export class AuctionListComponent implements OnInit {
     this.getData();
   }
 
-
+   /**
+   * 根据活动ID获取详细信息
+   */
+    public getActivityInfoById(id: any): void {
+      this.router.navigate(['/activity'], { queryParams: { id: id } });
+    }
 }
