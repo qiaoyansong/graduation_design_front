@@ -137,7 +137,6 @@ export class UserService {
         'orderBy': params.condition.orderBy,
         'searchValue': params.condition.searchValue,
         'userId': params.condition.userId,
-        'flag': params.condition.flag
       },
       'curPage': params.curPage
     }
@@ -265,4 +264,35 @@ export class UserService {
       withCredentials: true
     });
   }
+
+  /**
+   * 用于报名活动
+   * @param params 筛选条件
+   */
+   public signUp(params: any): Observable<any>{
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    return this.httpClient.post('http://localhost:8080/user/signUp', params,{
+      withCredentials: true
+    });
+  }
+
+  /**
+  * 查看当前用户参加的所有活动
+  * @param 筛选信息
+  */
+   public getActivityProcessByUserId(params: any): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/user/getActivityProcessByUserId', params, {
+      withCredentials: true
+    });
+  }
+
+   /**
+  * 查看当前用户参加的所有活动
+  * @param 筛选信息
+  */
+    public getParticipantByActivityId(params: any): Observable<any> {
+      return this.httpClient.post('http://localhost:8080/user/getParticipantByActivityId', params, {
+        withCredentials: true
+      });
+    }
 }

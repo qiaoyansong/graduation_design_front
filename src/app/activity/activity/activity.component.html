@@ -1,6 +1,7 @@
 <nz-alert *ngIf="otherFlag" nzType="error" nzCloseable nzMessage="在别处登录"
-    nzDescription="您的账号在别处登录，您被迫下线，右上角关闭此消息框，可以立刻修改密码" (nzOnClose)="afterClose()">
+    nzDescription="您的账号在别处登录，您被迫下线，右上角关闭此消息框，可以立刻修改密码" (nzOnClose)="afterClose(1)">
 </nz-alert>
+<nz-alert *ngIf="signUpFlag" nzType="success" nzCloseable  nzMessage="报名成功" nzShowIcon (nzOnClose)="afterClose(2)"></nz-alert>
 <!-- 首部信息 -->
 <nz-header nz-row style="background-color: white;
 height: 120px;">
@@ -92,7 +93,8 @@ height: 120px;">
                     </div>
                     <div class="content" [innerHTML]="safeArticle">
                     </div>
-                    <button nz-button nzType="primary">报名活动</button>
+                    <button *ngIf="flag" nz-button nzType="primary" (click)="signUp(tplTitle,tplContent,tplFooter)">报名活动</button>
+                    <button *ngIf="!flag" disabled nz-button nzType="primary">报名活动</button>
                 </div>
             </nz-content>
         </nz-layout>
@@ -114,3 +116,23 @@ height: 120px;">
     </div>
 </nz-footer>
 <app-back-top [height]="2"></app-back-top>
+<!-- 模态框头部 -->
+<ng-template #tplTitle>
+    <span>报名活动</span>
+</ng-template>
+<!-- 模态框内容 -->
+<ng-template #tplContent let-params let-ref="modalRef">
+    <!-- 上传公益资讯表单 -->
+    <form nz-form [formGroup]="signUpActivityForm">
+        <span>确认参加该活动么？</span>
+    </form>
+</ng-template>
+<!-- 模态框底部 -->
+<ng-template #tplFooter>
+    <button nz-button nzType="primary" (click)="destroyTplModal()">
+        取消
+    </button>
+    <button nz-button nzType="primary" (click)="signUp0()">
+        确认参加
+    </button>
+</ng-template>

@@ -46,12 +46,14 @@ export class ActivityComponent implements OnInit {
   public sizeTotal: number;
   // 倒计时
   public deadline;
-  public year;
-  public mounth;
-  public day;
-  public hour;
-  public minute;
-  public second;
+  // 倒计时标志位
+  public flag = true;
+  // 报名公益活动表单
+  public signUpActivityForm: FormGroup;
+  // 模态框
+  public newsModal?: NzModalRef;
+  // 报名是否成功标志位
+  public signUpFlag = false;
   constructor(public activeRouter: ActivatedRoute,
     private translate: TranslateService,
     private router: Router,
@@ -106,7 +108,8 @@ export class ActivityComponent implements OnInit {
     this.userService.getActivityInfoById(this.queryParams).subscribe(data => {
       this.news = data.body;
       this.deadline = new Date(data.body.beginTime).getTime() + new Date(data.body.endTime).getTime() - new Date(data.body.beginTime).getTime();
-      this.safeArticle = this.sanitizer.bypassSecurityTrustHtml(this.news.content)
+      this.safeArticle = this.sanitizer.bypassSecurityTrustHtml(this.news.content);
+      this.flag = this.deadline >= new Date().getTime() ? true : false;
     });
   }
   ngOnInit(): void {
@@ -142,8 +145,12 @@ export class ActivityComponent implements OnInit {
   /**
    * 导航去忘记密码界面
    */
-  public afterClose(): void {
-    this.router.navigate(['/forgetpwd']);
+  public afterClose(num: number): void {
+    if(num == 1){
+      this.router.navigate(['/forgetpwd']);
+    }else{
+      this.signUpFlag = false;
+    }
   }
 
   /**
@@ -159,4 +166,66 @@ export class ActivityComponent implements OnInit {
   public register(): void {
     this.router.navigate(['/register']);
   }
+
+  /**
+   * 报名活动
+   */
+  public signUp(tplTitle: TemplateRef<{}>, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>): void {
+    if (this.loginService.getUser() == null) {
+      this.router.navigate(['/login']);
+    } else {
+      this.flag = this.deadline >= new Date().getTime() ? true : false;
+      if(this.flag){
+        // 报名活动
+        this.createTplModal(tplTitle, tplContent, tplFooter);
+      }
+    }
+  }
+
+  /**
+  * 构建上传公益资讯表单
+  */
+  public buildUploadActivityForm(): void {
+    this.signUpActivityForm = this.fb.group(
+      {
+      });
+  }
+  public createTplModal(tplTitle: TemplateRef<{}>, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>): void {
+    this.buildUploadActivityForm();
+    this.newsModal = this.modal.create({
+      nzTitle: tplTitle,
+      nzContent: tplContent,
+      nzFooter: tplFooter,
+      nzMaskClosable: false,
+      nzClosable: false,
+      nzComponentParams: {
+        value: 'Template Context'
+      },
+    });
+  }
+  /**
+ * 销毁模态框
+ */
+  public destroyTplModal(): void {
+    this.signUpFlag = false;
+    this.newsModal!.destroy();
+  }
+
+  /**
+   * 报名活动
+   */
+  public signUp0(): void {
+    let params = {
+      'userId': this.loginService.getUserId()+'',
+      'activityId':this.queryParams
+    }
+    this.userService.signUp(params).subscribe(data => {
+      if (data.code === StatusCode.SUCCESS) {
+        // 提示报名成功
+        this.signUpFlag = true;
+      }
+      this.destroyTplModal();
+    });
+  }
+
 }

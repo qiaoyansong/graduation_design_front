@@ -89,6 +89,9 @@ import { ActivityComponent } from './activity/activity/activity.component';
 import { CommodityComponent } from './commodity/commodity/commodity.component';
 import { AuctionComponent } from './auction/auction/auction.component';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
+import { ActivityProcessComponent } from './user/activity-process/activity-process.component';
+import { NzProgressModule } from 'ng-zorro-antd/progress';
+import { UploadProcessComponent } from './admin/activity/upload-process/upload-process.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -138,6 +141,8 @@ import { NzStatisticModule } from 'ng-zorro-antd/statistic';
     ActivityComponent,
     CommodityComponent,
     AuctionComponent,
+    ActivityProcessComponent,
+    UploadProcessComponent,
   ],
   imports: [
     BrowserModule,
@@ -148,6 +153,7 @@ import { NzStatisticModule } from 'ng-zorro-antd/statistic';
     NzBackTopModule,
     EditorModule,
     NzToolTipModule,
+    NzProgressModule,
     NzDatePickerModule,
     NzCascaderModule,
     FormsModule,

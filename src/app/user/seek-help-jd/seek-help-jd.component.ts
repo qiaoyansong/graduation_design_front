@@ -76,7 +76,6 @@ export class SeekHelpJdComponent implements OnInit {
         'userId':'',
         'orderBy': '',
         'searchValue': '',
-        'flag' : '0'
       },
       'curPage': ''
     };

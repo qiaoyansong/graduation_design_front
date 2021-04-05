@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StatusComponent } from 'ng-devui';
 import { StatusCode } from 'src/app/enumType/StatusCode';
+import { AdminService } from 'src/app/service/admin.service';
 @Component({
   selector: 'app-admin-homepage',
   templateUrl: './admin-homepage.component.html',
@@ -57,13 +58,19 @@ export class AdminHomepageComponent implements OnInit {
   public updateUserInfoFlag;
   // 查询参数校验失败
   public searchFlag = false;
+  // 修改用户参与活动进度标志位
+  public updateActivityProcessFlag;
+  // 活动ID
+  @Output()
+  public activityId = new EventEmitter<string>();
   /**
    * 内嵌菜单切换按钮
    */
   public toggleCollapsed(): void {
     this.isCollapsed = !this.isCollapsed;
   }
-  constructor(private router: Router) {
+  constructor(private router: Router,
+    private adminService: AdminService) {
     this.select = 1;
   }
 
@@ -147,6 +154,18 @@ export class AdminHomepageComponent implements OnInit {
     if (this.updateNewsFlag === StatusCode.SUCCESS) {
       this.select = 4;
     } else if (this.updateNewsFlag === StatusCode.USER_IS_NOT_LOGGED_IN) {
+      this.router.navigate(['']);
+    }
+  }
+
+  /**
+   * 获取修改用户参与活动进度
+   */
+  public getUpdateActivityProcessFlag(msg): void {
+    this.updateActivityProcessFlag = msg;
+    if (this.updateActivityProcessFlag === StatusCode.SUCCESS) {
+      this.select = 7;
+    } else if (this.updateActivityProcessFlag === StatusCode.USER_IS_NOT_LOGGED_IN) {
       this.router.navigate(['']);
     }
   }
@@ -308,6 +327,14 @@ export class AdminHomepageComponent implements OnInit {
   }
 
   /**
+ * 获取到活动ID
+ */
+  public getActivityId(msg): void {
+    this.select = 12;
+    this.adminService.setActivityId(msg);
+  }
+
+  /**
    * 重置错误标志位
    */
   public afterClose(): void {
@@ -332,5 +359,6 @@ export class AdminHomepageComponent implements OnInit {
     this.isNotLogin = false;
     this.searchFlag = false;
     this.updateUserInfoFlag = '';
+    this.updateActivityProcessFlag = '';
   }
 }

@@ -89,6 +89,14 @@
                             </li>
                         </ul>
                     </li>
+                    <li nz-submenu nzTitle="活动相关" nzIcon="appstore" nzOpen>
+                        <ul>
+                            <li nz-menu-item [nzSelected]="select === 9">
+                                活动进度
+                                <a (click)="getInfo(9)"></a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </nz-sider>
@@ -113,21 +121,12 @@
         </app-receiving-address>
         <!-- 已购商品 -->
         <app-goods-purchased *ngIf="select === 6" style="width: 100%;"></app-goods-purchased>
+        <!-- 当前用户所参与活动 -->
+        <app-activity-process  *ngIf="select === 9" style="width: 100%;"></app-activity-process>
     </nz-layout>
     <!-- 声明信息 -->
     <nz-footer>
         <div nz-row>
-            <div nz-col nzSpan="12" nzOffset="6">
-                <a href="http://www.zggyw.org/"> {{ "Home.Footer.HomePage" | translate }}</a> |
-                <a href="http://www.zggyw.org/html/help/wzjs/gywm/"> {{ "Home.Footer.AboutUs" | translate }}</a> |
-                <a href="http://www.zggyw.org/html/help/cjwt/zggywtgxz/"> {{ "Home.Footer.SubmissionGuidelines" |
-                    translate
-                    }}</a>
-                |
-                <a href="http://www.zggyw.org/html/help/wzjs/wzsm/"> {{ "Home.Footer.WebsiteStated" | translate }}</a> |
-                <a href="http://www.zggyw.org/html/help/ywjs/ywhz/"> {{ "Home.Footer.BusinessCooperation" | translate
-                    }}</a>
-            </div>
             <div nz-col nzSpan="12" nzOffset="6">
                 微尘版权所有
             </div>

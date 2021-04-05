@@ -36,19 +36,19 @@
   }
   
   a {
-    color: white; 
+    color: white;
   }
   
   .ant-layout-header .ant-menu {
     margin: 22px auto;
   }
-  .green{
+  .green {
     background-color: rgba(9, 243, 9, 0.356);
   }
-  .red{
+  .red {
     background-color: rgba(247, 4, 4, 0.397);
   }
-  .blackColorText{
+  .blackColorText {
     color: black;
   }
   .wrapper {
@@ -63,48 +63,68 @@
   nz-footer {
     line-height: 1.5;
   }
-  .page{
-    height: 10%; 
+  .page {
+    height: 10%;
     padding: 0;
     background-color: white;
   }
-  .ant-pagination{
-   margin-top: 7px;
+  .ant-pagination {
+    margin-top: 7px;
   }
   nz-select {
     width: 80%;
     margin: 0;
   }
-  .bread-crumb{
-    background-color: white; 
+  .bread-crumb {
+    background-color: white;
     text-align: left;
   }
-  .content-header{
-    height: 10%; 
+  .content-header {
+    height: 10%;
     padding: 0;
   }
-  .order-div{
-    height: 100%; 
-    background-color: white; 
+  .order-div {
+    height: 100%;
+    background-color: white;
     flex: 2;
   }
-  .search-div{
-    height: 100%; 
-    background-color: white; 
-    display: inline-block; flex: 8;
+  .search-div {
+    height: 100%;
+    background-color: white;
+    display: inline-block;
+    flex: 8;
   }
-  .content-data{
-    background-color: white; 
-    height: 77%; 
+  .content-data {
+    height: 100%;
     padding: 0;
     margin-top: 5px;
   }
-  .content-data-upload{
-    background-color: white; 
-    height: 98%; 
+  .content-data-upload {
+    background-color: white;
+    height: 98%;
     padding: 0;
     margin-top: 10px;
   }
-  .anticon-question{
+  .anticon-question {
     color: blue;
+  }
+  td a{
+    color: #1890ff;
+  }
+  .search-box {
+    padding: 8px;
+  }
+  
+  .search-box input {
+    width: 188px;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
+  .search-box button {
+    width: 90px;
+  }
+  
+  .search-button {
+    margin-right: 8px;
   }

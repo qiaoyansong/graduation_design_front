@@ -110,6 +110,8 @@
                 <nz-divider nzType="vertical"></nz-divider>
                 <a nz-popconfirm nzPopconfirmTitle="确认删除么?" nzPopconfirmPlacement="bottom"
                   (nzOnConfirm)="deleteNewsById(data.id)">删除该条目</a>
+                <nz-divider nzType="vertical"></nz-divider>
+                <button nz-button [nzType]="'primary'" (click)="updateActivityProcess(data.id)"><span>管理进度信息</span></button>
               </td>
             </tr>
             <tr [nzExpand]="expandSet.has(data.id)">

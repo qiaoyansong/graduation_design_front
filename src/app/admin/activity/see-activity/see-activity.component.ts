@@ -69,6 +69,10 @@ export class SeeActivityComponent implements OnInit {
   // 删除文章标志位
   @Output()
   public deleteFlags = new EventEmitter<string>();
+
+  // 活动ID
+  @Output()
+  public activityId = new EventEmitter<string>();
   constructor(private adminService: AdminService,
     private router: Router,
     private loginService: LoginService,
@@ -169,6 +173,14 @@ export class SeeActivityComponent implements OnInit {
       }
       this.deleteFlags.emit(this.deleteFlag);
     });
+  }
+
+  /**
+   * 根据活动ID管理进度信息
+   * @param id 活动ID
+   */
+  public updateActivityProcess(id: any): void {
+    this.activityId.emit(id);
   }
 
   /**
@@ -273,7 +285,7 @@ export class SeeActivityComponent implements OnInit {
    * 验证开始结束时间是否符合格式
    */
   public checkBeginAndEndTime(): boolean {
-    return this.dateRange == null ? false : 
-    (this.dateRange[0] == null || this.dateRange[1] == null)? false: true;
+    return this.dateRange == null ? false :
+      (this.dateRange[0] == null || this.dateRange[1] == null) ? false : true;
   };
 }
