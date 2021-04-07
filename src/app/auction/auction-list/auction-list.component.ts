@@ -99,13 +99,12 @@ export class AuctionListComponent implements OnInit {
     let condition = {
       'condition': {
         'orderBy': '',
-        'searchValue': ''
       },
       'curPage': ''
     };
     condition.curPage = this.pageIndex + '';
     condition.condition.orderBy = 'desc';
-    this.userService.getNews2(condition).subscribe(data => {
+    this.userService.auctionList(condition).subscribe(data => {
       if (data.code === StatusCode.SUCCESS) {
         this.sizeTotal = data.totalSize;
         this.data = data.body;
@@ -182,5 +181,11 @@ export class AuctionListComponent implements OnInit {
     this.getData();
   }
 
-
+  /**
+   * 获取拍卖详情
+   * @param id 拍卖ID
+   */
+  public getAuctionInfoById(id: number):void{
+    this.router.navigate(['/auction'], { queryParams: { id: id } });
+  }
 }

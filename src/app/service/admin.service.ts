@@ -88,7 +88,6 @@ export class AdminService {
       'beginTime': params.beginTime,
       'endTime': params.endTime,
       'minPrice': params.minPrice,
-      'maxPrice': params.maxPrice,
       'img': params.img,
       'summary': params.summary,
     }
@@ -367,7 +366,6 @@ export class AdminService {
       'beginTime': params.beginTime,
       'endTime': params.endTime,
       'minPrice': params.minPrice,
-      'maxPrice': params.maxPrice,
       'summary': params.summary,
     }
     // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true

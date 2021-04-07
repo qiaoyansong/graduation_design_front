@@ -40,9 +40,9 @@ export class UploadCommodityComponent implements OnInit {
   public flag;
   constructor(private fb: FormBuilder,
     private msg: NzMessageService,
-    private adminService: AdminService) { 
-      this.buildUploadCommodityForm();
-    }
+    private adminService: AdminService) {
+    this.buildUploadCommodityForm();
+  }
 
   ngOnInit(): void {
   }
@@ -57,7 +57,7 @@ export class UploadCommodityComponent implements OnInit {
         title: [this.commodity.title, [newsTitleValidator()]],
         summary: [this.commodity.summary, [commoditySummaryValidator()]],
       });
-      this.isDisabled = false;
+    this.isDisabled = false;
   }
 
   // 富文本编辑器
@@ -121,7 +121,7 @@ export class UploadCommodityComponent implements OnInit {
   /**
     * 验证商品标题是否符合格式
     */
-   public checkNewsTitle(): boolean {
+  public checkNewsTitle(): boolean {
     const value = this.commodity.title;
     const reg = /^.{1,50}$/;
     const result = reg.test(value);
@@ -155,13 +155,13 @@ export class UploadCommodityComponent implements OnInit {
    * 上传公益商品
    */
   public uploadCommodity(): void {
-    if(this.checkData() && this.checkListImage() && this.checkNewsSummary() && this.checkNewsTitle()){
+    if (this.checkData() && this.checkListImage() && this.checkNewsSummary() && this.checkNewsTitle()) {
       this.commodity.content = this.data;
       this.commodity.img = this.imgLocation;
       this.commodity.quantity = this.quantity + '';
       this.commodity.point = this.point + '';
       this.adminService.uploadCommodity(this.commodity).subscribe(data => {
-        if(data.code === StatusCode.SUCCESS){
+        if (data.code === StatusCode.SUCCESS) {
           this.flag = StatusCode.SUCCESS;
           // 移动到顶部
           window.scrollTo(0, 0);
@@ -173,6 +173,6 @@ export class UploadCommodityComponent implements OnInit {
         }
         this.uploadFlags.emit(this.flag);
       });
-  }
+    }
   }
 }

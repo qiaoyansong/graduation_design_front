@@ -53,7 +53,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li nz-submenu nz-tooltip nzTooltipPlacement="right" nzTitle="投稿相关" nzOpen nzIcon="appstore">
+                    <li nz-submenu nz-tooltip nzTooltipPlacement="right" nzTitle="投稿相关" nzOpen nzIcon="read">
                         <ul>
                             <li nz-menu-item [nzSelected]="select === 2">
                                 资讯投稿
@@ -77,7 +77,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li nz-submenu nzTitle="商品相关" nzIcon="appstore" nzOpen>
+                    <li nz-submenu nzTitle="商品相关" nzIcon="shopping" nzOpen>
                         <ul>
                             <li nz-menu-item [nzSelected]="select === 5">
                                 收货地址
@@ -89,11 +89,19 @@
                             </li>
                         </ul>
                     </li>
-                    <li nz-submenu nzTitle="活动相关" nzIcon="appstore" nzOpen>
+                    <li nz-submenu nzTitle="活动相关" nzIcon="schedule" nzOpen>
                         <ul>
                             <li nz-menu-item [nzSelected]="select === 9">
                                 活动进度
                                 <a (click)="getInfo(9)"></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li nz-submenu nzTitle="拍卖相关" nzIcon="shopping-cart" nzOpen>
+                        <ul>
+                            <li nz-menu-item [nzSelected]="select === 10">
+                                拍卖进度
+                                <a (click)="getInfo(10)"></a>
                             </li>
                         </ul>
                     </li>
@@ -123,6 +131,8 @@
         <app-goods-purchased *ngIf="select === 6" style="width: 100%;"></app-goods-purchased>
         <!-- 当前用户所参与活动 -->
         <app-activity-process  *ngIf="select === 9" style="width: 100%;"></app-activity-process>
+        <!-- 拍卖进度查询 -->
+        <app-auction-process *ngIf="select === 10" style="width: 100%;"></app-auction-process>
     </nz-layout>
     <!-- 声明信息 -->
     <nz-footer>

@@ -96,7 +96,6 @@ export class LoginComponent implements OnInit {
           if(data.body.type != userType.GENERAL_USER){
             // 如果是管理员登录，登录无效，跳转至管理员登录界面并且清楚Session中的信息
             this.loginService.removeSaveInfo().subscribe(data => {
-              
             });
             this.router.navigate(['/admin/login']);
           }else{

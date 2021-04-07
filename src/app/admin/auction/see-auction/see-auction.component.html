@@ -31,7 +31,6 @@
             <th>开始时间</th>
             <th>结束时间</th>
             <th>最低价格</th>
-            <th>最高价格</th>
             <th>操作</th>
           </tr>
         </thead>
@@ -45,10 +44,6 @@
               <td>{{ data.endTime | date:'yyyy年-MM月-d日 HH:mm:ss' : 'utc'}}</td>
               <td>
                 <nz-slider style="width: 60%;" [(ngModel)]="data.minPrice" [nzDisabled]="false" [nzMax]=100 [nzMin]=1
-                  [ngModelOptions]="{standalone: true}"></nz-slider>
-              </td>
-              <td>
-                <nz-slider style="width: 60%;" [(ngModel)]="data.maxPrice" [nzDisabled]="false" [nzMax]=1000 [nzMin]=1
                   [ngModelOptions]="{standalone: true}"></nz-slider>
               </td>
               <td>
@@ -96,17 +91,6 @@
                       <nz-slider style="width: 60%;" [(ngModel)]="auction.minPrice" [nzDisabled]="false" [nzMax]=100 [nzMin]=1
                         [ngModelOptions]="{standalone: true}"></nz-slider>
                     </nz-form-item>
-                    <!-- 最高价格 -->
-                    <nz-form-item>
-                      <nz-form-label [nzSm]="6" [nzXs]="24"><span
-                          style="font-size: 24px; line-height: 100%; color: red;">*</span>
-                        最高价格
-                        <i nz-icon nzType="question" nzTheme="outline" nzTooltipTitle="最高1000元"
-                          nzTooltipPlacement="topCenter" nz-tooltip></i>
-                      </nz-form-label>
-                      <nz-slider style="width: 60%;" [(ngModel)]="auction.maxPrice" [nzDisabled]="false" [nzMax]=1000 [nzMin]=1
-                        [ngModelOptions]="{standalone: true}"></nz-slider>
-                    </nz-form-item>
                   </form>
                 </ng-template>
                 <!-- 模态框底部 -->
@@ -127,8 +111,8 @@
               <nz-table #innerTable (nzData)="data" nzSize="middle" [nzShowPagination]="false">
                 <thead>
                   <tr>
-                    <th>资讯摘要</th>
-                    <th>资讯列表展示图片</th>
+                    <th>拍卖摘要</th>
+                    <th>拍卖列表展示图片</th>
                   </tr>
                 </thead>
         <tbody>

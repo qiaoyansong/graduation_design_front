@@ -8,16 +8,22 @@
                     <tr>
                         <th>用户ID</th>
                         <th>用户名</th>
+                        <th>进度</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
                     <ng-template ngFor let-data [ngForOf]="parentTable.data">
                         <tr>
-                            <td>{{ data.id }}</td>
-                            <td>{{ data.userName }}</td>
-                            <td><button nz-button [nzType]="'primary'"
-                                    (click)="createTplModal(tplTitle,tplContent,tplFooter,data.id)"><span>进度管理</span></button>
+                            <td>{{ data.user.id }}</td>
+                            <td>{{ data.user.userName }}</td>
+                            <td>
+                                <nz-progress [nzPercent]="data.progress"
+                                    [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }" nzStatus="active">
+                                </nz-progress>
+                            </td>
+                            <td *ngIf="data.progress != 100"><button nz-button [nzType]="'primary'"
+                                    (click)="createTplModal(tplTitle,tplContent,tplFooter,data.user.id)"><span>进度管理</span></button>
                             </td>
                         </tr>
                     </ng-template>

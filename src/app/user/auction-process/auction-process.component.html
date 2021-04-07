@@ -1,0 +1,28 @@
+<nz-layout style="height: 100%;">
+    <nz-content>
+        <nz-content class="content-data">
+            <nz-table style="width: 100%; height: 100%;" #parentTable [(nzData)]="listOfParentData"
+                [(nzPageIndex)]="pageIndex" [nzShowQuickJumper]="true" [(nzPageSize)]="pageSize" [(nzTotal)]="sizeTotal"
+                [nzFrontPagination]="false" (nzPageIndexChange)="changePageIndex()">
+                <thead>
+                    <tr>
+                        <th [nzShowSort]="true" (nzSortOrderChange)="changeOrder($event)"
+                            [nzSortOrder]="listSortOrderBy">拍卖ID</th>
+                        <th>拍卖名称</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-template ngFor let-data [ngForOf]="parentTable.data">
+                        <tr>
+                            <td>{{ data.id }}</td>
+                            <td>{{ data.title }}</td>
+                            <td><button nz-button [nzType]="'primary'"
+                                    (click)="getAuctionInfoById(data.id)"><span>查看拍卖详情</span></button></td>
+                        </tr>
+                    </ng-template>
+                </tbody>
+            </nz-table>
+        </nz-content>
+    </nz-content>
+</nz-layout>

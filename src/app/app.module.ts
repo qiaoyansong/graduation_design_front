@@ -92,6 +92,8 @@ import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { ActivityProcessComponent } from './user/activity-process/activity-process.component';
 import { NzProgressModule } from 'ng-zorro-antd/progress';
 import { UploadProcessComponent } from './admin/activity/upload-process/upload-process.component';
+import { AuctionProcessComponent } from './user/auction-process/auction-process.component';
+import { NzTimelineModule } from 'ng-zorro-antd/timeline';
 @NgModule({
   declarations: [
     AppComponent,
@@ -143,6 +145,7 @@ import { UploadProcessComponent } from './admin/activity/upload-process/upload-p
     AuctionComponent,
     ActivityProcessComponent,
     UploadProcessComponent,
+    AuctionProcessComponent,
   ],
   imports: [
     BrowserModule,
@@ -157,6 +160,7 @@ import { UploadProcessComponent } from './admin/activity/upload-process/upload-p
     NzDatePickerModule,
     NzCascaderModule,
     FormsModule,
+    NzTimelineModule,
     NzModalModule,
     NzFormModule,
     NzDividerModule,

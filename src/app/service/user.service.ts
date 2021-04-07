@@ -214,33 +214,33 @@ export class UserService {
    * 用于获取商品信息
    * @param params 筛选条件
    */
-   public getCommodity(params: any): Observable<any>{
+  public getCommodity(params: any): Observable<any> {
     let condition = {
-      'condition' : {
-        'orderBy':params.condition.orderBy,
+      'condition': {
+        'orderBy': params.condition.orderBy,
       },
-        'curPage':params.curPage
+      'curPage': params.curPage
     }
     // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
-    return this.httpClient.post('http://localhost:8080/commodity/commodityList', condition,{
+    return this.httpClient.post('http://localhost:8080/commodity/commodityList', condition, {
       withCredentials: true
     });
   }
 
-  
+
   /**
    * 用于获取资讯信息
    * @param params 筛选条件
    */
-   public getActivity(params: any): Observable<any>{
+  public getActivity(params: any): Observable<any> {
     let condition = {
-      'condition' : {
-        'orderBy':params.condition.orderBy,
+      'condition': {
+        'orderBy': params.condition.orderBy,
       },
-        'curPage':params.curPage
+      'curPage': params.curPage
     }
     // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
-    return this.httpClient.post('http://localhost:8080/activity/activityList', condition,{
+    return this.httpClient.post('http://localhost:8080/activity/activityList', condition, {
       withCredentials: true
     });
   }
@@ -249,7 +249,7 @@ export class UserService {
  * 用于获取商品详情
  * @param id 商品ID
  */
-   public getCommodityInfoById(id: any): Observable<any> {
+  public getCommodityInfoById(id: any): Observable<any> {
     return this.httpClient.get('http://localhost:8080/commodity/getCommodityInfoById/' + id, {
       withCredentials: true
     });
@@ -259,7 +259,7 @@ export class UserService {
  * 用于获取活动详情
  * @param id 活动ID
  */
-   public getActivityInfoById(id: any): Observable<any> {
+  public getActivityInfoById(id: any): Observable<any> {
     return this.httpClient.get('http://localhost:8080/activity/getActivityInfoById/' + id, {
       withCredentials: true
     });
@@ -269,9 +269,9 @@ export class UserService {
    * 用于报名活动
    * @param params 筛选条件
    */
-   public signUp(params: any): Observable<any>{
+  public signUp(params: any): Observable<any> {
     // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
-    return this.httpClient.post('http://localhost:8080/user/signUp', params,{
+    return this.httpClient.post('http://localhost:8080/user/signUp', params, {
       withCredentials: true
     });
   }
@@ -280,19 +280,86 @@ export class UserService {
   * 查看当前用户参加的所有活动
   * @param 筛选信息
   */
-   public getActivityProcessByUserId(params: any): Observable<any> {
+  public getActivityProcessByUserId(params: any): Observable<any> {
     return this.httpClient.post('http://localhost:8080/user/getActivityProcessByUserId', params, {
       withCredentials: true
     });
   }
 
-   /**
-  * 查看当前用户参加的所有活动
+  /**
+ * 查看当前用户参加的所有活动
+ * @param 筛选信息
+ */
+  public getParticipantByActivityId(params: any): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/user/getParticipantByActivityId', params, {
+      withCredentials: true
+    });
+  }
+
+  /**
+ * 用于获取拍卖列表
+ * @param params 筛选条件
+ */
+  public auctionList(params: any): Observable<any> {
+    let condition = {
+      'condition': {
+        'orderBy': params.condition.orderBy,
+      },
+      'curPage': params.curPage
+    }
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    return this.httpClient.post('http://localhost:8080/auction/auctionList', condition, {
+      withCredentials: true
+    });
+  }
+
+  /**
+ * 根据拍卖ID查看拍卖详情
+ * @param 筛选信息
+ */
+  public getAuctionInfoById(params: any): Observable<any> {
+    return this.httpClient.get('http://localhost:8080/auction/getAuctionInfoById/' + params, {
+      withCredentials: true
+    });
+  }
+
+  /**
+ * 根据拍卖ID查看价格实时变化
+ * @param 筛选信息
+ */
+  public getAuctionRealtimePrice(params: any): Observable<any> {
+    return this.httpClient.get('http://localhost:8080/auction/getAuctionRealtimePrice/' + params, {
+      withCredentials: true
+    });
+  }
+
+  /**
+ * 拍卖加价的逻辑
+ * @param 加价价格
+ */
+   public offer(auctionRealtimePrice: any): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/user/offer', auctionRealtimePrice, {
+      withCredentials: true
+    });
+  }
+  
+  /**
+  * 查看当前用户参加的所有拍卖
   * @param 筛选信息
   */
-    public getParticipantByActivityId(params: any): Observable<any> {
-      return this.httpClient.post('http://localhost:8080/user/getParticipantByActivityId', params, {
-        withCredentials: true
-      });
-    }
+   public getAuctionProcessByUserId(params: any): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/user/getAuctionProcessByUserId', params, {
+      withCredentials: true
+    });
+  }
+
+  /**
+ * 根据拍卖ID查看最高价格
+ * @param 筛选信息
+ */
+   public getMaxAuctionRealtimePrice(params: any): Observable<any> {
+    return this.httpClient.get('http://localhost:8080/auction/getMaxAuctionRealtimePrice/' + params, {
+      withCredentials: true
+    });
+  }
 }

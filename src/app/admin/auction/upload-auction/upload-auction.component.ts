@@ -23,14 +23,11 @@ export class UploadAuctionComponent implements OnInit {
     'beginTime': '',
     'endTime': '',
     'minPrice': '',
-    'maxPrice': '',
     'img': '',
     'summary': '',
   }
   // 最低价格
   public minPrice = 1;
-  // 最高价格
-  public maxPrice = 1;
   // 所需点数
   public point = 1;
   // 能否上传图片
@@ -175,7 +172,6 @@ export class UploadAuctionComponent implements OnInit {
         this.auction.beginTime = this.dateRange[0];
         this.auction.endTime = this.dateRange[1];
         this.auction.minPrice = this.minPrice + '';
-        this.auction.maxPrice = this.maxPrice + '';
         this.auction.img = this.imgLocation;
         this.adminService.uploadAuction(this.auction).subscribe(data => {
           if(data.code === StatusCode.SUCCESS){

@@ -46,7 +46,6 @@ export class SeeAuctionComponent implements OnInit {
     'beginTime': '',
     'endTime': '',
     'minPrice': '',
-    'maxPrice': '',
     'img': '',
     'summary': '',
   }
@@ -183,7 +182,6 @@ export class SeeAuctionComponent implements OnInit {
     this.dateRange.push(data.endTime);
     this.auction.summary = data.summary;
     this.auction.minPrice = data.minPrice;
-    this.auction.maxPrice = data.maxPrice;
     this.auction.img = data.img;
     this.buildUploadAuctionForm();
     this.newsModal = this.modal.create({
