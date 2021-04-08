@@ -7,7 +7,8 @@
 <nz-header nz-row style="background-color: white;
 height: 120px;">
     <div nz-col nzSpan="8">
-        <a routerLink="/"><img alt="微尘logo" src="http://localhost:8080/image/logo.png" /></a>
+        <a routerLink="/"><img style="width: 253.06px; height: 120px;" alt="微尘logo"
+                src="http://localhost:8080/image/logo.png" /></a>
     </div>
     <div nz-col nzSpan="8" style="margin-left: 240px;">
         <div *ngIf="!isLogin"><button nz-button class="green" nzType="default" (click)="login()">登录</button><button
@@ -73,6 +74,10 @@ height: 120px;">
                     <i nz-icon nzType="shopping" nzTheme="outline"></i>
                     <a [routerLink]="['/commodityList']">商品兑换</a>
                 </li>
+                <li nz-menu-item>
+                    <i nz-icon nzType="heart" nzTheme="outline"></i>
+                    <a [routerLink]="['/seekHelpList']">求助信息</a>
+                </li>
             </ul>
         </nz-header>
         <nz-layout style="background-color: white;">
@@ -124,8 +129,9 @@ height: 120px;">
             </nz-list>
         </nz-layout>
         <nz-layout style="width: 80%; background-color: white;">
-              <nz-pagination [(nzPageIndex)]="pageIndex" [nzTotal]="sizeTotal" [(nzPageSize)]="pageSize" nzShowQuickJumper (nzPageIndexChange)="changePageIndex()"></nz-pagination>
-          </nz-layout>
+            <nz-pagination [(nzPageIndex)]="pageIndex" [nzTotal]="sizeTotal" [(nzPageSize)]="pageSize" nzShowQuickJumper
+                (nzPageIndexChange)="changePageIndex()"></nz-pagination>
+        </nz-layout>
         <!-- 模态框头部 -->
         <ng-template #tplTitle>
             <span>评论</span>

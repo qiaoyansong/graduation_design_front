@@ -1,12 +1,16 @@
 <nz-alert *ngIf="otherFlag" nzType="error" nzCloseable nzMessage="在别处登录"
     nzDescription="您的账号在别处登录，您被迫下线，右上角关闭此消息框，可以立刻修改密码" (nzOnClose)="afterClose(1)">
 </nz-alert>
-<nz-alert *ngIf="signUpFlag" nzType="success" nzCloseable  nzMessage="报名成功" nzShowIcon (nzOnClose)="afterClose(2)"></nz-alert>
+<nz-alert *ngIf="signUpFlag" nzType="success" nzCloseable nzMessage="报名成功" nzShowIcon (nzOnClose)="afterClose(2)">
+</nz-alert>
+<nz-alert *ngIf="repeatFlag" nzType="error" nzCloseable nzMessage="请勿重复报名该活动" nzShowIcon (nzOnClose)="afterClose(2)">
+</nz-alert>
 <!-- 首部信息 -->
 <nz-header nz-row style="background-color: white;
 height: 120px;">
     <div nz-col nzSpan="8">
-        <a routerLink="/"><img alt="微尘logo" src="http://localhost:8080/image/logo.png" /></a>
+        <a routerLink="/"><img style="width: 253.06px; height: 120px;" alt="微尘logo"
+                src="http://localhost:8080/image/logo.png" /></a>
     </div>
     <div nz-col nzSpan="8" style="margin-left: 240px;">
         <div *ngIf="!isLogin"><button nz-button class="green" nzType="default" (click)="login()">登录</button><button
@@ -72,6 +76,10 @@ height: 120px;">
                     <i nz-icon nzType="shopping" nzTheme="outline"></i>
                     <a [routerLink]="['/commodityList']">商品兑换</a>
                 </li>
+                <li nz-menu-item>
+                    <i nz-icon nzType="heart" nzTheme="outline"></i>
+                    <a [routerLink]="['/seekHelpList']">求助信息</a>
+                </li>
             </ul>
         </nz-header>
         <nz-layout style="background-color: white;">
@@ -93,7 +101,8 @@ height: 120px;">
                     </div>
                     <div class="content" [innerHTML]="safeArticle">
                     </div>
-                    <button *ngIf="flag" nz-button nzType="primary" (click)="signUp(tplTitle,tplContent,tplFooter)">报名活动</button>
+                    <button *ngIf="flag" nz-button nzType="primary"
+                        (click)="signUp(tplTitle,tplContent,tplFooter)">报名活动</button>
                     <button *ngIf="!flag" disabled nz-button nzType="primary">报名活动</button>
                 </div>
             </nz-content>

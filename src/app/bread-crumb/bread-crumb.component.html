@@ -55,6 +55,10 @@
     <i nz-icon nzType="shopping-cart" nzTheme="outline"></i>
     拍卖列表
   </nz-breadcrumb-item>
+  <nz-breadcrumb-item *ngIf="type === 'seekHelpList'">
+    <i nz-icon nzType="heart" nzTheme="outline"></i>
+    求助列表
+  </nz-breadcrumb-item>
   <nz-breadcrumb-item *ngIf="type === 'auctionDetail'">
     <i nz-icon nzType="shopping-cart" nzTheme="outline"></i>
     <a [routerLink]="['/auctionList']">拍卖列表</a>
@@ -62,6 +66,14 @@
   <nz-breadcrumb-item *ngIf="type === 'auctionDetail'">
     <i nz-icon nzType="shopping-cart" nzTheme="outline"></i>
     拍卖详情
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item *ngIf="type === 'seekHelpDetail'">
+    <i nz-icon nzType="heart" nzTheme="outline"></i>
+    <a [routerLink]="['/seekHelpList']">求助列表</a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item *ngIf="type === 'seekHelpDetail'">
+    <i nz-icon nzType="heart" nzTheme="outline"></i>
+    求助详情
   </nz-breadcrumb-item>
   <nz-breadcrumb-item *ngIf="type === 'commodityList'">
     <i nz-icon nzType="shopping" nzTheme="outline"></i>

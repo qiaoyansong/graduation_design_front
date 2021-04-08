@@ -11,12 +11,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { newsSummaryValidator } from 'src/app/validator/bussinessValidator';
 
 @Component({
-  selector: 'app-activity',
-  templateUrl: './activity.component.html',
+  selector: 'app-seek-help-info',
+  templateUrl: './seek-help-info.component.html',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./activity.component.scss']
+  styleUrls: ['./seek-help-info.component.scss']
 })
-export class ActivityComponent implements OnInit {
+export class SeekHelpInfoComponent implements OnInit {
 
   public queryParams;
   public news;
@@ -38,24 +38,6 @@ export class ActivityComponent implements OnInit {
   public otherFlag = false;
   //头像
   public headPortrait = null;
-  // 当前页数
-  public pageIndex: number;
-  // 当前每页的数据条数
-  public pageSize: number;
-  // 当前数据条数
-  public sizeTotal: number;
-  // 倒计时
-  public deadline;
-  // 倒计时标志位
-  public flag = true;
-  // 报名公益活动表单
-  public signUpActivityForm: FormGroup;
-  // 模态框
-  public newsModal?: NzModalRef;
-  // 报名是否成功标志位
-  public signUpFlag = false;
-  // 判断该用户
-  public repeatFlag = false;
   constructor(public activeRouter: ActivatedRoute,
     private translate: TranslateService,
     private router: Router,
@@ -66,8 +48,6 @@ export class ActivityComponent implements OnInit {
     private fb: FormBuilder) {
     this.otherFlag = false;
     this.translate.use('zh');
-    this.pageIndex = 1;
-    this.pageSize = 10;
     this.activeRouter.queryParams.subscribe(params => {
       this.queryParams = params.id;
     });
@@ -107,11 +87,9 @@ export class ActivityComponent implements OnInit {
         this.headPortrait = this.loginService.getUser().headPortrait;
       }
     });
-    this.userService.getActivityInfoById(this.queryParams).subscribe(data => {
+    this.userService.getSeekHelpInfoById0(this.queryParams).subscribe(data => {
       this.news = data.body;
-      this.deadline = new Date(data.body.beginTime).getTime() + new Date(data.body.endTime).getTime() - new Date(data.body.beginTime).getTime();
       this.safeArticle = this.sanitizer.bypassSecurityTrustHtml(this.news.content);
-      this.flag = this.deadline >= new Date().getTime() ? true : false;
     });
   }
   ngOnInit(): void {
@@ -151,8 +129,6 @@ export class ActivityComponent implements OnInit {
     if (num == 1) {
       this.router.navigate(['/forgetpwd']);
     } else {
-      this.signUpFlag = false;
-      this.repeatFlag = false;
     }
   }
 
@@ -168,74 +144,6 @@ export class ActivityComponent implements OnInit {
    */
   public register(): void {
     this.router.navigate(['/register']);
-  }
-
-  /**
-   * 报名活动
-   */
-  public signUp(tplTitle: TemplateRef<{}>, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>): void {
-    if (this.loginService.getUser() == null) {
-      this.router.navigate(['/login']);
-    } else {
-      this.flag = this.deadline >= new Date().getTime() ? true : false;
-      if (this.flag) {
-        // 报名活动
-        this.createTplModal(tplTitle, tplContent, tplFooter);
-      }
-    }
-  }
-
-  /**
-  * 构建上传公益资讯表单
-  */
-  public buildUploadActivityForm(): void {
-    this.signUpActivityForm = this.fb.group(
-      {
-      });
-  }
-  public createTplModal(tplTitle: TemplateRef<{}>, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>): void {
-    this.buildUploadActivityForm();
-    this.newsModal = this.modal.create({
-      nzTitle: tplTitle,
-      nzContent: tplContent,
-      nzFooter: tplFooter,
-      nzMaskClosable: false,
-      nzClosable: false,
-      nzComponentParams: {
-        value: 'Template Context'
-      },
-    });
-  }
-  /**
- * 销毁模态框
- */
-  public destroyTplModal(): void {
-    this.signUpFlag = false;
-    this.newsModal!.destroy();
-  }
-
-  /**
-   * 报名活动
-   */
-  public signUp0(): void {
-    let params = {
-      'userId': this.loginService.getUserId() + '',
-      'activityId': this.queryParams
-    }
-    this.userService.signUp(params).subscribe(data => {
-      if (data.code === StatusCode.SUCCESS) {
-        // 提示报名成功
-        this.signUpFlag = true;
-        // 移动到顶部
-        window.scrollTo(0, 0);
-      } else if (data.code === StatusCode.REPEAT_THE_EVENT) {
-        // 已经参加过该活动了
-        this.repeatFlag = true;
-        // 移动到顶部
-        window.scrollTo(0, 0);
-      }
-      this.destroyTplModal();
-    });
   }
 
 }

@@ -61,10 +61,6 @@ nz-select {
     border-color: red;
 }
 
-a {
-    color: white;
-}
-
 .ant-layout-header .ant-menu {
     margin: 22px auto;
 }
@@ -83,6 +79,16 @@ nz-layout:last-child {
 nz-layout {
     margin-bottom: 0px;
 }
+.title h1 {
+    width: 680px;
+    line-height: 50px;
+    font-family: 'microsoft yahei',Arial;
+    font-size: 25px;
+    font-weight: normal;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+}
 .arc {
     padding: 5px 0;
 }
@@ -92,21 +98,12 @@ nz-layout {
     border-bottom: 1px solid #DEDEDE;
     text-align: center;
     margin-bottom: 8px;
-    color: black;
 }
 .des {
     height: 50px;
     padding: 5px;
     line-height: 25px;
     border: #CCC 1px dotted;
-    color: black;
-    overflow: hidden;
-}
-.des1 {
-    padding: 5px;
-    line-height: 25px;
-    border: #CCC 1px dotted;
-    color: black;
     overflow: hidden;
 }
 .content {
@@ -127,13 +124,12 @@ p {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
 }
-.title h1 {
-    width: 680px;
-    line-height: 50px;
-    font-family: 'microsoft yahei',Arial;
-    font-size: 25px;
-    font-weight: normal;
+h3 {
     display: block;
-    margin: 0 auto;
-    text-align: center;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
 }

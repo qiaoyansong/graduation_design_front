@@ -159,4 +159,11 @@ export class SeekHelpJdComponent implements OnInit {
    public getSeekHelpInfoById(id: any): void {
     this.router.navigate(['/seekHelpDetail'], { queryParams: { id: id } });
   }
+
+  /**
+  * 根据求助ID获取详细信息
+  */
+   public getSeekHelpInfoById0(id: any): void {
+    this.router.navigate(['/seekHelp'], { queryParams: { id: id } });
+  }
 }

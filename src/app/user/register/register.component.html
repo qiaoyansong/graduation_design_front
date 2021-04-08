@@ -59,6 +59,12 @@
                           placeholder="将会发送验证码到您提供的邮箱" maxlength="30" />
                       </nz-form-control>
                     </nz-form-item>
+                    <nz-form-item>
+                      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="telephone">手机号码</nz-form-label>
+                      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="手机号码不符合要求">
+                          <input nz-input formControlName="telephone" id="telephone" [(ngModel)]="user.telephone" />
+                      </nz-form-control>
+                  </nz-form-item>
                   </form>
                   <!-- 表单结束 -->
                 </nz-content>

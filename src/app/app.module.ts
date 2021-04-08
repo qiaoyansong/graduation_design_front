@@ -94,6 +94,9 @@ import { NzProgressModule } from 'ng-zorro-antd/progress';
 import { UploadProcessComponent } from './admin/activity/upload-process/upload-process.component';
 import { AuctionProcessComponent } from './user/auction-process/auction-process.component';
 import { NzTimelineModule } from 'ng-zorro-antd/timeline';
+import { SeekHelpListComponent } from './seekHelp/seek-help-list/seek-help-list.component';
+import { SeekHelpInfoComponent } from './seekHelp/seek-help-info/seek-help-info.component';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 @NgModule({
   declarations: [
     AppComponent,
@@ -146,11 +149,14 @@ import { NzTimelineModule } from 'ng-zorro-antd/timeline';
     ActivityProcessComponent,
     UploadProcessComponent,
     AuctionProcessComponent,
+    SeekHelpListComponent,
+    SeekHelpInfoComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NzButtonModule,
+    NzEmptyModule,
     BrowserAnimationsModule,
     NzLayoutModule,
     NzBackTopModule,

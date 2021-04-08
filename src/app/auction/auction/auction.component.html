@@ -5,7 +5,8 @@
 <nz-header nz-row style="background-color: white;
 height: 120px;">
     <div nz-col nzSpan="8">
-        <a routerLink="/"><img alt="微尘logo" src="http://localhost:8080/image/logo.png" /></a>
+        <a routerLink="/"><img style="width: 253.06px; height: 120px;" alt="微尘logo"
+                src="http://localhost:8080/image/logo.png" /></a>
     </div>
     <div nz-col nzSpan="8" style="margin-left: 240px;">
         <div *ngIf="!isLogin"><button nz-button class="green" nzType="default" (click)="login()">登录</button><button
@@ -71,6 +72,10 @@ height: 120px;">
                     <i nz-icon nzType="shopping" nzTheme="outline"></i>
                     <a [routerLink]="['/commodityList']">商品兑换</a>
                 </li>
+                <li nz-menu-item>
+                    <i nz-icon nzType="heart" nzTheme="outline"></i>
+                    <a [routerLink]="['/seekHelpList']">求助信息</a>
+                </li>
             </ul>
         </nz-header>
         <nz-layout style="background-color: white;">
@@ -97,7 +102,7 @@ height: 120px;">
                             </nz-timeline-item>
                         </nz-timeline>
                     </div>
-                    <div class="des1" *ngIf="!flag">
+                    <div class="des1" *ngIf="!flag && user != null">
                         <nz-avatar *ngIf="user.user.headPortrait == null " [ngStyle]="{ 'background-color': color }"
                             [nzText]="userName" nzSize="large" style="vertical-align: middle;"></nz-avatar>
                         <nz-avatar *ngIf="user.user.headPortrait != null " nzIcon="user"
@@ -105,6 +110,9 @@ height: 120px;">
                         </nz-avatar>
                         出价人：{{ user.user.userName}}
                         价格：{{user.price}}
+                    </div>
+                    <div class="des1" *ngIf="!flag && user == null">
+                        此商品已经流拍
                     </div>
                     <nz-col [nzSpan]="24" style="margin-top: 32px;">
                         <nz-countdown [nzValue]="deadline" [nzTitle]="'允许出价倒计时'" [nzFormat]="'D 天 H 时 m 分 s 秒'">

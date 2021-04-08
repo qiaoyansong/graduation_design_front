@@ -27,7 +27,8 @@ export class RegisterService {
       'userName': user.userName,
       'password': user.password,
       'mailbox':  user.mailbox,
-      'verificationCode': user.verificationCode
+      'verificationCode': user.verificationCode,
+      'telephone': user.telephone
     }
     return this.httpClient.post('http://localhost:8080/register/register', register,{
       withCredentials: true

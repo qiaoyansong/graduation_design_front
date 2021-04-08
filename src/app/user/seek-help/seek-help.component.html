@@ -11,6 +11,21 @@
                 placeholder="只支持汉字，最多支持50个汉字" />
             </nz-form-control>
           </nz-form-item>
+           <!-- 列表展示图片 -->
+           <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24">
+              <span style="font-size: 24px; line-height: 100%; color: red;">*</span>列表展示图片
+              <i nz-icon nzType="question" nzTheme="outline" nzTooltipTitle="仅支持.png、.jpg格式的图片" nzTooltipPlacement="topCenter" nz-tooltip></i>
+            </nz-form-label>
+            <nz-upload
+            nzAction="http://localhost:8080/upload/pic"
+            [nzHeaders]="{ authorization: 'authorization-text' }"
+            (nzChange)="handleNewsImagChange($event)"
+            [nzDisabled]="isDisabled"
+            >
+          <button nz-button><i nz-icon nzType="upload"></i>上传</button>
+          </nz-upload>
+          </nz-form-item>
         </form>
         <editor [(ngModel)]="data" apiKey="gwyubai1cdtwea9azntbx3b4dni7oq5e5hmptytgybotdmh3" [init]="tinyInit"></editor>
         <button nz-button nzType="primary" (click)="submit()">提交申请</button>

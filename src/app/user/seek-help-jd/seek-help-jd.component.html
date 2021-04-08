@@ -37,7 +37,8 @@
                             <td>{{ data.id }}</td>
                             <td>{{ data.title }}</td>
                             <td>{{ data.flag | newsCheckPipe}}</td>
-                            <td><button nz-button [nzType]="'primary'" (click)="getSeekHelpInfoById(data.id)"><span>查看详情</span></button></td>
+                            <td *ngIf="data.flag == 0"><button nz-button [nzType]="'primary'" (click)="getSeekHelpInfoById(data.id)"><span>查看详情</span></button></td>
+                            <td *ngIf="data.flag == 1"><button nz-button [nzType]="'primary'" (click)="getSeekHelpInfoById0(data.id)"><span>查看详情</span></button></td>
                         </tr>
                     </ng-template>
                 </tbody>

@@ -156,6 +156,16 @@ export class UserService {
   }
 
   /**
+ * 查看具体的求助信息
+ * @param id 求助信息ID
+ */
+   public getSeekHelpInfoById0(id: any): Observable<any> {
+    return this.httpClient.get('http://localhost:8080/seekHelpList/getSeekHelpInfoById/' + id, {
+      withCredentials: true
+    });
+  }
+
+  /**
  * 用于获取资讯详情
  * @param id 资讯ID
  */
@@ -359,6 +369,24 @@ export class UserService {
  */
    public getMaxAuctionRealtimePrice(params: any): Observable<any> {
     return this.httpClient.get('http://localhost:8080/auction/getMaxAuctionRealtimePrice/' + params, {
+      withCredentials: true
+    });
+  }
+
+  /**
+   * 用于获取求助信息
+   * @param params 筛选条件
+   */
+   public getSeekHelp(params: any): Observable<any> {
+    let condition = {
+      'condition': {
+        'orderBy': params.condition.orderBy,
+        'flag': params.condition.flag
+      },
+      'curPage': params.curPage
+    }
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    return this.httpClient.post('http://localhost:8080/seekHelpList/seekHelpList', condition, {
       withCredentials: true
     });
   }

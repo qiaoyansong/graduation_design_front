@@ -84,31 +84,26 @@
             </ul>
         </nz-header>
         <nz-layout style="background-color: white;">
-            <app-bread-crumb type='auctionList' style="width: 18%;"></app-bread-crumb>
+            <app-bread-crumb type='seekHelpList' style="width: 18%;"></app-bread-crumb>
         </nz-layout>
         <nz-layout style="background-color: white; width: 100%;">
-            <nz-content style="width: 80%; margin: 0 auto; background-color: white;">
+            <nz-content style="width: 80%; margin: 0 auto; background-color: white;" *ngIf="sizeTotal != 0">
                 <nz-list nzItemLayout="vertical">
                     <nz-list-item *ngFor="let item of data">
                         <nz-list-item-meta>
                             <nz-list-item-meta-title>
                                 标题:
-                                <a style="color: black;" (click)="getAuctionInfoById(item.id)">{{ item.title }}</a>
+                                <a style="color: black;" (click)="getSeekHelpInfoById(item.id)">{{ item.title }}</a>
                             </nz-list-item-meta-title>
                         </nz-list-item-meta>
-                        开始时间：
-                        {{ item.beginTime | date:'yyyy年-MM月-d日 HH:mm:ss' : 'utc+8' }}
-                        <br />
-                        结束时间：
-                        {{ item.endTime | date:'yyyy年-MM月-d日 HH:mm:ss' : 'utc+8' }}
-                        <br />
-                        最低价格：
-                        {{ item.minPrice}}
                         <nz-list-item-extra>
                             <img width="272" height="220" alt="logo" src="{{item.img}}" />
                         </nz-list-item-extra>
                     </nz-list-item>
                 </nz-list>
+            </nz-content>
+            <nz-content style="width: 80%; margin: 0 auto; background-color: white;" *ngIf="sizeTotal == 0">
+                <nz-empty [nzNotFoundContent]="'暂无求助信息'"></nz-empty>
             </nz-content>
         </nz-layout>
         <nz-layout style="background-color: white;">

@@ -25,6 +25,8 @@ import { NewsComponent } from './news/news/news.component';
 import { ActivityComponent } from './activity/activity/activity.component';
 import { AuctionComponent } from './auction/auction/auction.component';
 import { CommodityComponent } from './commodity/commodity/commodity.component';
+import { SeekHelpListComponent } from './seekHelp/seek-help-list/seek-help-list.component';
+import { SeekHelpInfoComponent } from './seekHelp/seek-help-info/seek-help-info.component';
 
 const routes: Routes = [
   {path: 'tinyEditor', component: TinyEditorComponent},
@@ -46,9 +48,11 @@ const routes: Routes = [
   {path: 'activity', component: ActivityComponent},
   {path: 'auction', component: AuctionComponent},
   {path: 'commodity', component: CommodityComponent},
+  {path: 'seekHelp', component: SeekHelpInfoComponent},
   {path: 'auctionList', component: AuctionListComponent},
   {path: 'commodityList', component: CommodityListComponent},
   {path: 'activityList', component: ActivityListComponent},
+  {path: 'seekHelpList', component: SeekHelpListComponent},
   {path: '**', component: ResultFofComponent},
 ];
 

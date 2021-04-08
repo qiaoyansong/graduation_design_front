@@ -1,23 +1,14 @@
 <nz-alert *ngIf="otherFlag" nzType="error" nzCloseable nzMessage="在别处登录"
-    nzDescription="您的账号在别处登录，您被迫下线，右上角关闭此消息框，可以立刻修改密码" (nzOnClose)="afterClose()">
+    nzDescription="您的账号在别处登录，您被迫下线，右上角关闭此消息框，可以立刻修改密码" (nzOnClose)="afterClose(1)">
 </nz-alert>
 <!-- 首部信息 -->
-<nz-header nz-row>
+<nz-header nz-row style="background-color: white;
+height: 120px;">
     <div nz-col nzSpan="8">
-        <a routerLink="/"><img alt="微尘logo" src="http://localhost:8080/image/logo.png" /></a>
+        <a routerLink="/"><img style="width: 253.06px; height: 120px;" alt="微尘logo"
+                src="http://localhost:8080/image/logo.png" /></a>
     </div>
-    <div nz-col nzSpan="8">
-        <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-            <input type="text" nz-input placeholder="{{ 'Home.SearchInputValue' | translate }}"
-                [(ngModel)]="searchValue" />
-        </nz-input-group>
-        <ng-template #suffixIconButton>
-            <button nz-button nzType="primary" nzSearch (click)="search()">
-                <i nz-icon nzType="search"></i>
-            </button>
-        </ng-template>
-    </div>
-    <div nz-col nzSpan="8">
+    <div nz-col nzSpan="8" style="margin-left: 240px;">
         <div *ngIf="!isLogin"><button nz-button class="green" nzType="default" (click)="login()">登录</button><button
                 class="red" (click)="register()" nz-button nzType="default">注册</button></div>
         <!-- 登陆成功显示用户 -->
@@ -57,9 +48,13 @@
     </div>
 </nz-header>
 <nz-content>
-    <nz-layout>
+    <nz-layout style="background-color: white;">
         <!-- 导航栏 -->
-        <nz-header>
+        <nz-header style="    height: 106px;
+        padding: 0 50px;
+        color: rgba(0,0,0,.65);
+        line-height: 64px;
+        background: white;">
             <ul nz-menu nzMode="horizontal">
                 <li nz-menu-item>
                     <i nz-icon nzType="read" nzTheme="outline"></i>
@@ -84,51 +79,34 @@
             </ul>
         </nz-header>
         <nz-layout style="background-color: white;">
-            <app-bread-crumb type='auctionList' style="width: 18%;"></app-bread-crumb>
+            <app-bread-crumb type='seekHelpDetail' style="width: 18%;"></app-bread-crumb>
         </nz-layout>
-        <nz-layout style="background-color: white; width: 100%;">
-            <nz-content style="width: 80%; margin: 0 auto; background-color: white;">
-                <nz-list nzItemLayout="vertical">
-                    <nz-list-item *ngFor="let item of data">
-                        <nz-list-item-meta>
-                            <nz-list-item-meta-title>
-                                标题:
-                                <a style="color: black;" (click)="getAuctionInfoById(item.id)">{{ item.title }}</a>
-                            </nz-list-item-meta-title>
-                        </nz-list-item-meta>
-                        开始时间：
-                        {{ item.beginTime | date:'yyyy年-MM月-d日 HH:mm:ss' : 'utc+8' }}
-                        <br />
-                        结束时间：
-                        {{ item.endTime | date:'yyyy年-MM月-d日 HH:mm:ss' : 'utc+8' }}
-                        <br />
-                        最低价格：
-                        {{ item.minPrice}}
-                        <nz-list-item-extra>
-                            <img width="272" height="220" alt="logo" src="{{item.img}}" />
-                        </nz-list-item-extra>
-                    </nz-list-item>
-                </nz-list>
+        <!-- 活动内容 -->
+        <nz-layout style="width: 80%; margin: 0 auto;">
+            <nz-content style="width: 100%;">
+                <div class="arc">
+                    <div class="title">
+                        <h1>{{news.title}}</h1>
+                    </div>
+                    <div class="content" [innerHTML]="safeArticle">
+                    </div>
+                </div>
             </nz-content>
-        </nz-layout>
-        <nz-layout style="background-color: white;">
-            <nz-pagination [(nzPageIndex)]="pageIndex" [nzTotal]="sizeTotal" [(nzPageSize)]="pageSize" nzShowQuickJumper
-                (nzPageIndexChange)="changePageIndex()"></nz-pagination>
         </nz-layout>
     </nz-layout>
 </nz-content>
-<nz-footer>
+<nz-footer style="background: #333;">
     <div nz-row>
-        <div nz-col nzSpan="12" nzOffset="6">
+        <div nz-col nzSpan="12" nzOffset="6" style="color: white;">
             微尘版权所有
         </div>
-        <div nz-col nzSpan="12" nzOffset="6">
+        <div nz-col nzSpan="12" nzOffset="6" style="color: white;">
             联系我：1012077930@qq.com
         </div>
-        <div nz-col nzSpan="12" nzOffset="6">
-            <a href="http://www.12377.cn/" target="_blank">违法和不良信息举报中心</a>
+        <div nz-col nzSpan="12" nzOffset="6" style="color: white;">
+            <a style="color: white;" href="http://www.12377.cn/" target="_blank">违法和不良信息举报中心</a>
             |
-            <a href="http://www.piyao.org.cn/" target="_blank">中国互联网联合辟谣平台</a>
+            <a style="color: white;" href="http://www.piyao.org.cn/" target="_blank">中国互联网联合辟谣平台</a>
         </div>
     </div>
 </nz-footer>

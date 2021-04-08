@@ -8,7 +8,6 @@
                     <tr>
                         <th [nzShowSort]="true" (nzSortOrderChange)="changeOrder($event)"
                             [nzSortOrder]="listSortOrderBy">活动ID</th>
-                        <th>用户ID</th>
                         <th>进度</th>
                         <th>操作</th>
                     </tr>
@@ -17,7 +16,6 @@
                     <ng-template ngFor let-data [ngForOf]="parentTable.data">
                         <tr>
                             <td>{{ data.activityId }}</td>
-                            <td>{{ data.userId }}</td>
                             <td>
                                 <nz-progress [nzPercent]="data.progress" [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }" nzStatus="active"></nz-progress>
                             </td>

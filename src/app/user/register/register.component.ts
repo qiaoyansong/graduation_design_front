@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../../service/language.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { mailboxValidator, passwordValidator, userNameValidator, verificationCodeValidator } from '../../validator/bussinessValidator';
+import { locationTelValidator, mailboxValidator, passwordValidator, userNameValidator, verificationCodeValidator } from '../../validator/bussinessValidator';
 import { RegisterService } from '../../service/register.service';
 import { StatusCode } from '../../enumType/StatusCode';
 import { Router } from '@angular/router';
@@ -23,7 +23,8 @@ export class RegisterComponent implements OnInit {
     'password':'',
     'checkPassword': '',
     'mailbox': '',
-    'verificationCode': ''
+    'verificationCode': '',
+    'telephone':''
   };
   constructor(private languageService: LanguageService, 
     private translate: TranslateService, 
@@ -43,6 +44,7 @@ export class RegisterComponent implements OnInit {
         password: [this.user.password, [passwordValidator()]],
         checkPassword: [this.user.checkPassword, [passwordValidator()]],
         mailbox: [this.user.mailbox, [Validators.required, mailboxValidator()]],
+        telephone: [this.user.telephone, [Validators.required, locationTelValidator()]],
       });
   }
 
@@ -119,7 +121,7 @@ export class RegisterComponent implements OnInit {
   next(num: number): void {
     if(num === 1){
       // 检测表单信息
-      if(this.checkMailbox() && this.recheckPassword() && this.checkPassword() && this.checkUsername()){
+      if(this.checkMailbox() && this.recheckPassword() && this.checkPassword() && this.checkUsername() && this.checkLocationTel()){
         this.disabled = true;
         this.registerService.getVerificationCode(this.user.mailbox).subscribe(data => {
           if(data.code === StatusCode.CREATE_VERIFICATION_CODE_COMPLETE){
@@ -222,4 +224,13 @@ export class RegisterComponent implements OnInit {
     return result;
   }
 
+  /**
+   * 验证手机号码是否符合格式
+   */
+   public checkLocationTel(): boolean {
+    const value = this.user.telephone;
+    const reg = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+    const result = reg.test(value);
+    return result;
+  };
 }
