@@ -74,5 +74,13 @@ export enum StatusCode {
     /**
      * 已经参加过该活动，请勿重复参加
      */
-    REPEAT_THE_EVENT = "117"
+    REPEAT_THE_EVENT = "117",
+    /**
+     * 积分不足
+     */
+     INSUFFICIENT_POINTS = "118",
+     /**
+      * 库存不足
+      */
+     OUT_OF_STOCK = "119"
 }

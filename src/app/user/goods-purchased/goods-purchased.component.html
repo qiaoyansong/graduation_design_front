@@ -1,1 +1,60 @@
-<p>goods-purchased works!</p>
+<nz-layout style="height: 100%;">
+    <nz-content>
+        <nz-content class="content-data">
+            <nz-table style="width: 100%; height: 100%;" #parentTable [(nzData)]="listOfParentData"
+                [(nzPageIndex)]="pageIndex" [nzShowQuickJumper]="true" [(nzPageSize)]="pageSize" [(nzTotal)]="sizeTotal"
+                [nzFrontPagination]="false" (nzPageIndexChange)="changePageIndex()">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th [nzShowSort]="true" (nzSortOrderChange)="changeOrder($event)"
+                            [nzSortOrder]="listSortOrderBy">兑换商品ID</th>
+                        <th>
+                            兑换商品名称
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-template ngFor let-data [ngForOf]="parentTable.data">
+                        <tr>
+                            <td [nzExpand]="expandSet.has(data.id)" (nzExpandChange)="onExpandChange(data.id, $event)">
+                            </td>
+                            <td>{{ data.id }}</td>
+                            <td>{{ data.commodity.title }}</td>
+                            <td>
+                                <button nz-button [nzType]="'primary'" (click)="getCommdityInfoById(data.commodity.id)"><span>查看商品详情</span></button>
+                            </td>
+                        </tr>
+                        <tr [nzExpand]="expandSet.has(data.id)">
+                            <nz-table #innerTable (nzData)="data" nzSize="middle" [nzShowPagination]="false">
+                                <thead>
+                                    <tr>
+                                        <th>电话号码</th>
+                                        <th>收货人姓名</th>
+                                        <th>省</th>
+                                        <th>市</th>
+                                        <th>区</th>
+                                        <th>具体地址</th>
+                                    </tr>
+                                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{data.userLocations.telephone}}</td>
+                        <td>{{data.userLocations.name}}</td>
+                        <td>{{data.userLocations.province | location}}</td>
+                        <td>{{data.userLocations.city | location}}</td>
+                        <td>{{data.userLocations.area | location}}</td>
+                        <td>{{data.userLocations.location}}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+            </tr>
+            </ng-template>
+            </tbody>
+            </nz-table>
+        </nz-content>
+    </nz-content>
+</nz-layout>

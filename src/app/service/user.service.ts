@@ -390,4 +390,37 @@ export class UserService {
       withCredentials: true
     });
   }
+
+  /**
+   * 根据用户ID获取地址信息
+   * @param params 筛选条件
+   */
+   public getAddressListByUserId(params: any): Observable<any> {
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    return this.httpClient.post('http://localhost:8080/user/getAddressListByUserId', params, {
+      withCredentials: true
+    });
+  }
+
+  /**
+   * 兑换商品
+   * @param params 参数
+   */
+   public exchangeCommodity(params: any): Observable<any> {
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    return this.httpClient.post('http://localhost:8080/user/exchangeCommodity', params, {
+      withCredentials: true
+    });
+  }
+
+  /**
+   * 获取用户兑换的商品列表
+   * @param params 参数
+   */
+   public getExchangeCommodityListByUserId(params: any): Observable<any> {
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    return this.httpClient.post('http://localhost:8080/user/getExchangeCommodityListByUserId', params, {
+      withCredentials: true
+    });
+  }
 }

@@ -84,7 +84,7 @@
                                 <a (click)="getInfo(5)"></a>
                             </li>
                             <li nz-menu-item [nzSelected]="select === 6">
-                                已购商品
+                                已兑换商品
                                 <a (click)="getInfo(6)"></a>
                             </li>
                         </ul>
@@ -102,6 +102,10 @@
                             <li nz-menu-item [nzSelected]="select === 10">
                                 拍卖进度
                                 <a (click)="getInfo(10)"></a>
+                            </li>
+                            <li nz-menu-item [nzSelected]="select === 11">
+                                已拍得商品
+                                <a (click)="getInfo(11)"></a>
                             </li>
                         </ul>
                     </li>
@@ -127,12 +131,14 @@
         <app-receiving-address *ngIf="select === 5" style="width: 100%;" (uploadFlags)="getUploadLocationsFlag($event)"
             (deleteFlags)="getDeleteLocationFlag($event)" (upsetFlags)="getUpdateLocationFlag($event)">
         </app-receiving-address>
-        <!-- 已购商品 -->
+        <!-- 已兑换商品 -->
         <app-goods-purchased *ngIf="select === 6" style="width: 100%;"></app-goods-purchased>
         <!-- 当前用户所参与活动 -->
         <app-activity-process  *ngIf="select === 9" style="width: 100%;"></app-activity-process>
         <!-- 拍卖进度查询 -->
         <app-auction-process *ngIf="select === 10" style="width: 100%;"></app-auction-process>
+        <!-- 已拍得商品 -->
+        <app-deliver-auction *ngIf="select === 11" style="width: 100%;"></app-deliver-auction>
     </nz-layout>
     <!-- 声明信息 -->
     <nz-footer>

@@ -97,6 +97,8 @@ import { NzTimelineModule } from 'ng-zorro-antd/timeline';
 import { SeekHelpListComponent } from './seekHelp/seek-help-list/seek-help-list.component';
 import { SeekHelpInfoComponent } from './seekHelp/seek-help-info/seek-help-info.component';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { DeliverAuctionComponent } from './user/deliver-auction/deliver-auction.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -151,6 +153,7 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
     AuctionProcessComponent,
     SeekHelpListComponent,
     SeekHelpInfoComponent,
+    DeliverAuctionComponent,
   ],
   imports: [
     BrowserModule,
@@ -159,6 +162,7 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
     NzEmptyModule,
     BrowserAnimationsModule,
     NzLayoutModule,
+    NzRadioModule,
     NzBackTopModule,
     EditorModule,
     NzToolTipModule,

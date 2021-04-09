@@ -1,5 +1,13 @@
 <nz-alert *ngIf="otherFlag" nzType="error" nzCloseable nzMessage="在别处登录"
-    nzDescription="您的账号在别处登录，您被迫下线，右上角关闭此消息框，可以立刻修改密码" (nzOnClose)="afterClose()">
+    nzDescription="您的账号在别处登录，您被迫下线，右上角关闭此消息框，可以立刻修改密码" (nzOnClose)="afterClose(1)">
+</nz-alert>
+<nz-alert *ngIf="flag === '200'" nzType="success" nzCloseable nzMessage="兑换商品成功" nzShowIcon (nzOnClose)="afterClose(2)">
+</nz-alert>
+<nz-alert *ngIf="flag === '109'" nzType="error" nzCloseable nzMessage="未知错误" nzShowIcon (nzOnClose)="afterClose(2)">
+</nz-alert>
+<nz-alert *ngIf="flag === '119'" nzType="error" nzCloseable nzMessage="商品库存不足" nzShowIcon (nzOnClose)="afterClose(2)">
+</nz-alert>
+<nz-alert *ngIf="flag === '118'" nzType="error" nzCloseable nzMessage="积分不足" nzShowIcon (nzOnClose)="afterClose(2)">
 </nz-alert>
 <!-- 首部信息 -->
 <nz-header nz-row style="background-color: white;
@@ -98,7 +106,13 @@ height: 120px;">
                     </div>
                     <div class="content" [innerHTML]="safeArticle">
                     </div>
-                    <button nz-button nzType="primary">兑换商品</button>
+                    <button *ngIf="user == null" nz-button nzType="primary" (click)="login()">兑换商品</button>
+                    <!-- 展示点数不够模态框 -->
+                    <button *ngIf="user != null && user.point < news.point" nz-button nzType="primary"
+                        (click)="createTplModal(tplTitle,tplContent,tplFooter,1)">兑换商品</button>
+                    <!-- 展示选择地址模态框 -->
+                    <button *ngIf="user != null && user.point >= news.point" nz-button nzType="primary"
+                        (click)="createTplModal(tplTitle1,tplContent1,tplFooter1,2)">兑换商品</button>
                 </div>
             </nz-content>
         </nz-layout>
@@ -120,3 +134,71 @@ height: 120px;">
     </div>
 </nz-footer>
 <app-back-top [height]="2"></app-back-top>
+<!-- 模态框头部 -->
+<ng-template #tplTitle>
+    <span>兑换商品</span>
+</ng-template>
+<!-- 模态框内容 -->
+<ng-template #tplContent let-params let-ref="modalRef">
+    <!-- 点数不足表单 -->
+    <form nz-form [formGroup]="insufficientPointsForm">
+        <span>该商品所需积分为{{news.point}},您当前的积分为{{user.point}},积分不足</span>
+    </form>
+</ng-template>
+<!-- 模态框底部 -->
+<ng-template #tplFooter>
+    <button nz-button nzType="primary" (click)="destroyTplModal()">
+        取消
+    </button>
+    <button nz-button nzType="primary" (click)="goToActivityList()">
+        获取积分
+    </button>
+</ng-template>
+<!-- 模态框头部 -->
+<ng-template #tplTitle1>
+    <span>兑换商品</span>
+</ng-template>
+<!-- 模态框内容 -->
+<ng-template #tplContent1 let-params let-ref="modalRef">
+    <!-- 选择地址表单 -->
+    <nz-table #basicTable [nzData]="data">
+        <thead>
+            <tr>
+                <th></th>
+                <th>电话号码</th>
+                <th>收货人姓名</th>
+                <th>省</th>
+                <th>市</th>
+                <th>区</th>
+                <th>具体地址</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of basicTable.data">
+                <td>
+                    <label *ngIf="selected == null" nz-radio ngModel (ngModelChange)="select(data.id)"></label>
+                    <label *ngIf="selected != null && selected == data.id" nz-radio ngModel (ngModelChange)="select(data.id)"></label>
+                    <label *ngIf="selected != null && selected != data.id" [nzDisabled] ="false" nz-radio ngModel (ngModelChange)="select(data.id)"></label>
+                </td>
+                <td>{{data.telephone}}</td>
+                <td>{{data.name}}</td>
+                <td>{{data.province | location}}</td>
+                <td>{{data.city | location}}</td>
+                <td>{{data.area | location}}</td>
+                <td>{{data.location}}</td>
+            </tr>
+        </tbody>
+    </nz-table>
+</ng-template>
+<!-- 模态框底部 -->
+<ng-template #tplFooter1>
+    <button nz-button nzType="primary" (click)="destroyTplModal()">
+        取消
+    </button>
+    <button *ngIf="sizeTotal != 0" nz-button nzType="primary" (click)="exchangeCommodity()">
+        确认兑换
+    </button>
+    <button *ngIf="sizeTotal == 0" nz-button nzType="primary" (click)="goToPersonalPage()">
+        添加收货地址
+    </button>
+</ng-template>
