@@ -99,6 +99,9 @@ import { SeekHelpInfoComponent } from './seekHelp/seek-help-info/seek-help-info.
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { DeliverAuctionComponent } from './user/deliver-auction/deliver-auction.component';
+import { DeliverCommodityComponent } from './admin/commodity/deliver-commodity/deliver-commodity.component';
+import { DeliverAuctionAdminComponent } from './admin/auction/deliver-auction-admin/deliver-auction-admin.component';
+import { DeliverPipe } from './pipe/deliver.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -154,6 +157,9 @@ import { DeliverAuctionComponent } from './user/deliver-auction/deliver-auction.
     SeekHelpListComponent,
     SeekHelpInfoComponent,
     DeliverAuctionComponent,
+    DeliverCommodityComponent,
+    DeliverAuctionAdminComponent,
+    DeliverPipe,
   ],
   imports: [
     BrowserModule,

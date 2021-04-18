@@ -90,7 +90,8 @@ height: 120px;">
                     </div>
                     <div class="des">
                         最低价格：{{news.minPrice}}
-                        <br>
+                    </div>
+                    <div class="des">
                         摘要：{{news.summary}}
                     </div>
                     <div class="des1" *ngIf="flag">
@@ -103,6 +104,14 @@ height: 120px;">
                         </nz-timeline>
                     </div>
                     <div class="des1" *ngIf="!flag && user != null">
+                        <nz-timeline [nzMode]="'alternate'">
+                            <nz-timeline-item>上传拍卖商品 {{ news.beginTime | date:'yyyy年-MM月-d日 HH:mm:ss' : 'utc+8'
+                                }}
+                            </nz-timeline-item>
+                            <nz-timeline-item>开始拍卖 {{ news.beginTime | date:'yyyy年-MM月-d日 HH:mm:ss' : 'utc+8' }}
+                            </nz-timeline-item>
+                            <nz-timeline-item nzColor="green">拍卖结束 {{ news.endTime | date:'yyyy年-MM月-d日 HH:mm:ss' : 'utc+8' }}</nz-timeline-item>
+                        </nz-timeline>
                         <nz-avatar *ngIf="user.user.headPortrait == null " [ngStyle]="{ 'background-color': color }"
                             [nzText]="userName" nzSize="large" style="vertical-align: middle;"></nz-avatar>
                         <nz-avatar *ngIf="user.user.headPortrait != null " nzIcon="user"
@@ -110,6 +119,7 @@ height: 120px;">
                         </nz-avatar>
                         出价人：{{ user.user.userName}}
                         价格：{{user.price}}
+                        <button *ngIf="isPayment" nz-button nzType="primary" (click)="createTplModal(tplTitle,tplContent,tplFooter)">付款</button>
                     </div>
                     <div class="des1" *ngIf="!flag && user == null">
                         此商品已经流拍
@@ -167,3 +177,51 @@ height: 120px;">
     </div>
 </nz-footer>
 <app-back-top [height]="2"></app-back-top>
+<!-- 模态框头部 -->
+<ng-template #tplTitle>
+    <span>选择收货地址</span>
+</ng-template>
+<!-- 模态框内容 -->
+<ng-template #tplContent let-params let-ref="modalRef">
+    <!-- 选择地址表单 -->
+    <nz-table #basicTable [nzData]="locationData">
+        <thead>
+            <tr>
+                <th></th>
+                <th>电话号码</th>
+                <th>收货人姓名</th>
+                <th>省</th>
+                <th>市</th>
+                <th>区</th>
+                <th>具体地址</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of basicTable.data">
+                <td>
+                    <label *ngIf="selected == null" nz-radio ngModel (ngModelChange)="select(data.id)"></label>
+                    <label *ngIf="selected != null && selected == data.id" nz-radio ngModel (ngModelChange)="select(data.id)"></label>
+                    <label *ngIf="selected != null && selected != data.id" [nzDisabled] ="false" nz-radio ngModel (ngModelChange)="select(data.id)"></label>
+                </td>
+                <td>{{data.telephone}}</td>
+                <td>{{data.name}}</td>
+                <td>{{data.province | location}}</td>
+                <td>{{data.city | location}}</td>
+                <td>{{data.area | location}}</td>
+                <td>{{data.location}}</td>
+            </tr>
+        </tbody>
+    </nz-table>
+</ng-template>
+<!-- 模态框底部 -->
+<ng-template #tplFooter>
+    <button nz-button nzType="primary" (click)="destroyTplModal()">
+        取消
+    </button>
+    <button *ngIf="sizeTotal != 0" nz-button nzType="primary" (click)="pay()">
+        去付款
+    </button>
+    <button *ngIf="sizeTotal == 0" nz-button nzType="primary" (click)="goToPersonalPage()">
+        添加收货地址
+    </button>
+</ng-template>

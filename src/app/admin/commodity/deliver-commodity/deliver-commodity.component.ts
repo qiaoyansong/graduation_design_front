@@ -10,11 +10,11 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
-  selector: 'app-deliver-auction',
-  templateUrl: './deliver-auction.component.html',
-  styleUrls: ['./deliver-auction.component.scss']
+  selector: 'app-deliver-commodity',
+  templateUrl: './deliver-commodity.component.html',
+  styleUrls: ['./deliver-commodity.component.scss']
 })
-export class DeliverAuctionComponent implements OnInit {
+export class DeliverCommodityComponent implements OnInit {
 
    // 当前页数
    public pageIndex: number;
@@ -119,5 +119,4 @@ export class DeliverAuctionComponent implements OnInit {
     public getCommdityInfoById(id: any): void {
      this.router.navigate(['/commodity'], { queryParams: { id: id } });
    }
-
 }

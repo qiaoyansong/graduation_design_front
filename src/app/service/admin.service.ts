@@ -421,4 +421,15 @@ export class AdminService {
       withCredentials: true
     });
   }
+
+   /**
+   * 获取所有用户兑换的商品列表
+   * @param params 参数
+   */
+    public getExchangeCommodityList(params: any): Observable<any> {
+      // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+      return this.httpClient.post('http://localhost:8080/admin/getExchangeCommodityList', params, {
+        withCredentials: true
+      });
+    }
 }

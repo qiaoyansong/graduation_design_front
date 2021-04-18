@@ -8,14 +8,6 @@
       <a routerLink="/"><img alt="微尘logo" src="http://localhost:8080/image/logo.png" /></a>
     </div>
     <div nz-col nzSpan="8">
-      <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-        <input type="text" nz-input placeholder="{{ 'Home.SearchInputValue' | translate }}" [(ngModel)]="searchValue" />
-      </nz-input-group>
-      <ng-template #suffixIconButton>
-        <button nz-button nzType="primary" nzSearch (click)="search()">
-          <i nz-icon nzType="search"></i>
-        </button>
-      </ng-template>
     </div>
     <div nz-col nzSpan="8">
       <div *ngIf="!isLogin"><button nz-button class="green" nzType="default" (click)="login()">登录</button><button
@@ -227,7 +219,7 @@
             </div>
           </div>
           <img title="" src="http://www.zggyw.org/uploadfile/2018/0315/20180315115204519.png"
-            style="border: 0px; display: inline; width: 100% ; height: 100px;"
+            style="border: 0px; display: inline; width: 100% ; height: 100px; margin-top: 25px;"
             original="http://www.zggyw.org/uploadfile/2018/0315/20180315115204519.png">
           <!-- 公益网站联盟 -->
           <div class="links common-box">

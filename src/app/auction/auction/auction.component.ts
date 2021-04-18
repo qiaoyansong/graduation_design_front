@@ -56,6 +56,16 @@ export class AuctionComponent implements OnInit {
   public offer0;
   // 如果当前拍卖已经结束，就去获取拍卖成的用户
   public user;
+  // 是否付款了
+  public isPayment = false;
+  // 模态框
+  public newsModal?: NzModalRef;
+  // 选择到的地址
+  public selected;
+  // 收货地址信息
+  public locationData;
+  // 付款表单
+  public paymentForm: FormGroup;
   constructor(public activeRouter: ActivatedRoute,
     private translate: TranslateService,
     private router: Router,
@@ -112,15 +122,16 @@ export class AuctionComponent implements OnInit {
       this.safeArticle = this.sanitizer.bypassSecurityTrustHtml(this.news.content);
       this.deadline = new Date(data.body.beginTime).getTime() + new Date(data.body.endTime).getTime() - new Date(data.body.beginTime).getTime();
       this.flag = this.deadline >= new Date().getTime() ? true : false;
+      if (!this.flag) {
+        // 获取拍卖到此商品的用户信息
+        this.userService.getMaxAuctionRealtimePrice(this.queryParams).subscribe(data => {
+          this.user = data.body;
+          this.getAuctionRealtimePrice();
+          this.getIsPayment();
+        });
+      }
     });
-    this.getAuctionRealtimePrice();
     this.offer0 = 1;
-    if (!this.flag) {
-      // 获取拍卖到此商品的用户信息
-      this.userService.getMaxAuctionRealtimePrice(this.queryParams).subscribe(data => {
-        this.user = this.data;
-      });
-    }
   }
   ngOnInit(): void {
   }
@@ -228,7 +239,7 @@ export class AuctionComponent implements OnInit {
       } else {
         // 获取拍卖到此商品的用户信息
         this.userService.getMaxAuctionRealtimePrice(this.queryParams).subscribe(data => {
-          this.user = this.data;
+          this.user = data.body;
         });
       }
     }
@@ -241,6 +252,90 @@ export class AuctionComponent implements OnInit {
       this.data = data.body;
       this.flag = this.deadline >= new Date().getTime() ? true : false;
     });
+  }
+
+  /**
+   * 获取是否付款
+   */
+  public getIsPayment(): void {
+    if (this.loginService.getUser() == null) {
+      // 如果不存在用户信息
+      this.isPayment = false;
+    } else {
+      if (this.user.user.id == this.loginService.getUser().id) {
+        // 如果存在用户信息
+        let param = {
+          'auctionId': this.queryParams,
+          'userId': this.loginService.getUser().id
+        }
+        // 开始判断有没有付款过
+        this.userService.getIsPayment(param).subscribe(data => {
+          if (data.body != null) {
+            this.isPayment = false;
+          } else {
+            // 没有付款
+            this.isPayment = true;
+          }
+        });
+      } else {
+        this.isPayment = false;
+      }
+    }
+  }
+
+  public createTplModal(tplTitle: TemplateRef<{}>, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>): void {
+    // 展示选择地址模态框
+    let condition = {
+      'condition': {
+        'orderBy': '',
+        'userId': this.user.user.id
+      },
+      'curPage': ''
+    };
+    condition.curPage = this.pageIndex + '';
+    condition.condition.orderBy = 'desc';
+    this.userService.getAddressListByUserId(condition).subscribe(data => {
+      if (data.code === StatusCode.SUCCESS) {
+        this.sizeTotal = data.totalSize;
+        this.locationData = data.body;
+      }
+    });
+    this.newsModal = this.modal.create({
+      nzTitle: tplTitle,
+      nzContent: tplContent,
+      nzFooter: tplFooter,
+      nzMaskClosable: false,
+      nzClosable: false,
+      nzComponentParams: {
+        value: 'Template Context'
+      },
+    });
+  }
+  /**
+ * 销毁模态框
+ */
+  public destroyTplModal(): void {
+    this.newsModal!.destroy();
+  }
+  count = 0;
+  /**
+   * 选择地址
+   * @param num 选项
+   */
+  public select(num: number): void {
+    this.selected = num;
+    this.count++;
+  }
+
+
+  /**
+   * 付款
+   * @param num 选项
+   */
+  public pay(): void {
+    if (this.count > 0 && this.count % 2 == 0 && this.selected != null) {
+      window.location.href = 'http://localhost:8080/order/index?auctionId='+this.queryParams+'&userLocationsId='+this.selected;
+    }
   }
 }
 

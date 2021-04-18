@@ -266,13 +266,13 @@ export class CommodityComponent implements OnInit {
           this.flag = StatusCode.SUCCESS;
         } else if (data.code === StatusCode.UNKNOWN_ERROR) {
           // 未知错误，提示信息
-          this.flag = StatusCode.SUCCESS;
+          this.flag = StatusCode.UNKNOWN_ERROR;
         } else if (data.code === StatusCode.OUT_OF_STOCK) {
           // 商品库存不足，提示信息
-          this.flag = StatusCode.SUCCESS;
+          this.flag = StatusCode.OUT_OF_STOCK;
         } else if (data.code === StatusCode.INSUFFICIENT_POINTS) {
           // 积分不足，提示信息
-          this.flag = StatusCode.SUCCESS;
+          this.flag = StatusCode.INSUFFICIENT_POINTS;
         }
         document.body.scrollTop = document.documentElement.scrollTop = 0;
         this.destroyTplModal();

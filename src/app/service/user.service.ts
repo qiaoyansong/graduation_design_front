@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -159,7 +160,7 @@ export class UserService {
  * 查看具体的求助信息
  * @param id 求助信息ID
  */
-   public getSeekHelpInfoById0(id: any): Observable<any> {
+  public getSeekHelpInfoById0(id: any): Observable<any> {
     return this.httpClient.get('http://localhost:8080/seekHelpList/getSeekHelpInfoById/' + id, {
       withCredentials: true
     });
@@ -347,17 +348,17 @@ export class UserService {
  * 拍卖加价的逻辑
  * @param 加价价格
  */
-   public offer(auctionRealtimePrice: any): Observable<any> {
+  public offer(auctionRealtimePrice: any): Observable<any> {
     return this.httpClient.post('http://localhost:8080/user/offer', auctionRealtimePrice, {
       withCredentials: true
     });
   }
-  
+
   /**
   * 查看当前用户参加的所有拍卖
   * @param 筛选信息
   */
-   public getAuctionProcessByUserId(params: any): Observable<any> {
+  public getAuctionProcessByUserId(params: any): Observable<any> {
     return this.httpClient.post('http://localhost:8080/user/getAuctionProcessByUserId', params, {
       withCredentials: true
     });
@@ -367,7 +368,7 @@ export class UserService {
  * 根据拍卖ID查看最高价格
  * @param 筛选信息
  */
-   public getMaxAuctionRealtimePrice(params: any): Observable<any> {
+  public getMaxAuctionRealtimePrice(params: any): Observable<any> {
     return this.httpClient.get('http://localhost:8080/auction/getMaxAuctionRealtimePrice/' + params, {
       withCredentials: true
     });
@@ -377,7 +378,7 @@ export class UserService {
    * 用于获取求助信息
    * @param params 筛选条件
    */
-   public getSeekHelp(params: any): Observable<any> {
+  public getSeekHelp(params: any): Observable<any> {
     let condition = {
       'condition': {
         'orderBy': params.condition.orderBy,
@@ -395,7 +396,7 @@ export class UserService {
    * 根据用户ID获取地址信息
    * @param params 筛选条件
    */
-   public getAddressListByUserId(params: any): Observable<any> {
+  public getAddressListByUserId(params: any): Observable<any> {
     // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
     return this.httpClient.post('http://localhost:8080/user/getAddressListByUserId', params, {
       withCredentials: true
@@ -406,7 +407,7 @@ export class UserService {
    * 兑换商品
    * @param params 参数
    */
-   public exchangeCommodity(params: any): Observable<any> {
+  public exchangeCommodity(params: any): Observable<any> {
     // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
     return this.httpClient.post('http://localhost:8080/user/exchangeCommodity', params, {
       withCredentials: true
@@ -417,10 +418,42 @@ export class UserService {
    * 获取用户兑换的商品列表
    * @param params 参数
    */
-   public getExchangeCommodityListByUserId(params: any): Observable<any> {
+  public getExchangeCommodityListByUserId(params: any): Observable<any> {
     // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
     return this.httpClient.post('http://localhost:8080/user/getExchangeCommodityListByUserId', params, {
       withCredentials: true
     });
+  }
+
+  /**
+  * 判断当前用户是否付款
+  * @param params 参数
+  */
+  public getIsPayment(params: any): Observable<any> {
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    return this.httpClient.post('http://localhost:8080/user/getIsPayment', params, {
+      withCredentials: true
+    });
+  }
+
+  /**
+  * 付款
+  * @param amount 价格
+  * @param subject 标题
+  * @param body 商品描述
+  */
+  public pay(amount: any, subject: any, body: any): Observable<any> {
+    // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+    let param = {
+      'amount': amount,
+      'subject': subject,
+      'body': body
+    }
+    console.log(param);
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }),
+      withCredentials: true
+    };
+    return this.httpClient.post('http://localhost:8080/order/pay', param, httpOptions);
   }
 }

@@ -50,7 +50,7 @@
           <span unchecked>Light</span>
         </nz-switch>
         <ul nz-menu nzMode="inline" [nzTheme]="theme ? 'dark' : 'light'" [nzInlineCollapsed]="isCollapsed">
-          <li nz-submenu nz-tooltip nzTooltipPlacement="right" nzTitle="用户相关" nzOpen nzIcon="appstore">
+          <li nz-submenu nz-tooltip nzTooltipPlacement="right" nzTitle="用户相关" nzOpen nzIcon="user">
             <ul>
               <li nz-menu-item [nzSelected]="select === 1">
                 用户信息
@@ -66,7 +66,7 @@
               </li>
             </ul>
           </li>
-          <li nz-submenu nzTitle="公益资讯" nzIcon="appstore" nzOpen>
+          <li nz-submenu nzTitle="公益资讯" nzIcon="read" nzOpen>
             <ul>
               <li nz-menu-item [nzSelected]="select === 4">
                 上传公益资讯
@@ -78,7 +78,7 @@
               </li>
             </ul>
           </li>
-          <li nz-submenu nzTitle="公益活动" nzIcon="setting" nzOpen>
+          <li nz-submenu nzTitle="公益活动" nzIcon="schedule" nzOpen>
             <ul>
               <li nz-menu-item [nzSelected]="select === 6">
                 上传公益活动
@@ -94,7 +94,7 @@
               </li>
             </ul>
           </li>
-          <li nz-submenu nzTitle="公益商品" nzIcon="setting" nzOpen>
+          <li nz-submenu nzTitle="公益商品" nzIcon="shopping" nzOpen>
             <ul>
               <li nz-menu-item [nzSelected]="select === 8">
                 上传公益商品
@@ -104,9 +104,13 @@
                 查看公益商品
                 <a (click)="getInfo(9)"></a>
               </li>
+              <li nz-menu-item [nzSelected]="select === 13">
+                查看公益商品发货信息
+                <a (click)="getInfo(13)"></a>
+              </li>
             </ul>
           </li>
-          <li nz-submenu nzTitle="公益拍卖" nzIcon="setting" nzOpen>
+          <li nz-submenu nzTitle="公益拍卖" nzIcon="shopping-cart" nzOpen>
             <ul>
               <li nz-menu-item [nzSelected]="select === 10">
                 上传公益拍卖
@@ -115,6 +119,10 @@
               <li nz-menu-item [nzSelected]="select === 11">
                 查看公益拍卖
                 <a (click)="getInfo(11)"></a>
+              </li>
+              <li nz-menu-item [nzSelected]="select === 14">
+                查看公益拍卖商品发货信息
+                <a (click)="getInfo(14)"></a>
               </li>
             </ul>
           </li>
@@ -156,6 +164,10 @@
     <!-- 维护公益活动进度 -->
     <app-upload-process *ngIf="select === 12" style="width: 100%;" (upsetFlags)="getUpdateActivityProcessFlag($event)">
     </app-upload-process>
+    <!-- 查看公益商品发货信息 -->
+    <app-deliver-commodity *ngIf="select === 13" style="width: 100%;"></app-deliver-commodity>
+    <!-- 查看公益拍卖商品发货信息 -->
+    <app-deliver-auction-admin *ngIf="select === 14" style="width: 100%;"></app-deliver-auction-admin>
   </nz-layout>
   <!-- 声明信息 -->
   <nz-footer>

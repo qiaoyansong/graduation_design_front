@@ -171,6 +171,10 @@ export class AdminLoginComponent implements OnInit {
             // 验证码失效
             this.flag = StatusCode.VERIFICATION_CODE_FAILURE;
             this.errorMsg = '验证码失效，需要用户重新申请验证码';
+          }else if(data.code === StatusCode.VALID_EXCEPTION){
+            // 参数校验失败
+            this.flag = StatusCode.VALID_EXCEPTION;
+            this.errorMsg = '参数校验失败';
           }else if(data.code === StatusCode.SUCCESS){
             // 成功
             this.flag = StatusCode.SUCCESS;

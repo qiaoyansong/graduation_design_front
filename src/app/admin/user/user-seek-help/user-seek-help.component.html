@@ -1,49 +1,51 @@
 <nz-layout style="height: 100%;">
-  <nz-content>
-      <nz-content class="content-data">
-          <nz-table style="width: 100%; height: 100%;" #parentTable [(nzData)]="listOfParentData"
-              [(nzPageIndex)]="pageIndex" [nzShowQuickJumper]="true" [(nzPageSize)]="pageSize" [(nzTotal)]="sizeTotal"
-              [nzFrontPagination]="false" (nzPageIndexChange)="changePageIndex()">
-              <thead>
-                  <tr>
-                      <th [nzShowSort]="true" (nzSortOrderChange)="changeOrder($event)"
-                          [nzSortOrder]="listSortOrderBy">求助ID</th>
-                      <th nzCustomFilter>
-                          求助标题
-                          <nz-filter-trigger [(nzVisible)]="visible" [nzDropdownMenu]="menu">
-                              <i nz-icon nzType="search"></i>
-                          </nz-filter-trigger>
-                      </th>
-                      <!-- 搜索框 -->
-                      <nz-dropdown-menu #menu="nzDropdownMenu">
-                          <div class="ant-table-filter-dropdown">
-                              <div class="search-box">
-                                  <input type="text" nz-input placeholder="输入求助标题" [(ngModel)]="searchValue" />
-                                  <button nz-button nzSize="small" nzType="primary" (click)="search()"
-                                      class="search-button">
-                                      查询
-                                  </button>
-                                  <button nz-button nzSize="small" (click)="reset()">重置</button>
-                              </div>
-                          </div>
-                      </nz-dropdown-menu>
-                      <th>求助人ID</th>
-                      <th>是否审核</th>
-                      <th>操作</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <ng-template ngFor let-data [ngForOf]="parentTable.data">
-                      <tr>
-                          <td>{{ data.id }}</td>
-                          <td>{{ data.title }}</td>
-                          <td>{{ data.userId }}</td>
-                          <td>{{ data.flag | newsCheckPipe}}</td>
-                          <td><button nz-button [nzType]="'primary'" (click)="getSeekHelpInfoById(data.id)"><span>查看详情</span></button></td>
-                      </tr>
-                  </ng-template>
-              </tbody>
-          </nz-table>
-      </nz-content>
-  </nz-content>
+    <app-bread-crumb class="bread-crumb" isAdmin=true type='userhelp'></app-bread-crumb>
+    <nz-content>
+        <nz-content class="content-data">
+            <nz-table style="width: 100%; height: 100%;" #parentTable [(nzData)]="listOfParentData"
+                [(nzPageIndex)]="pageIndex" [nzShowQuickJumper]="true" [(nzPageSize)]="pageSize" [(nzTotal)]="sizeTotal"
+                [nzFrontPagination]="false" (nzPageIndexChange)="changePageIndex()">
+                <thead>
+                    <tr>
+                        <th [nzShowSort]="true" (nzSortOrderChange)="changeOrder($event)"
+                            [nzSortOrder]="listSortOrderBy">求助ID</th>
+                        <th nzCustomFilter>
+                            求助标题
+                            <nz-filter-trigger [(nzVisible)]="visible" [nzDropdownMenu]="menu">
+                                <i nz-icon nzType="search"></i>
+                            </nz-filter-trigger>
+                        </th>
+                        <!-- 搜索框 -->
+                        <nz-dropdown-menu #menu="nzDropdownMenu">
+                            <div class="ant-table-filter-dropdown">
+                                <div class="search-box">
+                                    <input type="text" nz-input placeholder="输入求助标题" [(ngModel)]="searchValue" />
+                                    <button nz-button nzSize="small" nzType="primary" (click)="search()"
+                                        class="search-button">
+                                        查询
+                                    </button>
+                                    <button nz-button nzSize="small" (click)="reset()">重置</button>
+                                </div>
+                            </div>
+                        </nz-dropdown-menu>
+                        <th>求助人ID</th>
+                        <th>是否审核</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-template ngFor let-data [ngForOf]="parentTable.data">
+                        <tr>
+                            <td>{{ data.id }}</td>
+                            <td>{{ data.title }}</td>
+                            <td>{{ data.userId }}</td>
+                            <td>{{ data.flag | newsCheckPipe}}</td>
+                            <td><button nz-button [nzType]="'primary'"
+                                    (click)="getSeekHelpInfoById(data.id)"><span>查看详情</span></button></td>
+                        </tr>
+                    </ng-template>
+                </tbody>
+            </nz-table>
+        </nz-content>
+    </nz-content>
 </nz-layout>

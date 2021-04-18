@@ -13,6 +13,9 @@
                             兑换商品名称
                         </th>
                         <th>
+                            是否发货
+                        </th>
+                        <th>
                             操作
                         </th>
                     </tr>
@@ -24,6 +27,7 @@
                             </td>
                             <td>{{ data.id }}</td>
                             <td>{{ data.commodity.title }}</td>
+                            <td>{{ data.flag | deliver }}</td>
                             <td>
                                 <button nz-button [nzType]="'primary'" (click)="getCommdityInfoById(data.commodity.id)"><span>查看商品详情</span></button>
                             </td>
