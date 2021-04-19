@@ -34,7 +34,7 @@ export class DeliverAuctionComponent implements OnInit {
    public isLoginFlag;
    public errorFlag = '';
    public deleteFlags = new EventEmitter<string>();
-   constructor(private adminService: AdminService,
+   constructor(private userService: UserService,
      private router: Router,
      private loginService: LoginService,
      private fb: FormBuilder,
@@ -49,16 +49,18 @@ export class DeliverAuctionComponent implements OnInit {
      let condition = {
        'condition': {
          'orderBy': '',
+         'userId':'',
        },
        'curPage': ''
      };
      condition.curPage = this.pageIndex + '';
+     condition.condition.userId = this.loginService.getUserId() + '';
      if (this.listSortOrderBy === 'ascend') {
        condition.condition.orderBy = 'asc';
      } else {
        condition.condition.orderBy = 'desc';
      }
-     this.adminService.getExchangeCommodityList(condition).subscribe(data => {
+     this.userService.getExchangeAuctionList(condition).subscribe(data => {
        if (data.code === StatusCode.SUCCESS) {
          this.sizeTotal = data.totalSize;
          this.listOfParentData = data.body;
@@ -116,8 +118,8 @@ export class DeliverAuctionComponent implements OnInit {
    /**
    * 根据商品ID获取详细信息
    */
-    public getCommdityInfoById(id: any): void {
-     this.router.navigate(['/commodity'], { queryParams: { id: id } });
+    public getAuctionInfoById(id: any): void {
+     this.router.navigate(['/auction'], { queryParams: { id: id } });
    }
 
 }

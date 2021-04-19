@@ -31,6 +31,8 @@
   (nzOnClose)="afterClose()"></nz-alert>
 <nz-alert *ngIf="updateActivityProcessFlag === '200'" nzType="success" nzCloseable nzMessage="修改用户参与活动进度成功" nzShowIcon
   (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert *ngIf="deliverCommodityFlag === '200' || deliverAuctionFlag === '200'" nzType="success" nzCloseable
+  nzMessage="发货成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
 <nz-layout>
   <nz-header nz-row>
     <div nz-col nzSpan="8">
@@ -165,9 +167,10 @@
     <app-upload-process *ngIf="select === 12" style="width: 100%;" (upsetFlags)="getUpdateActivityProcessFlag($event)">
     </app-upload-process>
     <!-- 查看公益商品发货信息 -->
-    <app-deliver-commodity *ngIf="select === 13" style="width: 100%;"></app-deliver-commodity>
+    <app-deliver-commodity *ngIf="select === 13" style="width: 100%;" (deleverFlags)="getDeliverCommodityFlag($event)">
+    </app-deliver-commodity>
     <!-- 查看公益拍卖商品发货信息 -->
-    <app-deliver-auction-admin *ngIf="select === 14" style="width: 100%;"></app-deliver-auction-admin>
+    <app-deliver-auction-admin *ngIf="select === 14" style="width: 100%;" (deleverFlags)="getDeliverAuctionFlag($event)"></app-deliver-auction-admin>
   </nz-layout>
   <!-- 声明信息 -->
   <nz-footer>

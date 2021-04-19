@@ -60,6 +60,10 @@ export class AdminHomepageComponent implements OnInit {
   public searchFlag = false;
   // 修改用户参与活动进度标志位
   public updateActivityProcessFlag;
+  // 用户兑换商品发货标志位
+  public deliverCommodityFlag;
+  // 用户拍得商品发货标志位
+  public deliverAuctionFlag;
   // 活动ID
   @Output()
   public activityId = new EventEmitter<string>();
@@ -335,6 +339,30 @@ export class AdminHomepageComponent implements OnInit {
   }
 
   /**
+   * 获取用户兑换商品发货标志为
+   */
+   public getDeliverCommodityFlag(msg): void {
+    this.deliverCommodityFlag = msg;
+    if (this.deliverCommodityFlag === StatusCode.SUCCESS) {
+      this.select = 9;
+    } else if (this.deliverCommodityFlag === StatusCode.USER_IS_NOT_LOGGED_IN) {
+      this.router.navigate(['']);
+    }
+  }
+
+  /**
+   * 获取用户拍得商品发货标志为
+   */
+   public getDeliverAuctionFlag(msg): void {
+    this.deliverAuctionFlag = msg;
+    if (this.deliverAuctionFlag === StatusCode.SUCCESS) {
+      this.select = 11;
+    } else if (this.deliverAuctionFlag === StatusCode.USER_IS_NOT_LOGGED_IN) {
+      this.router.navigate(['']);
+    }
+  }
+
+  /**
    * 重置错误标志位
    */
   public afterClose(): void {
@@ -360,5 +388,7 @@ export class AdminHomepageComponent implements OnInit {
     this.searchFlag = false;
     this.updateUserInfoFlag = '';
     this.updateActivityProcessFlag = '';
+    this.deliverAuctionFlag = '';
+    this.deliverCommodityFlag = '';
   }
 }

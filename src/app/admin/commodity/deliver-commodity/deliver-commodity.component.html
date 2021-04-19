@@ -30,9 +30,9 @@
               <td>{{ data.id }}</td>
               <td>{{ data.commodity.title }}</td>
               <td>{{ data.flag | deliver }}</td>
-              <td>
-                <button nz-button [nzType]="'primary'"
-                  (click)="getCommdityInfoById(data.commodity.id)"><span>查看商品详情</span></button>
+              <td *ngIf="data.flag == 0">
+                <a nz-popconfirm nzPopconfirmTitle="确认已发货?" nzPopconfirmPlacement="bottom"
+                  (nzOnConfirm)="deliverGoods(data.id)">发货</a>
               </td>
             </tr>
             <tr [nzExpand]="expandSet.has(data.id)">

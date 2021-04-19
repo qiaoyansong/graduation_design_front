@@ -34,6 +34,10 @@ export class DeliverCommodityComponent implements OnInit {
    public isLoginFlag;
    public errorFlag = '';
    public deleteFlags = new EventEmitter<string>();
+   public flag;
+   // 发货标志位
+  @Output()
+  public deleverFlags = new EventEmitter<string>();
    constructor(private adminService: AdminService,
      private router: Router,
      private loginService: LoginService,
@@ -119,4 +123,23 @@ export class DeliverCommodityComponent implements OnInit {
     public getCommdityInfoById(id: any): void {
      this.router.navigate(['/commodity'], { queryParams: { id: id } });
    }
+
+   /**
+   * 根据对应的id进行发货
+   */
+    public deliverGoods(id: any): void {
+      this.adminService.deliverCommodityById(id).subscribe(data => {
+        if (data.code === StatusCode.SUCCESS) {
+          this.flag = StatusCode.SUCCESS;
+          // 移动到顶部
+          window.scrollTo(0, 0);
+        } else if (data.code === StatusCode.USER_IS_NOT_LOGGED_IN) {
+          // 未登录
+          this.flag = StatusCode.USER_IS_NOT_LOGGED_IN;
+          // 移动到顶部
+          window.scrollTo(0, 0);
+        }
+        this.deleverFlags.emit(this.flag);
+      });
+    }
 }

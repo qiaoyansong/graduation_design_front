@@ -432,4 +432,37 @@ export class AdminService {
         withCredentials: true
       });
     }
+
+     /**
+   * 获取所有用户拍得的商品列表
+   * @param params 参数
+   */
+      public getExchangeAuctionList(params: any): Observable<any> {
+        // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+        return this.httpClient.post('http://localhost:8080/admin/getExchangeAuctionList', params, {
+          withCredentials: true
+        });
+      }
+
+    /**
+   * 商品发货
+   * @param params 参数
+   */
+     public deliverCommodityById(params: any): Observable<any> {
+      // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+      return this.httpClient.post('http://localhost:8080/admin/deliverCommodityById', params, {
+        withCredentials: true
+      });
+    }
+
+    /**
+   * 商品发货
+   * @param params 参数
+   */
+     public deliverAuctionById(params: any): Observable<any> {
+      // 为了防止每次sessionID都改变必须设置为true，而且后台也必须设置为true
+      return this.httpClient.post('http://localhost:8080/admin/deliverAuctionById', params, {
+        withCredentials: true
+      });
+    }
 }
