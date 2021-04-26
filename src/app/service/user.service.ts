@@ -137,7 +137,7 @@ export class UserService {
       'condition': {
         'orderBy': params.condition.orderBy,
         'searchValue': params.condition.searchValue,
-        'userId': params.condition.userId,
+        'userId': params.condition.userId
       },
       'curPage': params.curPage
     }

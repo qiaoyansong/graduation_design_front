@@ -78,9 +78,13 @@ export enum StatusCode {
     /**
      * 积分不足
      */
-     INSUFFICIENT_POINTS = "118",
-     /**
-      * 库存不足
-      */
-     OUT_OF_STOCK = "119"
+    INSUFFICIENT_POINTS = "118",
+    /**
+     * 库存不足
+     */
+    OUT_OF_STOCK = "119",
+    /**
+    * 人数已满
+    */
+    FILL_UP = "120"
 }

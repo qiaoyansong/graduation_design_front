@@ -5,6 +5,8 @@
 </nz-alert>
 <nz-alert *ngIf="repeatFlag" nzType="error" nzCloseable nzMessage="请勿重复报名该活动" nzShowIcon (nzOnClose)="afterClose(2)">
 </nz-alert>
+<nz-alert *ngIf="fillFlag" nzType="error" nzCloseable nzMessage="该活动所需人数已满" nzShowIcon (nzOnClose)="afterClose(2)">
+</nz-alert>
 <!-- 首部信息 -->
 <nz-header nz-row style="background-color: white;
 height: 120px;">

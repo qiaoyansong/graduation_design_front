@@ -56,6 +56,8 @@ export class ActivityComponent implements OnInit {
   public signUpFlag = false;
   // 判断该用户
   public repeatFlag = false;
+  // 判断该用户
+  public fillFlag = false;
   constructor(public activeRouter: ActivatedRoute,
     private translate: TranslateService,
     private router: Router,
@@ -153,6 +155,7 @@ export class ActivityComponent implements OnInit {
     } else {
       this.signUpFlag = false;
       this.repeatFlag = false;
+      this.fillFlag = false;
     }
   }
 
@@ -231,6 +234,11 @@ export class ActivityComponent implements OnInit {
       } else if (data.code === StatusCode.REPEAT_THE_EVENT) {
         // 已经参加过该活动了
         this.repeatFlag = true;
+        // 移动到顶部
+        window.scrollTo(0, 0);
+      }else if (data.code === StatusCode.FILL_UP) {
+        // 人数已满，不允许参加活动
+        this.fillFlag = true;
         // 移动到顶部
         window.scrollTo(0, 0);
       }

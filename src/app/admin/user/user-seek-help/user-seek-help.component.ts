@@ -65,14 +65,14 @@ export class UserSeekHelpComponent implements OnInit {
     // 查询数据 根据当前页数以及排序查看
     let condition = {
       'condition': {
-        'userId': '',
         'orderBy': '',
         'searchValue': '',
+        'userId':'',
         'flag': null
       },
       'curPage': ''
     };
-    condition.condition.userId = this.loginService.getUserId() + '';
+    condition.condition.userId = this.loginService.getUser().userId;
     condition.condition.searchValue = this.searchValue;
     condition.curPage = this.pageIndex + '';
     if (this.listSortOrderBy === 'ascend') {
