@@ -122,13 +122,13 @@ export class AuctionComponent implements OnInit {
       this.safeArticle = this.sanitizer.bypassSecurityTrustHtml(this.news.content);
       this.deadline = new Date(data.body.beginTime).getTime() + new Date(data.body.endTime).getTime() - new Date(data.body.beginTime).getTime();
       this.flag = this.deadline >= new Date().getTime() ? true : false;
+      this.getAuctionRealtimePrice();
       if (!this.flag) {
         // 获取拍卖到此商品的用户信息
         this.userService.getMaxAuctionRealtimePrice(this.queryParams).subscribe(data => {
           this.user = data.body;
-          this.getAuctionRealtimePrice();
-          this.getIsPayment();
         });
+        this.getIsPayment();
       }
     });
     this.offer0 = 1;

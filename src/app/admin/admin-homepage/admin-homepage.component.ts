@@ -64,6 +64,7 @@ export class AdminHomepageComponent implements OnInit {
   public deliverCommodityFlag;
   // 用户拍得商品发货标志位
   public deliverAuctionFlag;
+  public updateUserTgFlag;
   // 活动ID
   @Output()
   public activityId = new EventEmitter<string>();
@@ -158,6 +159,18 @@ export class AdminHomepageComponent implements OnInit {
     if (this.updateNewsFlag === StatusCode.SUCCESS) {
       this.select = 4;
     } else if (this.updateNewsFlag === StatusCode.USER_IS_NOT_LOGGED_IN) {
+      this.router.navigate(['']);
+    }
+  }
+
+  /**
+   * 从查询资讯子组件获取修改资讯标志位
+   */
+   public getUpsetUserTgFlag(msg): void {
+    this.updateUserTgFlag = msg;
+    if (this.updateUserTgFlag === StatusCode.SUCCESS) {
+      this.select = 3;
+    } else if (this.updateUserTgFlag === StatusCode.USER_IS_NOT_LOGGED_IN) {
       this.router.navigate(['']);
     }
   }
@@ -390,5 +403,6 @@ export class AdminHomepageComponent implements OnInit {
     this.updateActivityProcessFlag = '';
     this.deliverAuctionFlag = '';
     this.deliverCommodityFlag = '';
+    this.updateUserTgFlag = '';
   }
 }

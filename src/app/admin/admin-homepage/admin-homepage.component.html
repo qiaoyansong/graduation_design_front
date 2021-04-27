@@ -33,6 +33,8 @@
   (nzOnClose)="afterClose()"></nz-alert>
 <nz-alert *ngIf="deliverCommodityFlag === '200' || deliverAuctionFlag === '200'" nzType="success" nzCloseable
   nzMessage="发货成功" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
+<nz-alert *ngIf="updateUserTgFlag === '200'" nzType="success" nzCloseable nzMessage="修改用户投稿信息成功" nzShowIcon
+  (nzOnClose)="afterClose()"></nz-alert>
 <nz-layout>
   <nz-header nz-row>
     <div nz-col nzSpan="8">
@@ -135,7 +137,7 @@
     <app-user-info *ngIf="select === 1" style="width: 100%;" (selectFlags)="getSearchUserFlag($event)"
       (deleteFlags)="getDeleteUserFlag($event)" (upsetFlags)="getUpdateUserInfoFlag($event)"></app-user-info>
     <!-- 用户投稿 -->
-    <app-user-tg *ngIf="select === 2" style="width: 100%;"></app-user-tg>
+    <app-user-tg *ngIf="select === 2" style="width: 100%;" (upsetFlags)="getUpsetUserTgFlag($event)"></app-user-tg>
     <!-- 用户求助 -->
     <app-user-seek-help *ngIf="select === 3" style="width: 100%;"></app-user-seek-help>
     <!-- 查看公益资讯 -->
@@ -170,7 +172,8 @@
     <app-deliver-commodity *ngIf="select === 13" style="width: 100%;" (deleverFlags)="getDeliverCommodityFlag($event)">
     </app-deliver-commodity>
     <!-- 查看公益拍卖商品发货信息 -->
-    <app-deliver-auction-admin *ngIf="select === 14" style="width: 100%;" (deleverFlags)="getDeliverAuctionFlag($event)"></app-deliver-auction-admin>
+    <app-deliver-auction-admin *ngIf="select === 14" style="width: 100%;"
+      (deleverFlags)="getDeliverAuctionFlag($event)"></app-deliver-auction-admin>
   </nz-layout>
   <!-- 声明信息 -->
   <nz-footer>
