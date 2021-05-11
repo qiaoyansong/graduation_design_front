@@ -127,8 +127,8 @@ export class AuctionComponent implements OnInit {
         // 获取拍卖到此商品的用户信息
         this.userService.getMaxAuctionRealtimePrice(this.queryParams).subscribe(data => {
           this.user = data.body;
+          this.getIsPayment();
         });
-        this.getIsPayment();
       }
     });
     this.offer0 = 1;
